@@ -1,0 +1,57 @@
+<head>
+	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html"> 
+
+	<link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
+	<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+	<link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+	<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+	<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+	<link rel="import" href="bower_components/core-icons/core-icons.html">
+	<link rel="import" href="bower_components/core-menu/core-menu.html">
+	<link rel="import" href="bower_components/paper-item/paper-item.html">
+	<link rel="import" href="bower_components/core-pages/core-pages.html">
+	<link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+	<link rel="import" href="bower_components/core-animated-pages/transitions/cross-fade.html">
+	<link rel="import" href="bower_components/core-animated-pages/transitions/slide-down.html">
+	<link rel="import" href="bower_components/core-animated-pages/transitions/hero-transition.html">
+</head>
+
+<template name="admin">
+	<core-drawer-panel id="drawer-panel">
+	  <core-header-panel mode="waterfall-tall" drawer>
+	    <core-toolbar>
+	      <h1 class="bottom title animated infinite bounce">WallAdmin</h1>
+	    </core-toolbar>
+	    <div>
+			<core-menu  selectedAttribute="" selected="{{label}}" valueattr="label">
+	    		<paper-item label="teams">
+	    			<core-icon icon="view-stream"></core-icon>
+						Wallpapers
+	    		</paper-item>
+	    		<paper-item label="games">
+	    			<core-icon icon="view-headline"></core-icon>
+						Comments
+	    		</paper-item>
+	    		<paper-item label="scaffold">
+	    			<core-icon icon="view-headline"></core-icon>
+						Scaffold
+	    		</paper-item>
+	    	</core-menu>
+	    </div>
+	  </core-header-panel>
+	  <core-header-panel mode="cover" main>
+	  	<paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+	    <core-toolbar class="tall">
+	      <div flex=""></div>
+	      <core-icon-button icon="more-vert"></core-icon-button>
+	    </core-toolbar>
+	    	<div label="Wallpapers">
+					{{#transition in="fadeInLeft" out="fadeOutRight" timeoutIn="900" timeoutOut="500"}}
+					   {{> yield}}
+					{{/transition}}
+				</div>
+	  </core-header-panel>
+	</core-drawer-panel>
+</template>

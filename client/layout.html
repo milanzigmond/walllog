@@ -1,0 +1,52 @@
+<head>
+	<link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
+	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+	<link rel="import" href="bower_components/core-menu/core-menu.html">
+	<link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+	<link rel="import" href="bower_components/core-animated-pages/transitions/cross-fade.html">
+	<link rel="import" href="bower_components/core-animated-pages/transitions/slide-down.html">
+	<link rel="import" href="bower_components/core-animated-pages/transitions/hero-transition.html">
+
+	<link rel="import" href="bower_components/paper-item/paper-item.html">
+</head>
+
+<template name="layout">
+	{{#if currentUser}}
+		<!-- {{> menu}} -->
+	{{/if}}
+	{{> loginButtons}}
+	
+  <core-scaffold id="scaffold">
+
+    <nav>
+    	<core-toolbar>
+    		<span>Wallog Admin</span>
+    	</core-toolbar>
+		  <core-menu selectedAttribute="" selected="Wallpapers"  valueattr="label">
+			  	<paper-item label="Wallpapers">
+			  		<core-icon icon="label-outline"></core-icon>
+			  		<a href="{{pathFor route='teams'}}">Games</a>
+			  	</paper-item>
+			  	<paper-item label="Comments">
+			  		<core-icon icon="label-outline"></core-icon>
+			  		<a href="{{pathFor route='admin'}}">Amind</a>
+			  	</paper-item>
+			</core-menu>	
+    </nav>
+
+    <core-toolbar tool flex>
+		  <div flex></div>
+		  <core-icon-button icon="refresh"></core-icon-button>
+		  <core-icon-button icon="add"></core-icon-button>
+    </core-toolbar>
+
+		<!-- content -->
+    <div layout horizontal center-center fit>
+			{{#transition type="slideup"}}
+	      {{> yield}}
+	    {{/transition}}
+		</div>
+
+  </core-scaffold>
+
+</template>
