@@ -1,5 +1,5 @@
-Template.scaffold.helpers
-	pages: [
+Template.wallpapers.helpers
+	wallpapers: [
 			  {
 			    name: "Wallpapers"
 			    hash: "wallpapers"

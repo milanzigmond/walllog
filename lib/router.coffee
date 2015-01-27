@@ -1,24 +1,23 @@
 Router.configure
-  layoutTemplate: 'admin'
+  layoutTemplate: 'layout'
  
 Router.route '/', {
-  name: 'games'
+  name: 'teams'
+  layoutTemplate: 'walllog'
 }
 
 Router.route '/admin', {
-  name: 'admin'
-}
- 
-Router.route '/teams', {
-  name: 'teams'
-}
-
-Router.route '/walllog', {
-  name: 'walllog'
+  name: 'wallpapers'
+  layoutTemplate: 'layout'
+  action: ->
+    unless Meteor.user()
+      @render "login"
+    else
+      @render "wallpapers"
 }
 
-Router.route '/scaffold', {
-  name: 'scaffold'
+Router.route '/games', {
+  name: 'games'
 }
 
  

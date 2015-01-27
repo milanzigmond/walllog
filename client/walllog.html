@@ -1,69 +1,9 @@
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link rel="import" href="/bower_components/polymer/polymer.html">
-	<link rel="import" href="/bower_components/font-roboto/roboto.html">
-	<link rel="import" href="/bower_components/core-animated-pages/core-animated-pages.html">
-	<link rel="import" href="/bower_components/core-animated-pages/transitions/cross-fade.html">
-	<link rel="import" href="/bower_components/core-animated-pages/transitions/slide-from-bottom.html"> 
+	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html"> 
 </head>
 
 <template name="walllog">
-  <h1>wallog</h1>
-   <walllog-app></walllog-app>
-  <style>
-		core-animated-pages {
-			color: white;
-			font-family: sans-serif;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			font-size: 72px;
-			overflow: hidden;
-		}
-	</style>
-	
-	<core-animated-pages onclick="stuff();" transitions="cross-fade-all" notap>
-    <section>
-      <div layout vertical center center-justified style="background:red;">
-        <div>1</div>
-      </div>
-    </section>
-    <section>
-      <div layout vertical center center-justified style="background:blue;">
-        <div>2</div>
-      </div>
-    </section>
-    <section>
-      <div layout vertical center center-justified style="background:purple;">
-        <div>3</div>
-      </div>
-    </section>
-    <section>
-      <div layout vertical center center-justified style="background:orange;">
-        <div>4</div>
-      </div>
-    </section>
-    <section>
-      <div layout vertical center center-justified style="background:green;">
-        <div>5</div>
-      </div>
-    </section>
-  </core-animated-pages>
-	<script type="text/javascript">
-	    var up = true;
-	    var max = 2;
-	    function stuff() {
-	      var p = document.querySelector('core-animated-pages');
-	      if (up && p.selected === max || !up && p.selected === 0) {
-	        up = !up;
-	      }
-	      if (up) {
-	        p.selected += 1;
-	      } else {
-	        p.selected -= 1;
-	      }
-	    }
-  </script>
+  <core-toolbar class="tall">
+    <div class="bottom title animated infinite bounce">WallAdmin</div>
+  </core-toolbar>
 </template>

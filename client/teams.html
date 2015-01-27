@@ -1,49 +1,10 @@
 <head>
-	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-	<link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
-	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-	<link rel="import" href="bower_components/core-menu/core-menu.html">
-	<link rel="import" href="bower_components/paper-item/paper-item.html">
-	<link rel="import" href="bower_components/core-icons/core-icons.html">
-	<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
-	<link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
-	<link rel="import" href="bower_components/core-animated-pages/transitions/cross-fade.html">
+	<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+	<link rel="import" href="bower_components/core-list/core-list.html">
 </head>
 
 <template name="teams">
 	<paper-shadow z="1" style="margin: 60px 60px 60px 6px; height: 1000px; background: white;">
-		<core-scaffold id="scaffold">
-
-	    <nav>
-				<core-menu selectedAttribute="" selected="Wallpapers"  valueattr="label">
-			  	<paper-item label="Wallpapers">
-			  		<core-icon icon="label-outline"></core-icon>
-			  		Wallpapers
-			  	</paper-item>
-			  	<paper-item label="Comments">
-			  		<core-icon icon="label-outline"></core-icon>
-			  		Comments
-			  	</paper-item>
-				</core-menu>
-	    </nav>
-	  
-	    <core-toolbar tool flex>
-			  <div flex></div>
-			  <core-icon-button icon="refresh"></core-icon-button>
-			  <core-icon-button icon="add"></core-icon-button>
-	    </core-toolbar>
-	  
-	    <div layout horizontal center-center fit>
-				<core-animated-pages valueattr="label" selected="0" transitions="cross-fade-all">
-					<section label="Wallpapers" layout vertical center-center>
-			      <div>Wallpapers</div>
-			    </section>
-			    <section label="Comments" layout vertical center-center>
-			      <div>Comments</div>
-			    </section>
-				</core-animated-pages>
-	    </div>
-  	
-  	</core-scaffold>
+		teams
   </paper-shadow>
 </template>
