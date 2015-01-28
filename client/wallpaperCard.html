@@ -1,0 +1,15 @@
+<template name="wallpaperCard">
+	<div class='wallpaperCard'>
+
+		<paper-action-dialog backdrop autoCloseDisabled layered="false" id="deleteWallpaper" heading="Delete this wallpaper?">
+      <paper-button id="yes" affirmative autofocus>YES</paper-button>
+      <paper-button id="no" dismissive>NO</paper-button>
+    </paper-action-dialog>
+
+		<img src="{{wallpaperSrc}}" >
+		<div layout horizontal style="padding: 5px">
+			<div flex></div>
+			<core-icon-button icon="close"></core-icon-button>
+		</div>
+	</div>
+</template>

@@ -1,30 +1,16 @@
-<head>
-	<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
-	<link rel="import" href="bower_components/core-icons/core-icons.html">
-</head>
-
 <template name="wallpapers">
-	<div class='wallpaperCard'>
-		<img src="images/wallpaper1.jpg" >
-		<div layout horizontal style="padding: 5px">
-			<div flex></div>
-			<core-icon-button icon="close"></core-icon-button>
-		</div>
-	</div>
-
-	<div class='wallpaperCard'>
-		<img src="images/wallpaper2.jpg" >
-		<div layout horizontal style="padding: 5px">
-			<div flex></div>
-			<core-icon-button icon="close"></core-icon-button>
-		</div>
-	</div>
-
-	<div class='wallpaperCard'>
-		<img src="images/wallpaper3.jpg" >
-		<div layout horizontal style="padding: 5px">
-			<div flex></div>
-			<core-icon-button icon="close"></core-icon-button>
-		</div>
+ 	<paper-dialog backdrop id="new" transition="core-transition-center">
+	  <div style="padding:20px; font-size:120px; line-height: 160px; color:#999;">
+	  	<div id="dropWallpaper">
+	  		<div>NEW WALLPAPER?</div>
+	  		<div>DROP IT HERE</div>
+	  	</div>
+	  </div>
+	</paper-dialog>
+  <paper-fab class="addWallpaper bottom animated fadeInRight" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
+	<div>
+		{{#each wallpapers}}
+			{{> wallpaperCard}}
+		{{/each}}
 	</div>
 </template>

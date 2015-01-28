@@ -18,3 +18,7 @@ ecwyne:polymer-elements
 meteorhacks:inject-initial
 jquery
 natestrauser:animate-css
+cfs:standard-packages
+cfs:gridfs
+cfs:ejson-file
+matb33:collection-hooks

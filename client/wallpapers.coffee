@@ -1,11 +1,4 @@
-Template.wallpapers.helpers
-	wallpapers: [
-			  {
-			    name: "Wallpapers"
-			    hash: "wallpapers"
-			  }
-			  {
-			    name: "Comments"
-			    hash: "comments"
-			  }
-			]
+Template.wallpapers.events
+	'click paper-fab.addWallpaper': (e) ->
+			Router.go 'newWallpaper'
+			# document.getElementById('new').toggle();

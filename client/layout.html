@@ -1,24 +1,3 @@
-<head>
-	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html"> 
-
-	<link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
-	<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
-	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-	<link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
-	<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
-	<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
-	<link rel="import" href="bower_components/core-icons/core-icons.html">
-	<link rel="import" href="bower_components/core-menu/core-menu.html">
-	<link rel="import" href="bower_components/paper-item/paper-item.html">
-	<link rel="import" href="bower_components/core-pages/core-pages.html">
-	<link rel="import" href="bower_components/paper-fab/paper-fab.html">
-	<link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
-	<link rel="import" href="bower_components/core-animated-pages/transitions/cross-fade.html">
-	<link rel="import" href="bower_components/core-animated-pages/transitions/slide-down.html">
-	<link rel="import" href="bower_components/core-animated-pages/transitions/hero-transition.html">
-</head>
-
 <template name="layout">
 	<core-drawer-panel id="drawer-panel">
 	  <core-header-panel mode="seamed" drawer>
@@ -28,8 +7,8 @@
 	    </core-toolbar>
 	    <div>
 	    {{#if currentUser}}
-			<core-menu  selectedAttribute="" selected="wallpapers" valueattr="label">
-	    		<paper-item label="wallpapers" class="animated fadeInLeft">
+			<core-menu  selectedAttribute="" selected="admin" valueattr="label">
+	    		<paper-item label="admin" class="animated fadeInLeft">
 	    			<core-icon icon="view-stream"></core-icon>
 						Wallpapers
 	    		</paper-item>
@@ -48,18 +27,12 @@
 	  <core-header-panel mode="cover" main>
 	  	<paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
 	  	
-	    <core-toolbar class="tall">
-	      <div flex></div>
-	      {{#if currentUser}}
-	      <paper-fab class="addWallpaper bottom animated fadeInRight" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
-	      {{/if}}
-	    </core-toolbar>
-	    
-	    	<div label="Wallpapers">
-					{{#transition in="fadeInLeft" out="fadeOutRight" timeoutIn="750" timeoutOut="250"}}
-					   {{> yield}}
-					{{/transition}}
-				</div>
+	    <core-toolbar class="tall"></core-toolbar>
+			<div>
+				{{#transition in="fadeInLeft" out="fadeOutRight" timeoutIn="750" timeoutOut="250"}}
+				   {{> yield}}
+				{{/transition}}	
+			</div>
 	  </core-header-panel>
 	</core-drawer-panel>
 </template>

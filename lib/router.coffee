@@ -7,17 +7,27 @@ Router.route '/', {
 }
 
 Router.route '/admin', {
-  name: 'wallpapers'
+  name: 'admin'
   layoutTemplate: 'layout'
   action: ->
     unless Meteor.user()
       @render "login"
     else
-      @render "wallpapers"
+      @render "wallpapers",
+        data: -> {
+          wallpapers: Wallpapers.find {},
+            sort:
+              createdAt: -1
+        }
 }
+
 
 Router.route '/games', {
   name: 'games'
+}
+
+Router.route '/newWallpaper', {
+  name: 'newWallpaper'
 }
 
  
