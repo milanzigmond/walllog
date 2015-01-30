@@ -7,10 +7,18 @@
 	    </core-toolbar>
 	    <div>
 	    {{#if currentUser}}
-			<core-menu  selectedAttribute="" selected="admin" valueattr="label">
+			<core-menu  selectedAttribute="" selected="{{selected}}" valueattr="label">
 	    		<paper-item label="admin" class="animated fadeInLeft">
 	    			<core-icon icon="view-stream"></core-icon>
 						Wallpapers
+	    		</paper-item>
+	    		<paper-item label="likes" class="animated fadeInLeft">
+	    			<core-icon icon="favorite"></core-icon>
+						Likes
+	    		</paper-item>
+	    		<paper-item label="stats" class="animated fadeInLeft">
+	    			<core-icon src="png/poll.png"></core-icon>
+						Stats
 	    		</paper-item>
 	    		<paper-item label="games" class="animated fadeInLeft">
 	    			<core-icon icon="view-headline"></core-icon>
@@ -29,7 +37,7 @@
 	  	
 	    <core-toolbar class="tall"></core-toolbar>
 			<div>
-				{{#transition in="fadeInLeft" out="fadeOutRight" timeoutIn="750" timeoutOut="250"}}
+				{{#transition in="fadeInLeft" out="fadeOut" timeoutIn="750" timeoutOut="250"}}
 				   {{> yield}}
 				{{/transition}}	
 			</div>

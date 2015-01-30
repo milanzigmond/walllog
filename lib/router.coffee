@@ -26,6 +26,26 @@ Router.route '/games', {
   name: 'games'
 }
 
+Router.route '/likes', {
+  name: 'likes'
+  action: ->
+    @render "likes",
+      data: -> {
+        wallpapers : ->
+          likes = Likes.find({
+            userId: Meteor.userId()
+          }).fetch()
+          wallpaperIds = _.map likes, (like) -> like.wallpaperId
+          Wallpapers.find {
+              _id: {
+                $in: wallpaperIds
+                }
+            },
+            sort:
+              createdAt: -1
+      }
+}
+
 Router.route '/walllog', {
   name: 'walllog'
   layoutTemplate: 'walllog'

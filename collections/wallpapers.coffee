@@ -19,3 +19,8 @@ Wallpapers.allow {
 	remove: (userId, doc) ->
 		doc.userId is userId
 }
+
+Wallpapers.helpers {
+	count: ->
+		return 0
+}

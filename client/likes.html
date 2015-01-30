@@ -1,0 +1,15 @@
+<template name="likes">
+	<div>
+		{{#if wallpapers.count}}
+			{{#transition in="fadeInLeft" out="fadeOutRight" timeoutIn="750" timeoutOut="500"}}
+				{{#each wallpapers}}
+					{{> wallpaperCard}}
+				{{/each}}
+			{{/transition}}
+		{{else}}
+			<div fit layout vertical left center-justified>
+				<h2 style="color:gray;">Ain't no likes. Like a wallpaper first Replace this with image</h2>
+			</div>
+		{{/if}}
+	</div>
+</template>

@@ -4,3 +4,7 @@ Template.layout.events
 		dp = document.getElementById 'drawer-panel'
 		dp.closeDrawer()  if dp.selected is "drawer" and dp.narrow
 		Router.go $(e.target).attr("label")
+
+Template.layout.helpers
+	selected: () ->
+		Router.current().route.getName()
