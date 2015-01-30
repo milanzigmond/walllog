@@ -1,6 +1,10 @@
 Template.wallpaperCard.helpers
+	# iconset: (icon) ->
+		# debugger
+		# document.getEementBytId("iconset").applyIcon 'comment-outline'
 	wallpaperSrc: ->
-		@file.url()
+		wallpaper = Images.findOne @file
+		wallpaper.url()
 
 removeWallpaper = (id) ->
 	console.log 'remove' + id

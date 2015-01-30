@@ -3,7 +3,7 @@ Router.configure
  
 Router.route '/', {
   name: 'teams'
-  layoutTemplate: 'walllog'
+  layoutTemplate: 'layout'
 }
 
 Router.route '/admin', {
@@ -24,6 +24,12 @@ Router.route '/admin', {
 
 Router.route '/games', {
   name: 'games'
+}
+
+Router.route '/walllog', {
+  name: 'walllog'
+  layoutTemplate: 'walllog'
+  template: 'teams'
 }
 
 Router.route '/newWallpaper', {

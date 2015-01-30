@@ -3,11 +3,20 @@
 
 		<paper-action-dialog backdrop autoCloseDisabled layered="false" id="deleteWallpaper" heading="Delete this wallpaper?">
       <paper-button id="yes" affirmative autofocus>YES</paper-button>
-      <paper-button id="no" dismissive>NO</paper-button>
+      <paper-button id="no" affirmative>NO</paper-button>
     </paper-action-dialog>
 
 		<img src="{{wallpaperSrc}}" >
+		<div class="texts">
+	    <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
+	    <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
+		</div>
 		<div layout horizontal style="padding: 5px">
+			<!-- <core-icon-button icon="favorite">14</core-icon-button> -->
+			<!-- <core-icon-button icon="none">25 <core-icon src="svg/comment-outline.svg"></core-icon></core-icon-button> -->
+			<!-- <core-icon-button id="iconset" icon="{{iconset}}"></core-icon-button> -->
+			<!-- <core-icon-button>25 <core-icon src="icon.png"></core-icon></core-icon-button>
+			<paper-icon-button icon="svg/comment.svg"></paper-icon-button> -->
 			<div flex></div>
 			<core-icon-button icon="close"></core-icon-button>
 		</div>

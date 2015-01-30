@@ -1,4 +1,4 @@
-FS.debug = true
+# FS.debug = true
 
 imageGridFSStore = new FS.Store.GridFS("images",
   mongoUrl: "mongodb://127.0.0.1:3001/meteor" # optional, defaults to Meteor's local MongoDB

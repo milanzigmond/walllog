@@ -10,11 +10,10 @@ saveWallpaper = (event) ->
     console.log err unless err
   )
 
-  Wallpapers.insert file: fileObj
+  Wallpapers.insert file: fileObj._id
 
   setTimeout (->
 	  Router.go 'admin'
-	  return
 	), 1000
 
 
