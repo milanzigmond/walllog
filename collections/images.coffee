@@ -24,3 +24,14 @@ this.Images = new FS.Collection("images",
 				'bmp'
 			]
 )
+
+Images.allow {
+	insert: (userId, doc) ->
+		yes
+	update: (userId, doc, fields, modifier) ->
+		yes
+	remove: (userId, doc) ->
+		yes
+	download: (userId, doc) ->
+		yes
+}

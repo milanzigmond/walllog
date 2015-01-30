@@ -12,13 +12,10 @@
 	    <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
 		</div>
 		<div layout horizontal style="padding: 5px">
-			<!-- <core-icon-button icon="favorite">14</core-icon-button> -->
-			<!-- <core-icon-button icon="none">25 <core-icon src="svg/comment-outline.svg"></core-icon></core-icon-button> -->
-			<!-- <core-icon-button id="iconset" icon="{{iconset}}"></core-icon-button> -->
-			<!-- <core-icon-button>25 <core-icon src="icon.png"></core-icon></core-icon-button>
-			<paper-icon-button icon="svg/comment.svg"></paper-icon-button> -->
+			<core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
+			<core-icon-button id="comment" src="{{commentIcon}}" class="dimmed"> {{commentsCount}}</core-icon-button>
 			<div flex></div>
-			<core-icon-button icon="close"></core-icon-button>
+			<core-icon-button id="delete" icon="close"></core-icon-button>
 		</div>
 	</div>
 </template>

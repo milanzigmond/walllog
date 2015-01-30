@@ -7,7 +7,15 @@ Wallpapers.before.insert (userId, doc) ->
   doc.text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum molestiae suscipit odio corrupti delectus est, quam repellat, vitae minus distinctio, eius quae voluptate beatae doloribus!"
   doc.link = "link.com"
 
-
 Wallpapers.before.remove (userId, doc) ->
 	console.log doc.file
 	Images.remove doc.file._id if doc.file
+
+Wallpapers.allow {
+	insert: (userId, doc) ->
+		doc.userId is userId
+	update: (userId, doc, fields, modifier) ->
+		doc.userId is userId
+	remove: (userId, doc) ->
+		doc.userId is userId
+}
