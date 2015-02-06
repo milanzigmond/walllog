@@ -7,7 +7,7 @@ saveWallpaper = (event) ->
   file = event.originalEvent.dataTransfer.files[0]
   fsFile = new FS.File(file)
   fileObj = Images.insert(fsFile, (err, fileObj) ->
-    console.log err unless err
+    console.log err if err
   )
 
   Wallpapers.insert file: fileObj._id

@@ -9,16 +9,27 @@ Router.route '/', {
 Router.route '/admin', {
   name: 'admin'
   layoutTemplate: 'layout'
+  waitOn: ->
+    NProgress.start()
+    [
+      Meteor.subscribe 'allWallpapers'
+      Meteor.subscribe 'allImages'
+      Meteor.subscribe 'allLikes'
+    ]
+  data: ->
+    {
+      images: Images.find {}
+      likes: Likes.find {}
+      wallpapers: Wallpapers.find {},
+            sort:
+              createdAt: -1
+    }
   action: ->
+    NProgress.done()
     unless Meteor.user()
       @render "login"
     else
-      @render "wallpapers",
-        data: -> {
-          wallpapers: Wallpapers.find {},
-            sort:
-              createdAt: -1
-        }
+      @render "wallpapers"
 }
 
 
@@ -28,6 +39,21 @@ Router.route '/games', {
 
 Router.route '/likes', {
   name: 'likes'
+  waitOn: ->
+    [
+      Meteor.subscribe 'allWallpapers'
+      Meteor.subscribe 'allImages'
+      Meteor.subscribe 'allLikes'
+    ]
+  data: ->
+    {
+      images: Images.find {}
+      likes: Likes.find {}
+      wallpapers: Wallpapers.find {},
+            sort:
+              createdAt: -1
+
+    }
   action: ->
     @render "likes",
       data: -> {

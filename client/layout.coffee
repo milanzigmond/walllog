@@ -8,3 +8,7 @@ Template.layout.events
 Template.layout.helpers
 	selected: () ->
 		Router.current().route.getName()
+	wallpapersCount: () ->
+		Wallpapers.find().count()
+	likesCount: () ->
+		Likes.find().count()

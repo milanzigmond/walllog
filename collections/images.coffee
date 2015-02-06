@@ -27,11 +27,11 @@ this.Images = new FS.Collection("images",
 
 Images.allow {
 	insert: (userId, doc) ->
-		yes
+		return true
 	update: (userId, doc, fields, modifier) ->
-		yes
+		return true
 	remove: (userId, doc) ->
-		yes
+		return true
 	download: (userId, doc) ->
-		yes
+		return true
 }

@@ -9,8 +9,10 @@
 	</paper-dialog>
   <paper-fab class="addWallpaper bottom animated fadeInRight" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
 	<div>
-		{{#each wallpapers}}
-			{{> wallpaperCard}}
-		{{/each}}
+		{{#transition in="fadeInLeft" out="fadeOutRight" timeoutIn="750" timeoutOut="500"}}
+			{{#each wallpapers}}
+				{{> wallpaperCard}}
+			{{/each}}
+		{{/transition}}
 	</div>
 </template>

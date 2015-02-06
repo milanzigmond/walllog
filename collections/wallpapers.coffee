@@ -8,8 +8,11 @@ Wallpapers.before.insert (userId, doc) ->
   doc.link = "link.com"
 
 Wallpapers.before.remove (userId, doc) ->
-	console.log doc.file
-	Images.remove doc.file._id if doc.file
+	console.log doc._id
+	Images.remove doc.file if doc.file 
+	Meteor.call 'removeLikesWithWallpaperId', doc._id, (err) ->
+	  if err
+	    console.log err
 
 Wallpapers.allow {
 	insert: (userId, doc) ->
@@ -23,4 +26,13 @@ Wallpapers.allow {
 Wallpapers.helpers {
 	count: ->
 		return 0
+}
+
+Meteor.methods {
+  removeLikesWithWallpaperId: (wallpaperId) ->
+    check wallpaperId, String
+    console.log wallpaperId
+		# Likes.remove {
+		# 	wallpaperId: wallpaperId
+		# }
 }

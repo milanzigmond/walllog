@@ -1,4 +1,4 @@
-this.Comments = new Mongo.Collection("comments")
+this.Comments = new Mongo.Collection "comments"
 
 Comments.before.insert (userId, doc) ->
   doc.createdAt = new Date()
