@@ -1,3 +1,35 @@
 <head>
-  <title>Walllog</title>
+	<style>
+    core-animated-pages {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      font-size: 72px;
+      overflow: hidden;
+    }
+    section > div {
+      height: 100%;
+      color: white;
+    }
+  </style>
 </head>
+
+<template name="main">
+
+	<select>
+    <option value="cross-fade" selected>cross-fade</option>
+    <option value="slide-from-right">slide-from-right</option>
+    <option value="hero-transition">hero-transition</option>
+  </select>
+	<core-animated-pages transitions="hero-transition">
+		{{#each sections}}
+    <section>
+      <div hero-id="foo" hero layout vertical center center-justified style="background:{{color}}; width:{{width}}; height:{{height}}">
+        <div hero hero-id="name">{{page}}</div>
+      </div>
+    </section>
+    {{/each}}
+  </core-animated-pages>
+</template>

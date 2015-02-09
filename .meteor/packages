@@ -24,3 +24,6 @@ babrahams:editable-text
 underscore
 dburles:collection-helpers
 mrt:nprogress
+okgrow:iron-router-autoscroll
+alanning:roles
+mrt:moment

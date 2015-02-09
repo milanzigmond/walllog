@@ -11,6 +11,9 @@ Meteor.publish 'allImages', () ->
 Meteor.publish 'allLikes', () ->
   console.log 'allLikesPublication'
   Likes.find {}
+Meteor.publish 'allComments', () ->
+  console.log 'allCommentsPublication'
+  Comments.find {}
 # Websites
 # Meteor.publish 'sitenameSearch', (query) ->
 #   check query, String

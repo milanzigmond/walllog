@@ -16,6 +16,7 @@
 	    			<core-icon icon="favorite"></core-icon>
 						{{likesCount}} Likes
 	    		</paper-item>
+	    		{{#if isInRole 'admin'}}
 	    		<paper-item label="stats" class="animated fadeInLeft">
 	    			<core-icon src="png/poll.png"></core-icon>
 						Stats
@@ -24,10 +25,13 @@
 	    			<core-icon icon="view-headline"></core-icon>
 						Games
 	    		</paper-item>
+	    		{{/if}}
+	    		{{#if isInRole 'regular'}}
 	    		<paper-item label="teams" class="animated fadeInLeft">
 	    			<core-icon icon="view-headline"></core-icon>
 						Home
 	    		</paper-item>
+	    		{{/if}}
 	    	</core-menu>
 	    	{{/if}}
 	    </div>

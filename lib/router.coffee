@@ -2,7 +2,7 @@ Router.configure
   layoutTemplate: 'layout'
  
 Router.route '/', {
-  name: 'teams'
+  name: 'main'
   layoutTemplate: 'layout'
 }
 
@@ -15,11 +15,13 @@ Router.route '/admin', {
       Meteor.subscribe 'allWallpapers'
       Meteor.subscribe 'allImages'
       Meteor.subscribe 'allLikes'
+      Meteor.subscribe 'allComments'
     ]
   data: ->
     {
       images: Images.find {}
       likes: Likes.find {}
+      comments: Comments.find {}
       wallpapers: Wallpapers.find {},
             sort:
               createdAt: -1
@@ -40,6 +42,7 @@ Router.route '/games', {
 Router.route '/likes', {
   name: 'likes'
   waitOn: ->
+    NProgress.start()
     [
       Meteor.subscribe 'allWallpapers'
       Meteor.subscribe 'allImages'
@@ -55,6 +58,7 @@ Router.route '/likes', {
 
     }
   action: ->
+    NProgress.done()
     @render "likes",
       data: -> {
         wallpapers : ->

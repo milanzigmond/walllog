@@ -13,13 +13,15 @@ updatWallpaper = (event) ->
   # fileObj = Images.insert(fsFile, (err, fileObj) ->
   #   if not err
   #     Images.remove @wallpaperId if @wallpaperId?
-  #   else
-  #     console.log err
+  #   else  #     console.log err
   # setModifier = {$set: {}}
   # setModifier.$set['file'] = fileObj._2id
   # Wallpapers.update {id: @_id}, setModifier 
-
 Template.wallpaperCard.helpers
+	comments: ->
+		Comments.find {
+			wallpaperId:@_id
+			}
 	likeIcon: ->
 		if Likes.findOne {
 			wallpaperId:@_id
@@ -32,7 +34,7 @@ Template.wallpaperCard.helpers
 		if Comments.findOne {
 			wallpaperId:@_id
 			userId:Meteor.userId()
-		}
+			}
 			"png/comment.png" 
 		else 
 			"png/comment-outline.png"
@@ -50,12 +52,18 @@ Template.wallpaperCard.helpers
 
 removeWallpaper = (id) ->
 	console.log 'remove' + id
-	Wallpapers.remove id
+	Wallpapers.remove {
+		_id: id
+	} 
 
 
 Template.wallpaperCard.events
 	'click #delete': (e) -> 
-		document.getElementById('deleteWallpaper').toggle();
+		_id = @_id
+		setTimeout (->
+		  removeWallpaper(_id)
+		), 250
+		# document.GETELEMENTBYID('deleteWallpaper').toggle();
 	'click #yes': (e) ->
 		_id = @_id
 		setTimeout (->
@@ -76,13 +84,13 @@ Template.wallpaperCard.events
 			}
 	'click #comment': (e) ->
 		iHaveCommented =	Comments.findOne {
-			wallpaperId: @_idin
+			wallpaperId: @_id
 			userId: Meteor.userId()
 		}
 		if iHaveCommented
 			#do something
 		else
-			Comments.insert {	
+			Comments.insert {
 				wallpaperId: @_id
 				comment: "this is great"
 			}

@@ -3,6 +3,11 @@ this.Comments = new Mongo.Collection "comments"
 Comments.before.insert (userId, doc) ->
   doc.createdAt = new Date()
   doc.userId = userId
+  user = Meteor.users.findOne {
+  	_id:userId
+  }
+  doc.name = user.profile.name
+
 
 Comments.allow {
 	insert: (userId, doc) ->
