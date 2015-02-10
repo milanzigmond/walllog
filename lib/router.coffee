@@ -23,8 +23,8 @@ Router.route '/admin', {
       likes: Likes.find {}
       comments: Comments.find {}
       wallpapers: Wallpapers.find {},
-            sort:
-              createdAt: -1
+        sort:
+          createdAt: -1
     }
   action: ->
     NProgress.done()

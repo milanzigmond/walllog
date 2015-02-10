@@ -1,3 +1,57 @@
+@import 'nib'
+
+darkPrimaryColor =   #455A64
+primaryColor =       #795548
+lightPrimaryColor =  #CFD8DC
+textPrimaryColor =   #212121
+accentColor =        #03A9F4
+primaryTextColor =   #212121
+secondaryTextColor = #727272
+dividerColor =       #B6B6B6
+
+
+
+.custom /deep/ ::-webkit-input-placeholder
+  color accentColor
+
+.custom /deep/ ::-moz-placeholder
+  color accentColor
+
+.custom /deep/ :-ms-input-placeholder
+  color accentColor
+
+.custom /deep/ .label-text,
+.custom /deep/ .error
+  color accentColor
+
+.custom /deep/ .unfocused-underline
+  background-color accentColor
+
+.custom[focused] /deep/ .floated-label .label-text
+  color accentColor
+
+.custom /deep/ .focused-underline
+  background-color accentColor
+
+.custom.invalid /deep/ .floated-label .label-text,
+.custom /deep/ .error
+  color green
+
+.custom.invalid /deep/ .focused-underline
+  background-color green
+
+.custom
+	padding-bottom 30px
+
+.myComment
+	background #fff
+
+.author 
+	color dividerColor
+	font-size 12px
+	padding-top 5px
+	padding-bottom 10px
+
 core-icon-button#like core-icon
 	color #F6402B
 

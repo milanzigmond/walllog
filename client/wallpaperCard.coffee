@@ -16,28 +16,33 @@ updatWallpaper = (event) ->
   #   else  #     console.log err
   # setModifier = {$set: {}}
   # setModifier.$set['file'] = fileObj._2id
-  # Wallpapers.update {id: @_id}, setModifier 
+  # Wallpapers.update {id: @_id}, setModifier
 Template.wallpaperCard.helpers
 	comments: ->
-		Comments.find {
-			wallpaperId:@_id
-			}
+		Comments.find {wallpaperId:@_id},
+			sort:
+				createdAt: -1
 	likeIcon: ->
 		if Likes.findOne {
 			wallpaperId:@_id
 			userId:Meteor.userId()
-			} 
-			"png/heart.png" 
-		else 
+			}
+			"png/heart.png"
+		else
 			"png/heart-outline.png"
 	commentIcon: ->
 		if Comments.findOne {
 			wallpaperId:@_id
 			userId:Meteor.userId()
 			}
-			"png/comment.png" 
-		else 
+			"png/comment.png"
+		else
 			"png/comment-outline.png"
+	myComment: ->
+		if @userId is Meteor.userId()
+			"myComment"
+		else
+			""
 	likesCount: ->
 		Likes.find(
 			wallpaperId:@_id
@@ -54,11 +59,11 @@ removeWallpaper = (id) ->
 	console.log 'remove' + id
 	Wallpapers.remove {
 		_id: id
-	} 
+	}
 
 
 Template.wallpaperCard.events
-	'click #delete': (e) -> 
+	'click #delete': (e) ->
 		_id = @_id
 		setTimeout (->
 		  removeWallpaper(_id)
@@ -90,13 +95,23 @@ Template.wallpaperCard.events
 		if iHaveCommented
 			#do something
 		else
-			Comments.insert {
-				wallpaperId: @_id
-				comment: "this is great"
-			}
+			#open comments
 	'dragover': (e) ->
 		preventActionsForEvent e
 	'drop img': (e) ->
 		preventActionsForEvent e
 		console.log 'dropped'
 		updateWallpaper e
+	'keyup textarea' : (e) ->
+		preventActionsForEvent e
+		if e.which is 27
+    	console.log 'escape pressed'
+		if e.which is 13
+			console.log 'enter pressed'
+			Comments.insert {
+    		wallpaperId: @_id
+    		comment: e.target.value
+			}
+			e.target.value = ""
+			e.target.parentElement.update()
+			$(e.target).blur()

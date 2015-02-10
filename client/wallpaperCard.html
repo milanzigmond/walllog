@@ -1,27 +1,38 @@
 <template name="wallpaperCard">
-    <paper-action-dialog backdrop layered="true" id="deleteWallpaper" heading="Delete this wallpaper? {{wallpaperSrc}}">
-        <paper-button id="yes" affirmative autofocus>YES</paper-button>
-        <paper-button id="no" affirmative>NO</paper-button>
-    </paper-action-dialog>
+  <paper-action-dialog backdrop layered="true" id="deleteWallpaper" heading="Delete this wallpaper? {{wallpaperSrc}}">
+      <paper-button id="yes" affirmative autofocus>YES</paper-button>
+      <paper-button id="no" affirmative>NO</paper-button>
+  </paper-action-dialog>
 
-    <div class='wallpaperCard animated bounceInLeft'>
-        <img src="{{wallpaperSrc}}">
-        <div class="texts">
-            <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
-            <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
-            {{#each comments}}
-                <div layout horizontal class="comments">
-                    <div flex strong class="comment">{{comment}}</div>
-                    {{formatDate createdAt}}
-                </div>
-                <div class="author">{{name}}</div>
-            {{/each}}
+  <div class='wallpaperCard animated bounceInLeft'>
+    <img src="{{wallpaperSrc}}">
+    <div class="texts">
+      <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
+      <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
+
+      <paper-input-decorator class="custom" label="Enter your comment here ..." floatingLabel>
+        <paper-autogrow-textarea>
+          <textarea></textarea>
+        </paper-autogrow-textarea>
+      </paper-input-decorator>
+
+      {{#each comments}}
+      <div class="{{myComment}}">
+        <div layout horizontal class="text-class">
+          {{comment}}
         </div>
-        <div layout horizontal style="padding: 5px">
-            <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
-            <core-icon-button id="comment" src="{{commentIcon}}" class="dimmed"> {{commentsCount}}</core-icon-button>
-            <div flex></div>
-            <core-icon-button id="delete" icon="close"></core-icon-button>
+        <div layout horizontal class="author">
+          <div flex>{{name}}</div>
+          {{formatDate createdAt}}
         </div>
+      </div>
+      {{/each}}
     </div>
+    <div layout horizontal style="padding: 5px">
+      <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
+      <core-icon-button id="comment" src="{{commentIcon}}" class="dimmed"> {{commentsCount}}</core-icon-button>
+      <div flex></div>
+      <core-icon-button id="delete" icon="close"></core-icon-button>
+    </div>
+  </div>
 </template>

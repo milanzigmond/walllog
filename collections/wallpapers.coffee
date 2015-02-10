@@ -8,11 +8,13 @@ Wallpapers.before.insert (userId, doc) ->
   doc.link = "link.com"
 
 Wallpapers.before.remove (userId, doc) ->
-	debugger
 	Images.remove {
-		_id: doc.file 
+		_id: doc.file
 	}
 	Meteor.call 'removeLikes', doc._id, (err) ->
+	  if err
+	    console.log err
+	Meteor.call 'removeComments', doc._id, (err) ->
 	  if err
 	    console.log err
 
@@ -33,6 +35,10 @@ Wallpapers.helpers {
 Meteor.methods {
 	removeLikes: (wallId) ->
 		Likes.remove {
+			wallpaperId: wallId
+		}
+	removeComments: (wallId) ->
+		Comments.remove {
 			wallpaperId: wallId
 		}
 }
