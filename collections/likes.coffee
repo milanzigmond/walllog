@@ -6,9 +6,9 @@ Likes.before.insert (userId, doc) ->
 
 Likes.allow {
 	insert: (userId, doc) ->
-		doc.userId is userId
+		yes
 	update: (userId, doc, fields, modifier) ->
-		doc.userId is userId
+		Roles.userIsInRole userId, ['admin']
 	remove: (userId, doc) ->
-		doc.userId is userId
+		yes
 }

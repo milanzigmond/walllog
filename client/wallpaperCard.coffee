@@ -88,6 +88,18 @@ Template.wallpaperCard.events
 				wallpaperId: @_id
 			}
 	'click #comment': (e) ->
+		wrapper = $ '#comments'
+		animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+		animationIn = 'animated fadeInDown'
+		animationOut = 'animated fadeOutUp'
+
+		if wrapper.hasClass 'invisible'
+			wrapper.removeClass('invisible').addClass(animationIn).one animationEnd, () ->
+				$(this).removeClass animationIn
+		else
+			wrapper.addClass(animationOut).one animationEnd, () ->
+				$(this).addClass('invisible').removeClass animationOut
+
 		iHaveCommented =	Comments.findOne {
 			wallpaperId: @_id
 			userId: Meteor.userId()
@@ -95,7 +107,7 @@ Template.wallpaperCard.events
 		if iHaveCommented
 			#do something
 		else
-			#open comments
+
 	'dragover': (e) ->
 		preventActionsForEvent e
 	'drop img': (e) ->

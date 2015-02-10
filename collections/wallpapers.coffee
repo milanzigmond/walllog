@@ -8,23 +8,23 @@ Wallpapers.before.insert (userId, doc) ->
   doc.link = "link.com"
 
 Wallpapers.before.remove (userId, doc) ->
-	Images.remove {
-		_id: doc.file
-	}
 	Meteor.call 'removeLikes', doc._id, (err) ->
 	  if err
 	    console.log err
 	Meteor.call 'removeComments', doc._id, (err) ->
 	  if err
 	    console.log err
+	Images.remove {
+		_id: doc.file
+	}
 
 Wallpapers.allow {
 	insert: (userId, doc) ->
-		doc.userId is userId
+		Roles.userIsInRole userId, ['admin']
 	update: (userId, doc, fields, modifier) ->
-		doc.userId is userId
+		Roles.userIsInRole userId, ['admin']
 	remove: (userId, doc) ->
-		doc.userId is userId
+		Roles.userIsInRole userId, ['admin']
 }
 
 Wallpapers.helpers {

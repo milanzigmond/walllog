@@ -6,6 +6,7 @@ preventActionsForEvent = (event) ->
 saveWallpaper = (event) ->
   file = event.originalEvent.dataTransfer.files[0]
   fsFile = new FS.File(file)
+  fsFile.userId = Meteor.userId()
   fileObj = Images.insert(fsFile, (err, fileObj) ->
     console.log err if err
   )
