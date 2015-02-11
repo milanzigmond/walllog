@@ -51,9 +51,6 @@ Template.wallpaperCard.helpers
 		Comments.find(
 			wallpaperId:@_id
 		).count()
-	wallpaperSrc: ->
-		wallpaper = Images.findOne @file
-		wallpaper.url()
 
 removeWallpaper = (id) ->
 	console.log 'remove' + id

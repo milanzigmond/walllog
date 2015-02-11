@@ -2,8 +2,28 @@ Router.configure
   layoutTemplate: 'layout'
  
 Router.route '/', {
-  name: 'main'
-  layoutTemplate: 'layout'
+  name: 'stream'
+  layoutTemplate: 'publicLayout'
+  waitOn: ->
+    NProgress.start()
+    [
+      Meteor.subscribe 'allWallpapers'
+      Meteor.subscribe 'allImages'
+      Meteor.subscribe 'allLikes'
+      Meteor.subscribe 'allComments'
+    ]
+  data: ->
+    {
+      images: Images.find {}
+      likes: Likes.find {}
+      comments: Comments.find {}
+      wallpapers: Wallpapers.find {},
+        sort:
+          createdAt: -1
+    }
+  action: ->
+    NProgress.done()
+    @render "stream"
 }
 
 Router.route '/admin', {

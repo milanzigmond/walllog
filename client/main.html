@@ -1,4 +1,4 @@
-<head>
+<!-- <head>
 	<style>
     core-animated-pages {
       position: absolute;
@@ -17,19 +17,13 @@
 </head>
 
 <template name="main">
-
-	<select>
-    <option value="cross-fade" selected>cross-fade</option>
-    <option value="slide-from-right">slide-from-right</option>
-    <option value="hero-transition">hero-transition</option>
-  </select>
-	<core-animated-pages transitions="hero-transition">
+	<core-animated-pages transitions="slide-from-right cross-fade">
 		{{#each sections}}
     <section>
-      <div hero-id="foo" hero layout vertical center center-justified style="background:{{color}}; width:{{width}}; height:{{height}}">
-        <div hero hero-id="name">{{page}}</div>
+      <div slide-from-right layout vertical center center-justified style="background:{{color}}; width:{{width}}; height:{{height}}">
+        <div cross-fade>{{page}}</div>
       </div>
     </section>
     {{/each}}
   </core-animated-pages>
-</template>
+</template> -->

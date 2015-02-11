@@ -1,15 +1,10 @@
-<template name="wallpaperCard">
-  <paper-action-dialog backdrop layered="true" id="deleteWallpaper" heading="Delete this wallpaper? {{wallpaperSrc}}">
-      <paper-button id="yes" affirmative autofocus>YES</paper-button>
-      <paper-button id="no" affirmative>NO</paper-button>
-  </paper-action-dialog>
-
+<template name="wallpaper">
   <div class='wallpaperCard animated bounceInLeft'>
     <img src="{{imageUrl file}}">
     <div class="texts">
-      <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
-      <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
-
+    	<p class="title-class">{{title}}</p>
+    	<p class="text-class">{{text}}</p>
+      
       <div id="comments" class="invisible">
       <paper-input-decorator class="custom" label="Enter your comment here ..." floatingLabel>
         <paper-autogrow-textarea>

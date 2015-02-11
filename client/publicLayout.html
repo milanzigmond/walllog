@@ -1,0 +1,7 @@
+<template name="publicLayout">
+	<div>
+		{{#transition in="fadeInLeft" out="fadeOut" timeoutIn="750" timeoutOut="250"}}
+			{{> yield}}
+		{{/transition}}
+	</div>
+</template>
