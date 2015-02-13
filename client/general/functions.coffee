@@ -7,3 +7,9 @@ Template.registerHelper 'formatDate', (datetime) ->
 Template.registerHelper 'imageUrl', (fileId) ->
 	image = Images.findOne fileId
 	image.url()
+
+
+this.preventActionsForEvent = (event) ->
+  event.preventDefault()
+  event.stopPropagation()
+  console.log "preventActionsForEvent"

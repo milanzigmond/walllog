@@ -8,8 +8,9 @@ Template.wallpaper.helpers
 			wallpaperId:@_id
 		).count()
 	comments: ->
-		Comments.find {wallpaperId:@_id},
-			sort:
+		Comments.find {
+			wallpaperId:@_id
+			},sort:
 				createdAt: -1
 	likeIcon: ->
 		if Likes.findOne {
@@ -44,3 +45,18 @@ Template.wallpaper.events
 			}
 	'click #comment': (e) ->
 		$('.commentsWrapper').slideToggle(400)
+	'keyup #commentText' : (e) ->
+		preventActionsForEvent e
+		if e.which is 27
+    	console.log 'escape pressed'
+		if e.which is 13
+			console.log 'enter pressed'
+			Comments.insert {
+    		wallpaperId: @_id
+    		comment: e.target.value
+				}
+			e.target.value = ""
+			e.target.parentElement.update()
+			$(e.target).blur()
+			if $('.commentsWrapper').css('display') is "none"
+				$('.commentsWrapper').slideToggle(400)
