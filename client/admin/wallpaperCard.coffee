@@ -84,27 +84,8 @@ Template.wallpaperCard.events
 			Likes.insert {
 				wallpaperId: @_id
 			}
-	# 'click #comment': (e) ->
-		# wrapper = $ '#comments'
-		# animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
-		# animationIn = 'animated fadeInDown'
-		# animationOut = 'animated fadeOutUp'
-
-		# if wrapper.hasClass 'invisible'
-		# 	wrapper.removeClass('invisible').addClass(animationIn).one animationEnd, () ->
-		# 		$(this).removeClass animationIn
-		# else
-		# 	wrapper.addClass(animationOut).one animationEnd, () ->
-		# 		$(this).addClass('invisible').removeClass animationOut
-
-		# iHaveCommented =	Comments.findOne {
-		# 	wallpaperId: @_id
-		# 	userId: Meteor.userId()
-		# }
-		# if iHaveCommented
-		# 	#do something
-		# else
-
+	'click #comment': (e) ->
+		$('.commentsWrapper').slideToggle(400)
 	'dragover': (e) ->
 		preventActionsForEvent e
 	'drop img': (e) ->
@@ -113,14 +94,16 @@ Template.wallpaperCard.events
 		updateWallpaper e
 	'keyup textarea' : (e) ->
 		preventActionsForEvent e
-		if e.which is 27
+		if e.keyCode is 27
     	console.log 'escape pressed'
-		if e.which is 13
+		if e.keyCode is 13
 			console.log 'enter pressed'
 			Comments.insert {
     		wallpaperId: @_id
     		comment: e.target.value
-			}
+				}
 			e.target.value = ""
 			e.target.parentElement.update()
 			$(e.target).blur()
+			if $('.commentsWrapper').css('display') is "none"
+				$('.commentsWrapper').slideToggle(400)

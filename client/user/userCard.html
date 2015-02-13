@@ -4,7 +4,15 @@
     <div layout horizontal class="icons">
       <core-icon-button id="likes" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
       <div flex></div>
-      <core-icon-button id="more" icon="more-vert"></core-icon-button>
+
+			<paper-menu-button>
+        <paper-icon-button icon="more-vert" noink></paper-icon-button>
+        <paper-dropdown class="dropdown" halign="right">
+          <core-menu class="menu">
+              <paper-item id="logout">Logout</paper-item>
+          </core-menu>
+        </paper-dropdown>
+      </paper-menu-button>
     </div>
   </div>
 </template>

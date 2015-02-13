@@ -47,9 +47,9 @@ Template.wallpaper.events
 		$('.commentsWrapper').slideToggle(400)
 	'keyup #commentText' : (e) ->
 		preventActionsForEvent e
-		if e.which is 27
+		if e.keyCode is 27
     	console.log 'escape pressed'
-		if e.which is 13
+		if e.keyCode is 13
 			console.log 'enter pressed'
 			Comments.insert {
     		wallpaperId: @_id

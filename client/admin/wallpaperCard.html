@@ -10,23 +10,24 @@
       <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
       <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
 
-      <div id="comments" class="invisible">
       <paper-input-decorator class="custom" label="Enter your comment here ..." floatingLabel>
         <paper-autogrow-textarea>
           <textarea></textarea>
         </paper-autogrow-textarea>
       </paper-input-decorator>
-      {{#each comments}}
-        <div class="{{myComment}}">
-          <div layout horizontal class="text-class">
-            {{comment}}
+
+      <div class="commentsWrapper" style="display:none;">
+        {{#each comments}}
+          <div class="{{myComment}}">
+            <div layout horizontal class="text-class">
+              {{comment}}
+            </div>
+            <div layout horizontal class="author">
+              <div flex>{{name}}</div>
+              {{formatDate createdAt}}
+            </div>
           </div>
-          <div layout horizontal class="author">
-            <div flex>{{name}}</div>
-            {{formatDate createdAt}}
-          </div>
-        </div>
-      {{/each}}
+        {{/each}}
       </div>
     </div>
     <div layout horizontal style="padding: 5px">
