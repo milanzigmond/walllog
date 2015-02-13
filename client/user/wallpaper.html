@@ -1,0 +1,41 @@
+<template name="wallpaper">
+  <section label="{{_id}}">
+
+    <div slide-from-right layout horizontal class="bgImage" style="background-image:url('{{imageUrl file}}');"></div>
+
+    <div horizontal layout end>
+      <div class='smallCard animated bounceInLeft'>
+        <div class="texts">
+          <p class="title-class">{{title}}</p>
+          <p class="text-class">{{text}}</p>
+          <div class="commentsWrapper" style="display:none;">
+            <paper-input-decorator class="custom" label="Enter your comment here ..." floatingLabel>
+              <paper-autogrow-textarea>
+                <textarea></textarea>
+              </paper-autogrow-textarea>
+            </paper-input-decorator>
+            {{#each comments}}
+            <div class="{{myComment}}">
+              <div layout horizontal class="author">
+                <div flex>{{name}}</div>
+                {{formatDate createdAt}}
+              </div>
+              <div layout horizontal class="text-class">
+                {{comment}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        <div layout horizontal style="padding: 5px">
+          <core-icon-button id="link" icon="link"><a href="www.google.com">krishnamurti.com</a>
+          </core-icon-button>
+          <div flex></div>
+          <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
+          <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</template>

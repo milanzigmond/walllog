@@ -1,0 +1,12 @@
+<template name="stream">
+	{{#if currentUser}}
+		{{> userCard}}
+	{{else}}
+		<paper-fab class="addUser bottom animated fadeInRight" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
+	{{/if}}
+	<core-animated-pages transitions="slide-from-right cross-fade" valueattr="label">
+		{{#each wallpapers}}
+			{{> wallpaper}}
+    {{/each}}
+  </core-animated-pages>
+</template>

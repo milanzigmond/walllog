@@ -84,26 +84,26 @@ Template.wallpaperCard.events
 			Likes.insert {
 				wallpaperId: @_id
 			}
-	'click #comment': (e) ->
-		wrapper = $ '#comments'
-		animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
-		animationIn = 'animated fadeInDown'
-		animationOut = 'animated fadeOutUp'
+	# 'click #comment': (e) ->
+		# wrapper = $ '#comments'
+		# animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+		# animationIn = 'animated fadeInDown'
+		# animationOut = 'animated fadeOutUp'
 
-		if wrapper.hasClass 'invisible'
-			wrapper.removeClass('invisible').addClass(animationIn).one animationEnd, () ->
-				$(this).removeClass animationIn
-		else
-			wrapper.addClass(animationOut).one animationEnd, () ->
-				$(this).addClass('invisible').removeClass animationOut
+		# if wrapper.hasClass 'invisible'
+		# 	wrapper.removeClass('invisible').addClass(animationIn).one animationEnd, () ->
+		# 		$(this).removeClass animationIn
+		# else
+		# 	wrapper.addClass(animationOut).one animationEnd, () ->
+		# 		$(this).addClass('invisible').removeClass animationOut
 
-		iHaveCommented =	Comments.findOne {
-			wallpaperId: @_id
-			userId: Meteor.userId()
-		}
-		if iHaveCommented
-			#do something
-		else
+		# iHaveCommented =	Comments.findOne {
+		# 	wallpaperId: @_id
+		# 	userId: Meteor.userId()
+		# }
+		# if iHaveCommented
+		# 	#do something
+		# else
 
 	'dragover': (e) ->
 		preventActionsForEvent e
