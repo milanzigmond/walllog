@@ -1,0 +1,40 @@
+@import 'nib'
+@import '../styl/colors'
+
+a#register
+  color accentColor
+
+.loginCard
+  position fixed
+  right 40px
+  top 40px
+  height auto
+  z-index 1
+  background rgba(0,0,0,0.4)
+  color white
+  padding 10px
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
+  border-radius 2px 2px 2px 2px
+
+
+paper-button::shadow
+  .button-content
+    height 51px
+  #ripple
+    color accentColor
+    
+paper-button.foreground::shadow .button-content
+  color accentColor
+  
+paper-button.background::shadow .button-content
+  color rgba(255,255,255,0.6)
+  
+.loginButton, .registerButton
+  display block
+  margin-top 10px
+  margin-left 0px
+  margin-right 0px
+  width 270px
+
+.passwordField, .emailField, .usernameField
+  height 51px

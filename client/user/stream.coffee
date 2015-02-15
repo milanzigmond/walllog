@@ -1,5 +1,5 @@
 switchToNextWallpaper = () ->
-	pages = document.querySelector 'core-animated-pages'
+	pages = document.querySelector '#stream'
 	selectedWallpaperId = pages.selected
 	wallpapers = Wallpapers.find({}, {sort: {createdAt: -1}}).fetch()
 	ids = _.map wallpapers, (wallpaper) ->
@@ -18,6 +18,6 @@ Template.stream.events
 		# console.log e
 
 Template.stream.rendered = () ->
-	p = document.querySelector('core-animated-pages')
+	p = document.querySelector('#stream')
 	wallpapers = Wallpapers.find({}, {sort: {createdAt: -1}}).fetch()
 	p.selected = wallpapers[0]._id

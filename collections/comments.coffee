@@ -6,7 +6,7 @@ Comments.before.insert (userId, doc) ->
   user = Meteor.users.findOne {
   	_id:userId
   }
-  doc.name = user.profile.name
+  doc.name = user.username
 
 
 Comments.allow {

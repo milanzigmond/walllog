@@ -2,11 +2,13 @@
 	{{#if currentUser}}
 		{{> userCard}}
 	{{else}}
-		<paper-fab class="addUser bottom animated fadeInRight" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
+		{{> userArea}}
 	{{/if}}
-	<core-animated-pages transitions="slide-from-right cross-fade" valueattr="label">
+
+	<core-animated-pages id="stream" transitions="slide-from-right cross-fade" valueattr="label">
 		{{#each wallpapers}}
 			{{> wallpaper}}
     {{/each}}
   </core-animated-pages>
+
 </template>

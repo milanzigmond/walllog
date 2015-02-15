@@ -1,0 +1,59 @@
+<template name="userArea">
+	<core-animated-pages id="userArea" transitions="hero-transition cross-fade" selected="new" valueattr="label">	
+		<section label="new">
+			<paper-fab hero-id="card" hero class="addUser" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
+		</section>
+
+		<section label="login">
+			<div class='loginCard' hero-id="card" hero>
+				<div layout horizontal>
+		      <div flex></div>
+		      <core-icon-button id="close" icon="close" cross-fade></core-icon-button>
+		    </div>
+				<div class="texts">
+			    <p class="title-class" cross-fade>Welcome</p>
+			    <p class="text-class" cross-fade>Login to like and comment wallpapers.</p>
+			    <paper-input-decorator class="custom" label="Email" floatingLabel hero-id="email" hero>
+			      <input is="core-input" id="loginEmail">
+			    </paper-input-decorator>
+			    <paper-input-decorator class="custom passwordField" label="Password" floatingLabel hero-id="password" hero>
+			      <input is="core-input" id="loginPassword">
+			    </paper-input-decorator>
+			    <div class="layout horizontal" hero-id="loginButton" hero>
+			    	<div flex></div>
+			    	<paper-button class="loginButton foreground">login</paper-button>
+			    </div>
+			    <div class="layout horizontal" hero-id="registerButton" hero>
+			    	<div flex></div>
+			    	<paper-button class="registerButton background">create account</paper-button>
+			    </div>
+				</div>
+		  </div>
+		</section>
+
+		<section label="register">
+			<div class='loginCard' hero-id="card" hero>
+				<div class="texts">
+			    <paper-input-decorator class="custom usernameField" label="Username" floatingLabel cross-fade>
+			      <input is="core-input" id="registerUsername">
+			    </paper-input-decorator>
+			    <paper-input-decorator class="custom emailField" label="Email" floatingLabel hero-id="email" hero>
+			      <input is="core-input" id="registerEmail">
+			    </paper-input-decorator>
+			    <paper-input-decorator class="custom passwordField" label="Password" floatingLabel hero-id="password" hero>
+			      <input is="core-input" id="registerPassword">
+			    </paper-input-decorator>
+			    <div class="layout horizontal">
+			    	<div flex></div>
+			    	<paper-button class="registerButton foreground" hero-id="registerButton" hero>create account</paper-button>
+			    </div>
+			    <div class="layout horizontal">
+			    	<div flex></div>
+			    	<paper-button class="loginButton background" hero-id="loginButton" hero>login</paper-button>
+			    </div>
+				</div>
+		  </div>
+		</section>
+
+	</core-animated-pages>
+</template>
