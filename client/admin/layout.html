@@ -1,9 +1,8 @@
 <template name="layout">
 	<core-drawer-panel id="drawer-panel">
-	  <core-header-panel mode="seamed" drawer>
-	    <core-toolbar class="tall">
+	  <core-header-panel drawer>
+	    <core-toolbar>
 	    	<div style="font-size:16px;">{{>loginButtons}}</div>
-	      <div class="bottom title animated infinite fadeInDown">WallAdmin</div>
 	    </core-toolbar>
 	    <div>
 	    {{#if currentUser}}
@@ -36,10 +35,10 @@
 	    	{{/if}}
 	    </div>
 	  </core-header-panel>
-	  <core-header-panel mode="cover" main>
+	  <core-header-panel main>
 	  	<paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
 	  	
-	    <core-toolbar class="tall"></core-toolbar>
+	    <core-toolbar></core-toolbar>
 			<div>
 				{{#transition in="fadeInLeft" out="fadeOut" timeoutIn="750" timeoutOut="250"}}
 				   {{> yield}}

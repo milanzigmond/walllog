@@ -7,11 +7,9 @@ body {
 }
 
 .addWallpaper {
-  position: fixed;
-  right: 28px;
-  top: 164px;
-  z-index: 1;
-  background: accentColor
+  margin-top 60px
+  background: primaryColor
+  color white
 }
 
 #dropShadow {
@@ -40,18 +38,14 @@ body {
   margin-right: 10px;
 }
 
-core-icon {
-  opacity: 0.7
-}
-
 core-header-panel {
-  background-color #eee
+  background-color lightPrimaryColor
   height: 100%
 }
 
 body /deep/ core-toolbar {
-  background-color #eee
-  // color #ddd
+  background-color darkPrimaryColor
+  color white
 }
 
 core-menu, core-animated-pages, core-pages {
@@ -60,7 +54,7 @@ core-menu, core-animated-pages, core-pages {
 
 paper-item.core-selected 
   color white
-  background-color accentColor
+  background-color primaryColor
   
 paper-item::shadow #ripple {
   color: white;

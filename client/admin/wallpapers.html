@@ -7,8 +7,10 @@
 	  	</div>
 	  </div>
 	</paper-dialog>
-  <paper-fab class="addWallpaper bottom animated fadeInRight" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
 	<div>
+		<div layout horizontal center-justified>
+			<paper-fab class="addWallpaper animated fadeInRight" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
+		</div>
 		{{#transition in="fadeInLeft" out="fadeOutRight" timeoutIn="750" timeoutOut="500"}}
 			{{#each wallpapers}}
 				{{> wallpaperCard}}

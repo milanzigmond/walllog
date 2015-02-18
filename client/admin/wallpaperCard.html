@@ -9,11 +9,19 @@
         <div class="texts">
             <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
             <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
-            <paper-input-decorator class="custom" label="Enter your comment here ..." floatingLabel>
-                <paper-autogrow-textarea>
-                    <textarea></textarea>
-                </paper-autogrow-textarea>
-            </paper-input-decorator>
+            
+            <div layout horizontal>
+                <div flex>
+                    <paper-input-decorator class="custom" label="Comment here" floatingLabel>
+                        <paper-autogrow-textarea>
+                            <textarea></textarea>
+                        </paper-autogrow-textarea>
+                    </paper-input-decorator>
+                </div>
+                <div layout horizontal center>
+                    <paper-fab class="downloadWallpaper" icon="file-download" role="button" tabindex="0" aria-label="Download"></paper-fab>
+                </div>
+            </div>
 
             <div class="commentsWrapper" style="display:none;">
                 {{#each comments}}
