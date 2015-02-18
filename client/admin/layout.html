@@ -1,6 +1,6 @@
 <template name="layout">
 	<core-drawer-panel id="drawer-panel">
-	  <core-header-panel drawer>
+	  <core-header-panel mode="seamed" drawer>
 	    <core-toolbar>
 	    	<div style="font-size:16px;">{{>loginButtons}}</div>
 	    </core-toolbar>
@@ -35,7 +35,7 @@
 	    	{{/if}}
 	    </div>
 	  </core-header-panel>
-	  <core-header-panel main>
+	  <core-header-panel mode="seamed" main>
 	  	<paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
 	  	
 	    <core-toolbar></core-toolbar>

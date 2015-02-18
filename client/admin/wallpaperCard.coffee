@@ -92,7 +92,7 @@ Template.wallpaperCard.events
 		preventActionsForEvent e
 		console.log 'dropped'
 		updateWallpaper e
-	'keyup textarea' : (e) ->
+	'keyup #addComment' : (e) ->
 		preventActionsForEvent e
 		if e.keyCode is 27
     	console.log 'escape pressed'

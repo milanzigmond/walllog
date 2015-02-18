@@ -8,6 +8,10 @@ Template.registerHelper 'imageUrl', (fileId) ->
 	image = Images.findOne fileId
 	image.url()
 
+Template.registerHelper 'downloadFile', (fileId) ->
+	file =Images.findOne fileId
+	file.url()+"&download=true"
+
 
 this.preventActionsForEvent = (event) ->
   event.preventDefault()
