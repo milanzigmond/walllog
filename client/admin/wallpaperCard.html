@@ -1,40 +1,40 @@
 <template name="wallpaperCard">
-  <paper-action-dialog backdrop layered="true" id="deleteWallpaper" heading="Delete this wallpaper? {{wallpaperSrc}}">
-      <paper-button id="yes" affirmative autofocus>YES</paper-button>
-      <paper-button id="no" affirmative>NO</paper-button>
-  </paper-action-dialog>
+    <paper-action-dialog backdrop layered="true" id="deleteWallpaper" heading="Delete this wallpaper? {{wallpaperSrc}}">
+        <paper-button id="yes" affirmative autofocus>YES</paper-button>
+        <paper-button id="no" affirmative>NO</paper-button>
+    </paper-action-dialog>
 
-  <div class='wallpaperCard animated bounceInLeft'>
-    <img src="{{imageUrl file}}">
-    <div class="texts">
-      <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
-      <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
+    <div class='wallpaperCard animated bounceInLeft'>
+        <img src="{{imageUrl file}}">
+        <div class="texts">
+            <p>{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
+            <p>{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
+            <paper-input-decorator class="custom" label="Enter your comment here ..." floatingLabel>
+                <paper-autogrow-textarea>
+                    <textarea></textarea>
+                </paper-autogrow-textarea>
+            </paper-input-decorator>
 
-      <paper-input-decorator class="custom" label="Enter your comment here ..." floatingLabel>
-        <paper-autogrow-textarea>
-          <textarea></textarea>
-        </paper-autogrow-textarea>
-      </paper-input-decorator>
-
-      <div class="commentsWrapper" style="display:none;">
-        {{#each comments}}
-          <div class="{{myComment}}">
-            <div layout horizontal class="text-class">
-              {{comment}}
+            <div class="commentsWrapper" style="display:none;">
+                {{#each comments}}
+                <div class="{{myComment}}">
+                    <div layout horizontal class="text-class">
+                        {{comment}}
+                    </div>
+                    <div layout horizontal class="author">
+                        <div flex>{{name}}</div>
+                        {{formatDate createdAt}}
+                    </div>
+                </div>
+                {{/each}}
             </div>
-            <div layout horizontal class="author">
-              <div flex>{{name}}</div>
-              {{formatDate createdAt}}
-            </div>
-          </div>
-        {{/each}}
-      </div>
+        </div>
+        <div layout horizontal style="padding: 5px">
+            <core-icon-button id="link" icon="link"></core-icon-button>
+            <span layout horizontal center flex>{{> editableText collection="wallpapers" inputClass="link-input-class" field="link"}}</span>
+            <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
+            <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
+            <core-icon-button id="delete" icon="close"></core-icon-button>
+        </div>
     </div>
-    <div layout horizontal style="padding: 5px">
-      <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
-      <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
-      <div flex></div>
-      <core-icon-button id="delete" icon="close"></core-icon-button>
-    </div>
-  </div>
 </template>

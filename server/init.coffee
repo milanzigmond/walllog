@@ -10,8 +10,8 @@ Meteor.startup ->
 				]
 			}
 			{
-				username: milanzigmond
-				email: 'milan@milan.com'
+				username: 'milanzigmond'
+				email: 'milanzigmond@gmail.com'
 				roles: [
 					'admin'
 				]

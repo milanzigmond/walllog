@@ -28,8 +28,9 @@
           </div>
         </div>
         <div layout horizontal style="padding: 5px">
-          <core-icon-button id="link" icon="link"><a href="www.google.com">krishnamurti.com</a>
-          </core-icon-button>
+          {{#if link}}
+            <core-icon-button id="link" icon="link"><a href="http://{{link}}" target="_blank">{{link}}</a></core-icon-button>
+          {{/if}}
           <div flex></div>
           <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
           <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
