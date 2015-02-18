@@ -1,4 +1,6 @@
 Template.userCard.helpers
+	username: ->
+		Meteor.user().username
 	likesCount: ->
 		Likes.find(
 			userId:Meteor.userId()

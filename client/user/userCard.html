@@ -1,10 +1,9 @@
 <template name="userCard">
 	<div class='userCard'>
-    <img src="jpg/sideface.jpg">
+    <div horizontal layout center-justified center class="username">{{username}}</div>
     <div layout horizontal class="icons">
       <core-icon-button id="likes" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
       <div flex></div>
-
 			<paper-menu-button>
         <paper-icon-button icon="more-vert" noink></paper-icon-button>
         <paper-dropdown class="dropdown" halign="right">

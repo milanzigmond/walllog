@@ -3,14 +3,14 @@ Meteor.startup ->
 	if Meteor.users.find().count() < 1
 		users = [
 			{
-				name:'Regular User'
+				username: 'regular'
 				email: 'regular@regular.com'
 				roles: [
 					'regular'
 				]
 			}
 			{
-				name:'Milan Zigmond'
+				username: milanzigmond
 				email: 'milan@milan.com'
 				roles: [
 					'admin'
@@ -22,13 +22,8 @@ Meteor.startup ->
 			userid = Accounts.createUser {
 				email: userData.email,
 				password: 'zigmond'
-				username: userData.email,
-				profile: {
-					name: userData.name
-				}
+				username: userData.username
 			}
-			console.log userid
 			Roles.addUsersToRoles userid, userData.roles
 	Inject.rawModHtml "addUnresolved", (html) ->
     html = html.replace("<body>", "<body unresolved fullbleed layout vertical>")
-  return
