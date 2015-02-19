@@ -1,7 +1,9 @@
 <template name="wallpaper">
     <section label="{{_id}}">
 
-        <div slide-from-right layout horizontal class="bgImage" style="background-image:url('{{imageUrl file}}');"></div>
+        <div slide-from-right layout horizontal class="bgImage" style="background-image:url('{{imageUrl file}}');">
+            <paper-ripple fit></paper-ripple>
+        </div>
 
         <div horizontal layout end>
             <div class='smallCard animated bounceInRight'>
