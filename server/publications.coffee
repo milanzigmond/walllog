@@ -24,9 +24,14 @@ Meteor.publish 'allLikes', () ->
   console.log 'allLikesPublication'
   Likes.find {}
 
-Meteor.publish 'myLikes', (userId) ->
+Meteor.publish 'myLikes', () ->
   console.log 'myLikesPublication'
-  Likes.find {userId:userId}
+  Likes.find {userId:@userId}
+
+Meteor.publish 'wallpaperLikes', (wallpaperName) ->
+  console.log 'wallpaperLikesPub, wallpaperName:'+wallpaperName
+  wallpaper = Wallpapers.findOne {name: wallpaperName}
+  Likes.find {wallpaperId:wallpaper._id}
 
 Meteor.publish 'allComments', () ->
   console.log 'allCommentsPublication'
@@ -36,3 +41,11 @@ Meteor.publish 'comments', (wallpaperName) ->
   console.log 'allCommentsPublication'
   wallpaper = Wallpapers.findOne {name: wallpaperName}
   Comments.find {wallpaperId: wallpaper._id}
+
+# Meteor.publish 'userData', ->
+#   if @userId
+#     return Meteor.users.find({ _id: @userId }, fields:
+#       'newsletter': 1)
+#   else
+#     @ready()
+#   return

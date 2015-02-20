@@ -1,7 +1,15 @@
+Session.setDefault('registerEmailValue',"")
+
 login = (email, password) ->
 	Meteor.loginWithPassword email, password, (err) ->
 		console.log err if err
 		# document.getElementById('userArea').selected = "new"
+
+Template.userArea.helpers
+	validEmail: () ->
+		dp = document.getElementById 'registerEmail'
+		if dp?
+			Session.get('registerEmailValue').length > 5
 
 Template.userArea.events
 	'click .addUser': (e,t) ->
@@ -36,3 +44,6 @@ Template.userArea.events
 			}
 			Meteor.call "addUser", userData, (err) ->
 				login(userData.email, userData.password)
+	'keyup #registerEmail' : (e, t) ->
+		preventActionsForEvent e
+		Session.set 'registerEmailValue', e.target.value

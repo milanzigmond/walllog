@@ -1,20 +1,19 @@
 <template name="userCard">
 	<div class='userCard'>
-    <div horizontal layout center-justified center class="username">{{username}}</div>
     <div layout horizontal class="icons">
       <core-tooltip label="Search wallpapers" large class="fancy" position="bottom">
         <core-icon-button id="search" icon="search"></core-icon-button>
       </core-tooltip>
-      <core-icon-button id="likes" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
-      <div flex></div>
-			<paper-menu-button>
-        <paper-icon-button icon="more-vert" noink></paper-icon-button>
-        <paper-dropdown class="dropdown" halign="right">
-          <core-menu class="menu">
-            <paper-item id="logout">Logout</paper-item>
-          </core-menu>
-        </paper-dropdown>
-      </paper-menu-button>
+      <core-tooltip label="Liked wallpapers" large class="fancy" position="bottom">
+        <core-icon-button id="likes" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
+      </core-tooltip>
+      <core-tooltip label="Send me email with each new wallpaper" large class="fancy" position="bottom">
+        <core-icon-button id="newsletter" src="{{newsletterIcon}}"></core-icon-button>
+      </core-tooltip>
+      <div horizontal layout center-justified center class="username">{{username}}</div>
+      <core-tooltip label="Logout" large class="fancy" position="bottom">
+        <core-icon-button id="logout" src="png/logout_white.png"></core-icon-button>
+      </core-tooltip>
     </div>
   </div>
 </template>

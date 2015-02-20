@@ -1,7 +1,11 @@
 <template name="userArea">
 	<core-animated-pages id="userArea" transitions="hero-transition cross-fade" selected="new" valueattr="label">	
 		<section label="new">
-			<paper-fab hero-id="card" hero class="addUser" icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
+				<div class="addUserWrapper">
+					<core-tooltip label="Login or create an account" large class="fancy" position="left">
+						<paper-fab hero-id="card" class="addUser" hero icon="add" role="button" tabindex="0" aria-label="Add"></paper-fab>
+					</core-tooltip>
+				</div>
 		</section>
 
 		<section label="login">
@@ -37,8 +41,8 @@
 			    <paper-input-decorator class="custom usernameField" label="Username" floatingLabel cross-fade>
 			      <input is="core-input" id="registerUsername">
 			    </paper-input-decorator>
-			    <paper-input-decorator class="custom emailField" label="Email" floatingLabel hero-id="email" hero>
-			      <input is="core-input" id="registerEmail">
+			    <paper-input-decorator class="custom emailField" label="Email" floatingLabel hero-id="email" hero error="Enter correct email" isInvalid="{{validEmail}}">
+			      <input is="core-input" id="registerEmail" pattern="^[0-9].*">
 			    </paper-input-decorator>
 			    <paper-input-decorator class="custom passwordField" label="Password" floatingLabel hero-id="password" hero>
 			      <input type="password" is="core-input" id="registerPassword">

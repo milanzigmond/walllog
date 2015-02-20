@@ -12,11 +12,13 @@
 
                 <div layout horizontal>
                     <div flex>
+                        {{#if currentUser}}
                         <paper-input-decorator class="custom" label="Comment here" floatingLabel>
                             <paper-autogrow-textarea>
                                 <textarea id="commentText"></textarea>
                             </paper-autogrow-textarea>
                         </paper-input-decorator>
+                        {{/if}}
                     </div>
                     <div layout horizontal center>
                         <core-tooltip label="Download wallpaper" large class="fancy" position="top">
@@ -26,6 +28,7 @@
                         </core-tooltip>
                     </div>
                 </div>
+
 
                 <div class="commentsWrapper" style="display:none;">
                     {{#each comments}}
@@ -47,7 +50,13 @@
                 </core-icon-button>
                 {{/if}}
                 <div flex></div>
-                <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
+                {{#if currentUser}}
+                    <core-icon-button id="like" src="{{likeIcon}}"> {{likes}}</core-icon-button>
+                {{else}}
+                    <core-tooltip label="Login to save your like" large class="fancy" position="top">
+                        <core-icon-button id="like" src="{{likeIcon}}"> {{likes}}</core-icon-button>
+                    </core-tooltip>
+                {{/if}}
                 <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
             </div>
         </div>

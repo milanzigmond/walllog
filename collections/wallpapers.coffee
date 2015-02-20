@@ -36,6 +36,8 @@ Wallpapers.allow {
 Wallpapers.helpers {
 	count: ->
 		return 0
+	likes: ->
+		Likes.find(wallpaperId:@_id).count()
 }
 
 Meteor.methods {

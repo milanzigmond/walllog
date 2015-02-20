@@ -5,6 +5,7 @@ Meteor.startup ->
 			{
 				username: 'regular'
 				email: 'regular@regular.com'
+				newsletter: true
 				roles: [
 					'regular'
 				]
@@ -12,6 +13,7 @@ Meteor.startup ->
 			{
 				username: 'milanzigmond'
 				email: 'milanzigmond@gmail.com'
+				newsletter: true
 				roles: [
 					'admin'
 				]

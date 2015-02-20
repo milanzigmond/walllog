@@ -30,23 +30,8 @@ Template.wallpaper.helpers
 			"png/ic_comment_white_24dp.png"
 
 Template.wallpaper.events
-  'click .bgImage' : (e) ->
-  	console.log 'bgImage clicked'
-  	Router.go "/red"
-	'click #like': (e) ->
-		iLike =	Likes.findOne {
-			wallpaperId: @_id
-			userId: Meteor.userId()
-		}
-		if iLike
-			Likes.remove {
-				_id:iLike._id
-			}
-		else
-			Likes.insert {
-				wallpaperId: @_id
-			}
 	'click #comment': (e) ->
+		console.log 'clicked'+$('.commentsWrapper')
 		$('.commentsWrapper').slideToggle(400)
 	'keyup #commentText' : (e) ->
 		preventActionsForEvent e
@@ -63,3 +48,20 @@ Template.wallpaper.events
 			$(e.target).blur()
 			if $('.commentsWrapper').css('display') is "none"
 				$('.commentsWrapper').slideToggle(400)
+	'click #like': (e) ->
+		if !Meteor.user()
+			return
+		iLike =	Likes.findOne {
+			wallpaperId: @_id
+			userId: Meteor.userId()
+		}
+		if iLike
+			Likes.remove { _id:iLike._id }
+		else
+			Likes.insert { 
+				wallpaperId: @_id 
+				wallpaperName: @name
+			}
+	'click .bgImage' : (e) ->
+  	console.log 'bgImage clicked'
+  	Router.go "/red"
