@@ -9,9 +9,9 @@ switchToNextWallpaper = () ->
   indexOfCurrentWallpaper = 0 if indexOfCurrentWallpaper >= ids.length
   pages.selected = ids[indexOfCurrentWallpaper]
 
-Template.stream.events
-	'click .bgImage': (e) ->
-	  switchToNextWallpaper()
+# Template.stream.events
+# 	'click .bgImage': (e) ->
+# 	  switchToNextWallpaper()
 	# 'core-animated-pages-transition-prepare core-animated-pages': (e) ->
 		# console.log e
 	# 'core-animated-pages-transition-endcore-animated-pages': (e) ->

@@ -3,6 +3,8 @@ preventActionsForEvent = (event) ->
   event.stopPropagation()
   console.log "preventActionsForEvent"
 
+getDefaultWallpaperName = () ->
+
 saveWallpaper = (event) ->
   file = event.originalEvent.dataTransfer.files[0]
   fsFile = new FS.File(file)
@@ -16,7 +18,6 @@ saveWallpaper = (event) ->
   setTimeout (->
 	  Router.go 'admin'
 	), 1000
-
 
 
 Template.newWallpaper.events

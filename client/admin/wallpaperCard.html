@@ -39,7 +39,8 @@
         </div>
         <div layout horizontal style="padding: 5px">
             <core-icon-button id="link" icon="link"></core-icon-button>
-            <span layout horizontal center flex>{{> editableText collection="wallpapers" inputClass="link-input-class" field="link"}}</span>
+            <span layout horizontal center flex one>{{> editableText collection="wallpapers" inputClass="link-input-class" field="link"}}</span>
+            <span layout horizontal center flex one>{{> editableText collection="wallpapers" inputClass="link-input-class" field="name"}}</span>
             <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
             <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
             <core-icon-button id="delete" icon="close"></core-icon-button>

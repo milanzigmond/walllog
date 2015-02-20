@@ -30,6 +30,9 @@ Template.wallpaper.helpers
 			"png/ic_comment_white_24dp.png"
 
 Template.wallpaper.events
+  'click .bgImage' : (e) ->
+  	console.log 'bgImage clicked'
+  	Router.go "/red"
 	'click #like': (e) ->
 		iLike =	Likes.findOne {
 			wallpaperId: @_id

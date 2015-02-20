@@ -6,6 +6,12 @@ Wallpapers.before.insert (userId, doc) ->
   doc.title = "Title"
   doc.text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum molestiae suscipit odio corrupti delectus est, quam repellat, vitae minus distinctio, eius quae voluptate beatae doloribus!"
   doc.link = "link.com"
+  doc.name = "shortest-possible-link-to-wallpaper"
+
+# Wallpapers.before.update (userId, doc, fieldNames, modifier, options) ->
+# 	if "name" in fieldNames and doc.file?
+# 		debugger
+# 		Images.update { _id: doc.file }, $set: name: modifier.$set.name
 
 Wallpapers.before.remove (userId, doc) ->
 	Meteor.call 'removeLikes', doc._id, (err) ->

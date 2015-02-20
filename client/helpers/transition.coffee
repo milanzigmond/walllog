@@ -33,13 +33,13 @@ createHooks = (options) ->
         @transitioning = false
         $(node).remove()
  
-      if options.removeClass.length
-        $(node).addClass(options.alwaysClass)
-        $(node).addClass(options.removeClass)
-        @transitioning = true
-        setTimeout remove, options.removeTimeout
-      else
-        remove()
+      # if options.removeClass.length
+      #   $(node).addClass(options.alwaysClass)
+      #   $(node).addClass(options.removeClass)
+      #   @transitioning = true
+      #   setTimeout remove, options.removeTimeout
+      # else
+      # remove()
   }
  
 Template.transition.rendered = ->

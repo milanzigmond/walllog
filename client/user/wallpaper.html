@@ -1,59 +1,55 @@
 <template name="wallpaper">
-    <section label="{{_id}}">
+    <div fit class="bgImage" style="background-image:url('{{imageUrl file}}');">
+        <paper-ripple fit></paper-ripple>
+    </div>
 
-        <div slide-from-right layout horizontal class="bgImage" style="background-image:url('{{imageUrl file}}');">
-            <paper-ripple fit></paper-ripple>
-        </div>
-
-        <div horizontal layout end>
-            <div class='smallCard animated bounceInRight'>
-                <div class="texts">
-                    <p class="title-class">{{title}}</p>
-                    <p class="text-class">{{text}}</p>
+    <div horizontal layout end>
+        <div class='smallCard animated bounceInLeft'>
+            <div class="texts">
+                <p class="title-class">{{title}}</p>
+                <p class="text-class">{{text}}</p>
 
 
-                    <div layout horizontal>
-                        <div flex>
-                            <paper-input-decorator class="custom" label="Comment here" floatingLabel>
-                                <paper-autogrow-textarea>
-                                    <textarea id="commentText"></textarea>
-                                </paper-autogrow-textarea>
-                            </paper-input-decorator>
-                        </div>
-                        <div layout horizontal center>
-                            <core-tooltip label="Download wallpaper" large class="fancy" position="top">
-                                <a href="{{downloadFile file}}" target="_self">
-                                    <paper-fab class="downloadWallpaper" icon="file-download" role="button" tabindex="0" aria-label="Download"></paper-fab>
-                                </a>
-                            </core-tooltip>
-                        </div>
+                <div layout horizontal>
+                    <div flex>
+                        <paper-input-decorator class="custom" label="Comment here" floatingLabel>
+                            <paper-autogrow-textarea>
+                                <textarea id="commentText"></textarea>
+                            </paper-autogrow-textarea>
+                        </paper-input-decorator>
                     </div>
-
-                    <div class="commentsWrapper" style="display:none;">
-                        {{#each comments}}
-                        <div class="{{myComment}}">
-                            <div layout horizontal class="text-class">
-                                {{comment}}
-                            </div>
-                            <div layout horizontal class="author">
-                                <div flex></div>
-                                {{name}}, {{formatDate createdAt}}
-                            </div>
-                        </div>
-                        {{/each}}
+                    <div layout horizontal center>
+                        <core-tooltip label="Download wallpaper" large class="fancy" position="top">
+                            <a href="{{downloadFile file}}" target="_self">
+                                <paper-fab class="downloadWallpaper" icon="file-download" role="button" tabindex="0" aria-label="Download"></paper-fab>
+                            </a>
+                        </core-tooltip>
                     </div>
                 </div>
-                <div layout horizontal style="padding: 5px">
-                    {{#if link}}
-                    <core-icon-button id="link" icon="link"><a href="http://{{link}}" target="_blank">{{link}}</a>
-                    </core-icon-button>
-                    {{/if}}
-                    <div flex></div>
-                    <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
-                    <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
+
+                <div class="commentsWrapper" style="display:none;">
+                    {{#each comments}}
+                    <div class="{{myComment}}">
+                        <div layout horizontal class="text-class">
+                            {{comment}}
+                        </div>
+                        <div layout horizontal class="author">
+                            <div flex></div>
+                            {{name}}, {{formatDate createdAt}}
+                        </div>
+                    </div>
+                    {{/each}}
                 </div>
             </div>
+            <div layout horizontal style="padding: 5px">
+                {{#if link}}
+                <core-icon-button id="link" icon="link"><a href="http://{{link}}" target="_blank">{{link}}</a>
+                </core-icon-button>
+                {{/if}}
+                <div flex></div>
+                <core-icon-button id="like" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
+                <core-icon-button id="comment" src="{{commentIcon}}"> {{commentsCount}}</core-icon-button>
+            </div>
         </div>
-
-    </section>
+    </div>
 </template>

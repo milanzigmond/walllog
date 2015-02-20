@@ -54,13 +54,9 @@ Router.route '/admin', {
       @render "wallpapers"
 }
 
-
-Router.route '/games', {
-  name: 'games'
-}
-
 Router.route '/likes', {
   name: 'likes'
+  layoutTemplate: 'layout'
   waitOn: ->
     NProgress.start()
     [
@@ -118,3 +114,24 @@ requireLogin = ->
     @next()
  
 Router.onBeforeAction(requireLogin)
+
+Router.route '/:wallpaper', {
+  name: 'wallpaper'
+  layoutTemplate: 'publicLayout'
+  waitOn: ->
+    NProgress.start()
+    [
+      Meteor.subscribe 'wallpaper', @params.wallpaper
+      Meteor.subscribe 'images', @params.wallpaper
+      Meteor.subscribe 'comments', @params.wallpaper
+      Meteor.subscribe 'myLikes', Meteor.userId()
+    ]
+  data: ->
+      Wallpapers.findOne(name: @params.wallpaper)
+  action: ->
+    NProgress.done()
+    @render 'wallpaper'
+}
+
+
+
