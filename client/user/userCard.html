@@ -1,9 +1,7 @@
 <template name="userCard">
 	<div class='userCard'>
     <div layout horizontal class="icons">
-      <core-tooltip label="Search wallpapers" large class="fancy" position="bottom" noarrow>
-        <core-icon-button id="search" icon="search"></core-icon-button>
-      </core-tooltip>
+      <core-icon-button id="view" src="{{viewIcon}}"></core-icon-button>
       <core-tooltip label="Liked wallpapers" large class="fancy" position="bottom" noarrow>
         <core-icon-button id="likes" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
       </core-tooltip>

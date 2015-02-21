@@ -25,6 +25,11 @@ Template.userCard.helpers
 			"Turn off email newsletter"
 		else
 			"Turn on email newsletter"
+	viewIcon: ->
+		if Session.get('lookingAtWallpaper')
+			"png/eye.png"
+		else
+			"png/eye-off.png"
 
 Template.userCard.events
 	'click #logout': (e) ->
@@ -33,3 +38,9 @@ Template.userCard.events
 		setModifier = { $set: {} }
 		setModifier.$set['profile.newsletter' ] = !Meteor.user().profile.newsletter
 		Meteor.users.update _id:Meteor.userId(), setModifier
+	'mouseover #view' : (e) ->
+		Session.set('lookingAtWallpaper', true)
+		$('.smallCard').hide()
+	'mouseout #view' : (e) ->
+		Session.set('lookingAtWallpaper', false)
+		$('.smallCard').show()
