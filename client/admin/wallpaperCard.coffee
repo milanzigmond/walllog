@@ -92,18 +92,18 @@ Template.wallpaperCard.events
 		preventActionsForEvent e
 		console.log 'dropped'
 		updateWallpaper e
-	'keyup #addComment' : (e) ->
-		preventActionsForEvent e
-		if e.keyCode is 27
-    	console.log 'escape pressed'
-		if e.keyCode is 13
-			console.log 'enter pressed'
-			Comments.insert {
-    		wallpaperId: @_id
-    		comment: e.target.value
-				}
-			e.target.value = ""
-			e.target.parentElement.update()
-			$(e.target).blur()
-			if $('.commentsWrapper').css('display') is "none"
-				$('.commentsWrapper').slideToggle(400)
+	# 'keyup #addComment' : (e) ->
+	# 	preventActionsForEvent e
+	# 	if e.keyCode is 27
+ #    	console.log 'escape pressed'
+	# 	if e.keyCode is 13
+	# 		console.log 'enter pressed'
+	# 		Comments.insert {
+ #    		wallpaperId: @_id
+ #    		comment: e.target.value
+	# 			}
+	# 		e.target.value = ""
+	# 		e.target.parentElement.update()
+	# 		$(e.target).blur()
+	# 		if $('.commentsWrapper').css('display') is "none"
+	# 			$('.commentsWrapper').slideToggle(400)

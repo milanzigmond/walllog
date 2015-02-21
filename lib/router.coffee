@@ -126,7 +126,7 @@ Router.route '/:wallpaper', {
       Meteor.subscribe 'comments', @params.wallpaper
       Meteor.subscribe 'wallpaperLikes', @params.wallpaper
       Meteor.subscribe 'myLikes'
-      # Meteor.subscribe 'userData'
+      Meteor.subscribe 'stream'
     ]
   data: ->
       Wallpapers.findOne(name: @params.wallpaper)

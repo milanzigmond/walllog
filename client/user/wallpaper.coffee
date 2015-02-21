@@ -1,3 +1,12 @@
+Template.wallpaper.rendered = () ->
+	stream = Wallpapers.find( {} , {
+    fields: name: 1
+    _id: 0
+    }).fetch()
+	@stream = _.map stream, (wallpaper) ->
+		wallpaper.name
+	console.log @stream
+
 Template.wallpaper.helpers
 	likesCount: ->
 		Likes.find(
@@ -13,7 +22,7 @@ Template.wallpaper.helpers
 			},sort:
 				createdAt: -1
 	likeIcon: ->
-		if Likes.findOne {
+		if Meteor.user() and Likes.findOne {
 			wallpaperId:@_id
 			userId:Meteor.userId()
 			}
@@ -58,10 +67,22 @@ Template.wallpaper.events
 		if iLike
 			Likes.remove { _id:iLike._id }
 		else
-			Likes.insert { 
-				wallpaperId: @_id 
+			Likes.insert {
+				wallpaperId: @_id
 				wallpaperName: @name
 			}
-	'click .bgImage' : (e) ->
-  	console.log 'bgImage clicked'
-  	Router.go "/red"
+	'click .bgImage' : (e, t) ->
+  	currentNameIndex = t.stream.indexOf @name
+  	currentNameIndex++
+  	console.log 'bgImage clicked: '+currentNameIndex+", "+t.stream.length
+  	if currentNameIndex >= t.stream.length
+  		currentNameIndex = 0
+  	nextWallpaperName = t.stream[currentNameIndex]
+  	Router.go '/'+nextWallpaperName
+
+
+
+
+
+
+

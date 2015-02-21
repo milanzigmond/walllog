@@ -1,5 +1,6 @@
 Template.userCard.helpers
 	username: ->
+		return if !Meteor.user()
 		Meteor.user().username
 	likesCount: ->
 		Likes.find(
@@ -14,10 +15,16 @@ Template.userCard.helpers
 			"png/ic_favorite_outline_white_24dp.png"
 	newsletterIcon: ->
 		user = Meteor.user()
-		if user.profile.newsletter
+		if user and user.profile.newsletter
 			"png/emailNewsletterOn.png"
 		else
 			"png/emailNewsletterOff.png"
+	newsletterTooltip: ->
+		user = Meteor.user()
+		if user and user.profile.newsletter
+			"Turn off email newsletter"
+		else
+			"Turn on email newsletter"
 
 Template.userCard.events
 	'click #logout': (e) ->

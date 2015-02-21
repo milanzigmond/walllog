@@ -42,10 +42,9 @@ Meteor.publish 'comments', (wallpaperName) ->
   wallpaper = Wallpapers.findOne {name: wallpaperName}
   Comments.find {wallpaperId: wallpaper._id}
 
-# Meteor.publish 'userData', ->
-#   if @userId
-#     return Meteor.users.find({ _id: @userId }, fields:
-#       'newsletter': 1)
-#   else
-#     @ready()
-#   return
+Meteor.publish 'stream', () ->
+  console.log 'streamPublication'
+  Wallpapers.find {},
+    sort: createdAt: -1
+    fields: name: 1
+    limit: 10

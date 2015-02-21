@@ -1,17 +1,17 @@
 <template name="userCard">
 	<div class='userCard'>
     <div layout horizontal class="icons">
-      <core-tooltip label="Search wallpapers" large class="fancy" position="bottom">
+      <core-tooltip label="Search wallpapers" large class="fancy" position="bottom" noarrow>
         <core-icon-button id="search" icon="search"></core-icon-button>
       </core-tooltip>
-      <core-tooltip label="Liked wallpapers" large class="fancy" position="bottom">
+      <core-tooltip label="Liked wallpapers" large class="fancy" position="bottom" noarrow>
         <core-icon-button id="likes" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>
       </core-tooltip>
-      <core-tooltip label="Send me email with each new wallpaper" large class="fancy" position="bottom">
+      <core-tooltip label="{{newsletterTooltip}}" large class="fancy" position="bottom" noarrow>
         <core-icon-button id="newsletter" src="{{newsletterIcon}}"></core-icon-button>
       </core-tooltip>
       <div horizontal layout center-justified center class="username">{{username}}</div>
-      <core-tooltip label="Logout" large class="fancy" position="bottom">
+      <core-tooltip label="Logout" large class="fancy" position="bottom" noarrow>
         <core-icon-button id="logout" src="png/logout_white.png"></core-icon-button>
       </core-tooltip>
     </div>
