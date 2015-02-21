@@ -15,14 +15,14 @@ Template.userCard.helpers
 	newsletterIcon: ->
 		user = Meteor.user()
 		if user.profile.newsletter
-			"png/emailNewsletterOff.png"
-		else
 			"png/emailNewsletterOn.png"
+		else
+			"png/emailNewsletterOff.png"
 
 Template.userCard.events
 	'click #logout': (e) ->
 		Meteor.logout()
 	'click #newsletter': (e) ->
-		console.log 'clicked'
-		debugger
-		# Meteor.user().profile.newsletter = !Meteor.user().profile.newsletter
+		setModifier = { $set: {} }
+		setModifier.$set['profile.newsletter' ] = !Meteor.user().profile.newsletter
+		Meteor.users.update _id:Meteor.userId(), setModifier
