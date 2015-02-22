@@ -27,9 +27,9 @@ Template.userCard.helpers
 			"Turn on email newsletter"
 	viewIcon: ->
 		if Session.get('lookingAtWallpaper')
-			"png/eye.png"
-		else
 			"png/eye-off.png"
+		else
+			"png/eye.png"
 
 Template.userCard.events
 	'click #logout': (e) ->
