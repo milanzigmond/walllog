@@ -22,10 +22,9 @@ Meteor.publish 'allImages', () ->
   console.log 'allImagesPublication'
   Images.find {}
 
-Meteor.publish 'images', (wallpaperName) ->
-  console.log 'imagesPublication'
-  wallpaper = Wallpapers.findOne {name: wallpaperName}
-  Images.find {_id:wallpaper.file} if wallpaper
+Meteor.publish 'image', (fileId) ->
+  console.log 'imagesPublication: '+fileId
+  Images.find {_id:fileId} if fileId
 
 Meteor.publish 'allLikes', () ->
   console.log 'allLikesPublication'

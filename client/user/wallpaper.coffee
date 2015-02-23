@@ -1,10 +1,14 @@
+Tracker.autorun () ->
+	if Session.get('fileId')
+		Meteor.subscribe 'image', Session.get('fileId')
+
 updateWallpaper = (event, wallpaperId, wallpaperFile) ->
 	console.log 'update wallpaper'
 	file = event.originalEvent.dataTransfer.files[0]
 	fsFile = new FS.File(file)
 	fsFile.userId = Meteor.userId()
-	if wallpaperId
-		Images.remove wallpaperId
+	if wallpaperFile
+		Images.remove wallpaperFile
 		fileObj = Images.insert fsFile, (err, fileObj) ->
 	    console.log err if err
 	else
@@ -14,10 +18,14 @@ updateWallpaper = (event, wallpaperId, wallpaperFile) ->
 	setModifier = {$set: {}}
 	setModifier.$set['file'] = fileObj._id
 	Wallpapers.update {_id: wallpaperId}, setModifier
+	Session.set 'fileId', fileObj._id
 	return
 
 
 Template.wallpaper.rendered = () ->
+	wallpaper = Wallpapers.findOne()
+	Session.set 'fileId', wallpaper.file
+
 	stream = Wallpapers.find( {} , {
     fields: name: 1
     _id: 0
@@ -25,6 +33,7 @@ Template.wallpaper.rendered = () ->
 	@stream = _.map stream, (wallpaper) ->
 		wallpaper.name
 	console.log @stream
+
 
 Template.wallpaper.helpers
 	likesCount: ->
@@ -58,10 +67,12 @@ Template.wallpaper.helpers
 			"png/ic_comment_white_24dp.png"
 
 Template.wallpaper.events
-	'dragover': (e) ->
-		preventActionsForEvent e
-	'drop': (e) ->
-		preventActionsForEvent e
+	# 'dragover': (e) ->
+	# 	console.log 'wallpaper dragover'
+	# 	preventActionsForEvent e
+	# 'drop': (e) ->
+	# 	console.log 'wallpaper drop'
+	# 	preventActionsForEvent e
 	'dragover #dropzone': (e) ->
 		preventActionsForEvent e
 	'drop #dropzone': (e) ->
