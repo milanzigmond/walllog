@@ -1,0 +1,33 @@
+<template name="wallpaperImage">
+
+    {{#if isInRole 'admin'}}
+
+		<div layout vertical center center-justified fit id="dropzone">
+			{{#if file}}
+	    		<div fit class="bgImage" style="background-image:url('{{imageUrl file}}');">
+	        		<paper-ripple fit></paper-ripple>
+	    		</div>
+		    {{else}}
+		        <img src="svg/image-area.svg" width="300px">
+		        <h1>Drag your first image here</h1>
+		    {{/if}}
+		</div>
+
+    {{/if}}
+
+    {{#if isInRole 'regular'}}
+
+		{{#if file}}
+    		<div fit class="bgImage" style="background-image:url('{{imageUrl file}}');">
+        		<paper-ripple fit></paper-ripple>
+    		</div>
+	    {{else}}
+		    <!-- <div layout vertical center center-justified fit style="background:#eee;">
+		        <img src="svg/image-area.svg" width="300px">
+		        <h1>Drag your first image here</h1>
+		    </div> -->
+	    {{/if}}
+
+    {{/if}}
+
+</template>

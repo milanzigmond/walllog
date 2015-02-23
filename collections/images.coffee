@@ -1,6 +1,6 @@
 # FS.debug = true
 
-imageGridFSStore = new FS.Store.GridFS("images",
+mackbookProRetina = new FS.Store.GridFS("mackbookProRetina",
   mongoUrl: "mongodb://127.0.0.1:3001/meteor" # optional, defaults to Meteor's local MongoDB
 	# mongoUrl: 'mongodb://localhost:27017/onlined' // to deploy to EC2
 	# mongoOptions: {...},  // optional, see note below
@@ -11,18 +11,44 @@ imageGridFSStore = new FS.Store.GridFS("images",
 	# Default: 2MB. Reasonable range: 512KB - 4MB
 )
 
+ # var anyStore = new FS.Store.S3("any", {
+ #   accessKeyId: Meteor.settings.accessKeyId, //required
+ #   secretAccessKey: Meteor.settings.secretAccessKey, //required
+ #   bucket: Meteor.settings.anyStoreBucket //required
+ # });
+
+
+mackbookProRetinaSmall = new (FS.Store.GridFS)('mackbookProRetinaSmall',
+  beforeWrite: (fileObj) ->
+    {
+      extension: 'png'
+      type: 'image/png'
+    }
+  transformWrite: (fileObj, readStream, writeStream) ->
+    gm(readStream).resize(2560,1600).stream('PNG').pipe writeStream
+    return
+)
+
+iMacSmall = new (FS.Store.GridFS)('iMacSmall',
+  beforeWrite: (fileObj) ->
+    {
+      extension: 'png'
+      type: 'image/png'
+    }
+  transformWrite: (fileObj, readStream, writeStream) ->
+    gm(readStream).resize(1920,1080).stream('PNG').pipe writeStream
+    return
+)
+
 # to make Images global in coffeeScript use this.
 this.Images = new FS.Collection("images",
-	stores: [imageGridFSStore]
+	stores: [mackbookProRetina, mackbookProRetinaSmall, iMacSmall]
 	filter:
-		allow:
-			extensions: [
-				'png'
-				'jpg'
-				'jpeg'
-				'gif'
-				'bmp'
-			]
+		allow:{
+			contentTypes: ['image/*']
+		},
+		onInvalid: (message) ->
+			console.log message
 )
 
 Images.allow {

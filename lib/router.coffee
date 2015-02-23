@@ -2,28 +2,14 @@ Router.configure
   layoutTemplate: 'layout'
  
 Router.route '/', {
-  name: 'stream'
+  name: 'setup'
   layoutTemplate: 'publicLayout'
   waitOn: ->
-    NProgress.start()
-    [
-      Meteor.subscribe 'allWallpapers'
-      Meteor.subscribe 'allImages'
-      Meteor.subscribe 'allLikes'
-      Meteor.subscribe 'allComments'
-    ]
+    Meteor.subscribe 'latestWallpaperId'
   data: ->
-    {
-      images: Images.find {}
-      likes: Likes.find {}
-      comments: Comments.find {}
-      wallpapers: Wallpapers.find {},
-        sort:
-          createdAt: -1
-    }
-  action: ->
-    NProgress.done()
-    @render "stream"
+    if Wallpapers.find().count() > 0
+      latestWallpaperId = Wallpapers.findOne()
+      Router.go '/'+latestWallpaperId.name
 }
 
 Router.route '/admin', {
@@ -127,9 +113,10 @@ Router.route '/:wallpaper', {
       Meteor.subscribe 'wallpaperLikes', @params.wallpaper
       Meteor.subscribe 'myLikes'
       Meteor.subscribe 'stream'
+      Meteor.subscribe 'userData'
     ]
   data: ->
-      Wallpapers.findOne(name: @params.wallpaper)
+    Wallpapers.findOne(name: @params.wallpaper)
   action: ->
     NProgress.done()
     @render 'wallpaper'

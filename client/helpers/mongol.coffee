@@ -1,6 +1,7 @@
 Session.set 'Mongol',
   'collections': [
     'Wallpapers'
+    'Images'
     'Likes'
     'Comments'
   ]

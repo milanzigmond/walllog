@@ -11,6 +11,13 @@ Meteor.publish 'wallpaper', (name) ->
   console.log 'wallpaperPublication'
   Wallpapers.find {name: name}
 
+Meteor.publish 'latestWallpaperId', () ->
+  console.log 'latestWallpaperIdPublication'
+  Wallpapers.find {},
+    limit: 1
+    sort: createdAt: -1
+    fields: name: 1
+
 Meteor.publish 'allImages', () ->
   console.log 'allImagesPublication'
   Images.find {}
@@ -18,7 +25,7 @@ Meteor.publish 'allImages', () ->
 Meteor.publish 'images', (wallpaperName) ->
   console.log 'imagesPublication'
   wallpaper = Wallpapers.findOne {name: wallpaperName}
-  Images.find {_id:wallpaper.file}
+  Images.find {_id:wallpaper.file} if wallpaper
 
 Meteor.publish 'allLikes', () ->
   console.log 'allLikesPublication'
@@ -31,7 +38,7 @@ Meteor.publish 'myLikes', () ->
 Meteor.publish 'wallpaperLikes', (wallpaperName) ->
   console.log 'wallpaperLikesPub, wallpaperName:'+wallpaperName
   wallpaper = Wallpapers.findOne {name: wallpaperName}
-  Likes.find {wallpaperId:wallpaper._id}
+  Likes.find {wallpaperId:wallpaper._id} if wallpaper
 
 Meteor.publish 'allComments', () ->
   console.log 'allCommentsPublication'
@@ -40,7 +47,7 @@ Meteor.publish 'allComments', () ->
 Meteor.publish 'comments', (wallpaperName) ->
   console.log 'allCommentsPublication'
   wallpaper = Wallpapers.findOne {name: wallpaperName}
-  Comments.find {wallpaperId: wallpaper._id}
+  Comments.find {wallpaperId: wallpaper._id} if wallpaper
 
 Meteor.publish 'stream', () ->
   console.log 'streamPublication'
@@ -48,3 +55,12 @@ Meteor.publish 'stream', () ->
     sort: createdAt: -1
     fields: name: 1
     limit: 10
+
+Meteor.publish 'userData', ->
+  console.log 'userDataPublication'
+  if @userId
+    return Meteor.users.find({ _id: @userId }, fields:
+      'newsletter': 1)
+  else
+    @ready()
+  return

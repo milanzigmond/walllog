@@ -1,7 +1,6 @@
 <template name="wallpaper">
-    <div fit class="bgImage" style="background-image:url('{{imageUrl file}}');">
-        <paper-ripple fit></paper-ripple>
-    </div>
+
+    {{> wallpaperImage this}}
 
     <div horizontal layout end>
         <div class='smallCard animated bounceInLeft'>

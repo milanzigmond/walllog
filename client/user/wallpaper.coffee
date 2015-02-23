@@ -1,3 +1,22 @@
+updateWallpaper = (event, wallpaperId, wallpaperFile) ->
+	console.log 'update wallpaper'
+	file = event.originalEvent.dataTransfer.files[0]
+	fsFile = new FS.File(file)
+	fsFile.userId = Meteor.userId()
+	if wallpaperId
+		Images.remove wallpaperId
+		fileObj = Images.insert fsFile, (err, fileObj) ->
+	    console.log err if err
+	else
+		fileObj = Images.insert fsFile, (err, fileObj) ->
+	    console.log err if err
+
+	setModifier = {$set: {}}
+	setModifier.$set['file'] = fileObj._id
+	Wallpapers.update {_id: wallpaperId}, setModifier
+	return
+
+
 Template.wallpaper.rendered = () ->
 	stream = Wallpapers.find( {} , {
     fields: name: 1
@@ -39,6 +58,16 @@ Template.wallpaper.helpers
 			"png/ic_comment_white_24dp.png"
 
 Template.wallpaper.events
+	'dragover': (e) ->
+		preventActionsForEvent e
+	'drop': (e) ->
+		preventActionsForEvent e
+	'dragover #dropzone': (e) ->
+		preventActionsForEvent e
+	'drop #dropzone': (e) ->
+		preventActionsForEvent e
+		console.log 'dropped'
+		updateWallpaper e, @_id, @file
 	'click #comment': (e) ->
 		console.log 'clicked'+$('.commentsWrapper')
 		$('.commentsWrapper').slideToggle(400)
@@ -79,10 +108,3 @@ Template.wallpaper.events
   		currentNameIndex = 0
   	nextWallpaperName = t.stream[currentNameIndex]
   	Router.go '/'+nextWallpaperName
-
-
-
-
-
-
-
