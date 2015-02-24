@@ -22,9 +22,11 @@ Meteor.publish 'allImages', () ->
   console.log 'allImagesPublication'
   Images.find {}
 
-Meteor.publish 'image', (fileId) ->
-  console.log 'imagesPublication: '+fileId
-  Images.find {_id:fileId} if fileId
+Meteor.publish 'image', (wallpaperName) ->
+  console.log 'imagePublication: '+wallpaperName
+  console.log  Images.find({name:wallpaperName}).count()
+  Images.find {'metadata.name':wallpaperName}
+
 
 Meteor.publish 'allLikes', () ->
   console.log 'allLikesPublication'
@@ -36,7 +38,7 @@ Meteor.publish 'myLikes', () ->
 
 Meteor.publish 'wallpaperLikes', (wallpaperName) ->
   console.log 'wallpaperLikesPub, wallpaperName:'+wallpaperName
-  wallpaper = Wallpapers.findOne {name: wallpaperName}
+  wallpaper = Wallpapers.find({name: wallpaperName})
   Likes.find {wallpaperId:wallpaper._id} if wallpaper
 
 Meteor.publish 'allComments', () ->

@@ -16,10 +16,8 @@ Template.userCard.helpers
 	newsletterIcon: ->
 		user = Meteor.user()
 		if user and user.profile.newsletter
-			console.log 'on'
 			"png/emailNewsletterOn.png"
 		else
-			console.log 'off'
 			"png/emailNewsletterOff.png"
 	newsletterTooltip: ->
 		user = Meteor.user()

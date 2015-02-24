@@ -5,19 +5,18 @@ Template.registerHelper 'formatDate', (datetime) ->
     datetime
 
 Template.registerHelper 'imageUrl', (fileId) ->
-	if !fileId
-		return
+	console.log 'imageUrl for fileId: '+fileId
 	image = Images.findOne {_id:fileId}
-	image.url()
+	if image
+		image.url()
 
 Template.registerHelper 'downloadFile', (fileId) ->
-	# if !fileId
-	# 	return
-	# file = Images.findOne fileId
-	# file.url()+"&download=true"
+	file = Images.findOne fileId
+	if file
+		file.url()+"&download=true"
 
 
 this.preventActionsForEvent = (event) ->
   event.preventDefault()
   event.stopPropagation()
-  console.log "preventActionsForEvent, "+event.target
+  # console.log "preventActionsForEvent, "+event.target

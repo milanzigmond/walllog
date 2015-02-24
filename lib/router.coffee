@@ -108,6 +108,7 @@ Router.route '/:wallpaper', {
     NProgress.start()
     [
       Meteor.subscribe 'wallpaper', @params.wallpaper
+      Meteor.subscribe 'image', @params.wallpaper
       Meteor.subscribe 'comments', @params.wallpaper
       Meteor.subscribe 'wallpaperLikes', @params.wallpaper
       Meteor.subscribe 'myLikes'
@@ -115,7 +116,8 @@ Router.route '/:wallpaper', {
       Meteor.subscribe 'userData'
     ]
   data: ->
-    Wallpapers.findOne(name: @params.wallpaper)
+    Wallpapers.findOne
+      name: @params.wallpaper
   action: ->
     NProgress.done()
     @render 'wallpaper'

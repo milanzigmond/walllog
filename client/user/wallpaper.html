@@ -1,5 +1,6 @@
 <template name="wallpaper">
 
+    <h1>{{file}}</h1>
     {{> wallpaperImage this}}
 
     <div horizontal layout end>
@@ -63,6 +64,12 @@
                 <core-tooltip label="Share wallpaper" large class="fancy" position="top" noarrow>
                     <core-icon-button id="share" src="png/ic_share_white_24dp.png"></core-icon-button>
                 </core-tooltip>
+
+                {{#if isInRole 'admin'}}
+                    <core-tooltip label="Delete wallpaper" large class="fancy" position="top" noarrow>
+                        <core-icon-button id="delete" icon="close"></core-icon-button>
+                    </core-tooltip>
+                {{/if}}
             </div>
         </div>
     </div>
