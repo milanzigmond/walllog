@@ -3,6 +3,9 @@ Meteor.publish 'allUsers', ->
   console.log 'allUsersPublication'
   Meteor.users.find()
 
+Meteor.publish null, () ->
+  Meteor.roles.find {}
+
 Meteor.publish 'allWallpapers', () ->
   console.log 'allWallpapersPublication'
   Wallpapers.find {}
@@ -14,6 +17,13 @@ Meteor.publish 'wallpaper', (name) ->
 Meteor.publish 'latestWallpaperId', () ->
   console.log 'latestWallpaperIdPublication'
   Wallpapers.find {},
+    limit: 1
+    sort: createdAt: -1
+    fields: name: 1
+
+Meteor.publish 'latestPublishedWallpaperId', () ->
+  console.log 'latestPublishedWallpaperIdPublication'
+  Wallpapers.find {published:true},
     limit: 1
     sort: createdAt: -1
     fields: name: 1

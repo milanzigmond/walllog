@@ -4,10 +4,13 @@ Wallpapers.before.insert (userId, doc) ->
   doc.createdAt = new Date()
   if !doc.userId
   	doc.userId = userId
-  doc.title = "Deep thought"
-  doc.text = "Who said it + what I think / story"
-  doc.link = "whereToGo.to"
+  doc.title = "title"
+  doc.text = "body"
+  doc.link = "link"
   doc.name = "new-wallpaper"
+  doc.file = ""
+  doc.published = false
+  return
 
 # Wallpapers.before.update (userId, doc, fieldNames, modifier, options) ->
 # 	if "name" in fieldNames and doc.file?

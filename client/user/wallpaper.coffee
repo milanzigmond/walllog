@@ -17,8 +17,15 @@ updateWallpaper = (event, data) ->
 	Wallpapers.update {_id: data._id}, setModifier
 	return
 
+EditableText.registerCallbacks
+	afterNameUpdate: (doc) ->
+		console.log 'afterNameUpdate'
+		debugger
 
 Template.wallpaper.rendered = () ->
+	if !@data.file
+		Session.set 'editingWallpaper', true
+	
 	stream = Wallpapers.find( {} , {
     fields: name: 1
     _id: 0

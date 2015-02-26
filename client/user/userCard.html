@@ -1,6 +1,16 @@
 <template name="userCard">
 	<div class='userCard'>
     <div layout horizontal class="icons">
+      {{#if isInRole 'admin'}}
+        {{#if finishedEditing}}
+        <core-tooltip label="Publish wallpaper" large class="fancy" position="bottom" noarrow>
+          <core-icon-button id="publish" icon="check"></core-icon-button>
+        </core-tooltip>
+        {{/if}}
+      <core-tooltip label="Add wallpaper" large class="fancy" position="bottom" noarrow>
+        <core-icon-button id="add" icon="{{addIcon}}"></core-icon-button>
+      </core-tooltip>
+      {{/if}}
       <core-icon-button id="view" src="{{viewIcon}}"></core-icon-button>
       <core-tooltip label="Liked wallpapers" large class="fancy" position="bottom" noarrow>
         <core-icon-button id="likes" src="{{likeIcon}}"> {{likesCount}}</core-icon-button>

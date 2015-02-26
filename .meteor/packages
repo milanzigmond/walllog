@@ -23,10 +23,10 @@ matb33:collection-hooks
 babrahams:editable-text
 underscore
 dburles:collection-helpers
-mrt:nprogress
-okgrow:iron-router-autoscroll
 alanning:roles
 mrt:moment
 meteorhacks:kadira
 msavin:mongol
 cfs:graphicsmagick
+okgrow:iron-router-autoscroll
+mrt:nprogress

@@ -1,13 +1,18 @@
 <template name="wallpaper">
 
-    <h1>{{file}}</h1>
     {{> wallpaperImage this}}
 
     <div horizontal layout end>
         <div class='smallCard animated bounceInLeft'>
             <div class="texts">
-                <p class="title-class">{{title}}</p>
-                <p class="text-class">{{text}}</p>
+
+                {{#if isInRole 'admin'}}
+                    <p id="title">{{> editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true}}</p>
+                    <p id="text">{{> editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true}}</p>
+                {{else}}
+                    <p class="title-class">{{title}}</p>
+                    <p class="text-class">{{text}}</p>
+                {{/if}}
 
 
                 <div layout horizontal>
@@ -46,11 +51,23 @@
             </div>
             <div layout horizontal style="padding: 5px">
                 {{#if link}}
-                    <core-tooltip label="Learn more" large class="fancy" position="top" noarrow>
-                        <core-icon-button id="link" icon="link"><a href="http://{{link}}" target="_blank">{{link}}</a></core-icon-button>
-                    </core-tooltip>
+                    {{#if isInRole 'admin'}}
+                        <div layout horizontal flex>
+                            <core-icon icon="link" style="margin:8px;"></core-icon><span layout horizontal center flex one>{{> editableText collection="wallpapers" inputClass="link-input-class" field="link"}}</span>
+                            <span layout horizontal center flex one>
+                            {{> editableText collection="wallpapers" field="name" afterUpdate="afterNameUpdate"}}
+                            <!-- {{> editableText collection="wallpapers" inputClass="link-input-class" autoInsert="true" beforeInsert="afterNameChange" field="name"}} --></span>
+                        </div>
+                    {{else}}
+                        <core-tooltip label="Learn more" large class="fancy" position="top" noarrow>
+                            <core-icon-button id="link" icon="link">
+                                <a href="http://{{link}}" target="_blank">{{link}}</a>
+                            </core-icon-button>
+                        </core-tooltip>
+                        <div flex></div>
+                    {{/if}}
                 {{/if}}
-                <div flex></div>
+
                 {{#if currentUser}}
                     <core-icon-button id="like" src="{{likeIcon}}"> {{likes}}</core-icon-button>
                 {{else}}

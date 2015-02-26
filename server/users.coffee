@@ -10,11 +10,11 @@ Meteor.methods {
 				newsletter: false
 		
 		if isAdmin
+			console.log 'isAdmin'
 			Roles.addUsersToRoles userid, ["admin"]
 			if Wallpapers.find().count() < 1
 					console.log 'admin created, creating first wallpaper'
 					Wallpapers.insert
-						file: ""
 						userId: userid
 		else
 			Roles.addUsersToRoles userid, ["regular"]

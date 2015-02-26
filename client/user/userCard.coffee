@@ -1,3 +1,7 @@
+Template.userCard.rendered = () ->
+	if Router.current().params.wallpaper == "new-wallpaper"
+		Session.set 'editingWallpaper', @data?._id
+
 Template.userCard.helpers
 	username: ->
 		return if !Meteor.user()
@@ -6,6 +10,11 @@ Template.userCard.helpers
 		Likes.find(
 			userId:Meteor.userId()
 		).count()
+	addIcon: ->
+		if Session.get 'editingWallpaper'
+			"clear"
+		else
+			"add"
 	likeIcon: ->
 		if Likes.findOne {
 			userId:Meteor.userId()
@@ -30,6 +39,9 @@ Template.userCard.helpers
 			"png/eye-off.png"
 		else
 			"png/eye.png"
+	finishedEditing: ->
+		false if @title == 'title' or @text == 'text' or @name == 'new-wallpaper' or @link == 'link' or @file == ''
+
 
 Template.userCard.events
 	'click #logout': (e) ->
@@ -38,6 +50,13 @@ Template.userCard.events
 		setModifier = { $set: {} }
 		setModifier.$set['profile.newsletter' ] = !Meteor.user().profile.newsletter
 		Meteor.users.update _id:Meteor.userId(), setModifier
+	'click #add' : (e) ->
+		if Session.get 'editingWallpaper'
+			Wallpapers.remove Session.get 'editingWallpaper'
+			Router.go '/'
+		else
+			Wallpapers.insert {}
+			Router.go '/new-wallpaper'
 	'mouseover #view' : (e) ->
 		Session.set('lookingAtWallpaper', true)
 		$('.smallCard').hide()
