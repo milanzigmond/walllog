@@ -5,7 +5,7 @@ Template.registerHelper 'formatDate', (datetime) ->
     datetime
 
 Template.registerHelper 'imageUrl', (fileId) ->
-	console.log 'imageUrl for fileId: '+fileId
+	# console.log 'imageUrl for fileId: '+fileId
 	image = Images.findOne {_id:fileId}
 	if image
 		image.url()

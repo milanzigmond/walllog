@@ -1,7 +1,3 @@
-Template.userCard.rendered = () ->
-	if Router.current().params.wallpaper == "new-wallpaper"
-		Session.set 'editingWallpaper', @data?._id
-
 Template.userCard.helpers
 	username: ->
 		return if !Meteor.user()
@@ -10,11 +6,6 @@ Template.userCard.helpers
 		Likes.find(
 			userId:Meteor.userId()
 		).count()
-	addIcon: ->
-		if Session.get 'editingWallpaper'
-			"clear"
-		else
-			"add"
 	likeIcon: ->
 		if Likes.findOne {
 			userId:Meteor.userId()
@@ -40,23 +31,31 @@ Template.userCard.helpers
 		else
 			"png/eye.png"
 	finishedEditing: ->
-		false if @title == 'title' or @text == 'text' or @name == 'new-wallpaper' or @link == 'link' or @file == ''
-
+		if @published
+			false
+		else
+			if @title == 'title' or @text == 'text' or @name == 'new-wallpaper' or @link == 'link' or @file == ''
+				false
+			else
+				true
 
 Template.userCard.events
-	'click #logout': (e) ->
+	'click #logout': (e, t) ->
 		Meteor.logout()
 	'click #newsletter': (e) ->
 		setModifier = { $set: {} }
 		setModifier.$set['profile.newsletter' ] = !Meteor.user().profile.newsletter
 		Meteor.users.update _id:Meteor.userId(), setModifier
-	'click #add' : (e) ->
-		if Session.get 'editingWallpaper'
-			Wallpapers.remove Session.get 'editingWallpaper'
-			Router.go '/'
-		else
-			Wallpapers.insert {}
-			Router.go '/new-wallpaper'
+	'click #publish' : (e, t) ->
+		Wallpapers.update t.data._id,
+			$set:
+				published: true
+	'click #add' : (e, t) ->
+		Wallpapers.insert {}
+		Router.go '/new-wallpaper'
+	'click #cancel' : (e, t) ->
+		Wallpapers.remove t.data._id
+		Router.go '/'
 	'mouseover #view' : (e) ->
 		Session.set('lookingAtWallpaper', true)
 		$('.smallCard').hide()

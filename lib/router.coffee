@@ -1,3 +1,47 @@
+Router.route '/:wallpaper', {
+  name: 'wallpaper'
+  layoutTemplate: 'publicLayout'
+  waitOn: ->
+    NProgress.start()
+    [
+      Meteor.subscribe 'wallpaper', @params.wallpaper
+      Meteor.subscribe 'image', @params.wallpaper
+      Meteor.subscribe 'comments', @params.wallpaper
+      Meteor.subscribe 'wallpaperLikes', @params.wallpaper
+      Meteor.subscribe 'myLikes'
+      Meteor.subscribe 'userData'
+    ]
+  data: ->
+    Wallpapers.findOne
+      name: @params.wallpaper
+  action: ->
+    NProgress.done()
+    @render 'wallpaper'
+}
+
+
+Router.route '/', {
+  name: 'setup'
+  layoutTemplate: 'publicLayout'
+  waitOn: ->
+    if Roles.userIsInRole Meteor.userId(), ['admin']
+      Meteor.subscribe 'latestWallpaperId'
+    else if !Roles.userIsInRole Meteor.userId(), ['admin']
+      Meteor.subscribe 'latestPublishedWallpaperId'
+  data: ->
+    if this.ready() and Wallpapers.find().count() < 1 and Roles.userIsInRole Meteor.userId(), ['admin']
+      console.log 'admin created, creating first wallpaper'
+      latestWallpaper = Wallpapers.insert
+        userId: Meteor.userId()
+    else
+      latestWallpaper = Wallpapers.findOne()
+      
+    if !latestWallpaper
+      return
+      
+    Router.go '/'+latestWallpaper.name
+}
+
 # Router.configure
 #   layoutTemplate: 'layout'
 
@@ -90,41 +134,6 @@
  
 # # Router.onBeforeAction(requireLogin)
 
-Router.route '/:wallpaper', {
-  name: 'wallpaper'
-  layoutTemplate: 'publicLayout'
-  waitOn: ->
-    console.log 'waiton wallpaper'
-    NProgress.start()
-    [
-      Meteor.subscribe 'wallpaper', @params.wallpaper
-      Meteor.subscribe 'image', @params.wallpaper
-      Meteor.subscribe 'comments', @params.wallpaper
-      Meteor.subscribe 'wallpaperLikes', @params.wallpaper
-      Meteor.subscribe 'myLikes'
-      Meteor.subscribe 'stream'
-      Meteor.subscribe 'userData'
-    ]
-  data: ->
-    Wallpapers.findOne
-      name: @params.wallpaper
-  action: ->
-    NProgress.done()
-    @render 'wallpaper'
-}
 
-
-Router.route '/', {
-  name: 'setup'
-  layoutTemplate: 'publicLayout'
-  waitOn: ->
-    console.log 'wait on / '+Meteor.userId()
-    Meteor.subscribe 'latestPublishedWallpaperId'
-  data: ->
-    console.log 'data'
-    if Wallpapers.find().count() > 0
-      latestWallpaperId = Wallpapers.findOne()
-      Router.go '/'+latestWallpaperId.name
-}
 
 

@@ -17,24 +17,6 @@ updateWallpaper = (event, data) ->
 	Wallpapers.update {_id: data._id}, setModifier
 	return
 
-EditableText.registerCallbacks
-	afterNameUpdate: (doc) ->
-		console.log 'afterNameUpdate'
-		debugger
-
-Template.wallpaper.rendered = () ->
-	if !@data.file
-		Session.set 'editingWallpaper', true
-	
-	stream = Wallpapers.find( {} , {
-    fields: name: 1
-    _id: 0
-    }).fetch()
-	@stream = _.map stream, (wallpaper) ->
-		wallpaper.name
-	console.log @stream
-
-
 Template.wallpaper.helpers
 	likesCount: ->
 		Likes.find(
@@ -108,10 +90,7 @@ Template.wallpaper.events
 				wallpaperName: @name
 			}
 	'click .bgImage' : (e, t) ->
-  	currentNameIndex = t.stream.indexOf @name
-  	currentNameIndex++
-  	console.log 'bgImage clicked: '+currentNameIndex+", "+t.stream.length
-  	if currentNameIndex >= t.stream.length
-  		currentNameIndex = 0
-  	nextWallpaperName = t.stream[currentNameIndex]
-  	Router.go '/'+nextWallpaperName
+		Meteor.call 'getNextWallpaperId', @name, (error, result) ->
+			if error
+				console.log error
+			Router.go '/'+result

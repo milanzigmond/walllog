@@ -5,17 +5,17 @@ Wallpapers.before.insert (userId, doc) ->
   if !doc.userId
   	doc.userId = userId
   doc.title = "title"
-  doc.text = "body"
+  doc.text = "text"
   doc.link = "link"
   doc.name = "new-wallpaper"
   doc.file = ""
   doc.published = false
   return
 
-# Wallpapers.before.update (userId, doc, fieldNames, modifier, options) ->
-# 	if "name" in fieldNames and doc.file?
-# 		debugger
-# 		Images.update { _id: doc.file }, $set: name: modifier.$set.name
+Wallpapers.after.update (userId, doc, fieldNames, modifier, options) ->
+	if "name" in fieldNames and doc.file?
+		Images.update { _id: doc.file }, $set: 'metadata.name': modifier.$set.name
+		Router.go '/'+modifier.$set.name
 
 Wallpapers.before.remove (userId, doc) ->
 	Meteor.call 'removeLikes', doc._id, (err) ->
@@ -42,15 +42,4 @@ Wallpapers.helpers {
 		return 0
 	likes: ->
 		Likes.find(wallpaperId:@_id).count()
-}
-
-Meteor.methods {
-	removeLikes: (wallId) ->
-		Likes.remove {
-			wallpaperId: wallId
-		}
-	removeComments: (wallId) ->
-		Comments.remove {
-			wallpaperId: wallId
-		}
 }

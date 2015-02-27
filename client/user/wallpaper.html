@@ -53,10 +53,9 @@
                 {{#if link}}
                     {{#if isInRole 'admin'}}
                         <div layout horizontal flex>
-                            <core-icon icon="link" style="margin:8px;"></core-icon><span layout horizontal center flex one>{{> editableText collection="wallpapers" inputClass="link-input-class" field="link"}}</span>
+                            <core-icon icon="link" style="margin:9px;"></core-icon><span layout horizontal center flex one>{{> editableText collection="wallpapers" inputClass="link-input-class" field="link"}}</span>
                             <span layout horizontal center flex one>
-                            {{> editableText collection="wallpapers" field="name" afterUpdate="afterNameUpdate"}}
-                            <!-- {{> editableText collection="wallpapers" inputClass="link-input-class" autoInsert="true" beforeInsert="afterNameChange" field="name"}} --></span>
+                            {{> editableText collection="wallpapers" inputClass="link-input-class" autoInsert="true" field="name"}}</span>
                         </div>
                     {{else}}
                         <core-tooltip label="Learn more" large class="fancy" position="top" noarrow>
