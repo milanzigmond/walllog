@@ -60,6 +60,9 @@ Template.wallpaper.events
 		updateWallpaper e, t.data
 	'click #comment': (e) ->
 		$('.commentsWrapper').slideToggle(400)
+	'click #remove': (e) ->
+		Wallpapers.remove @_id
+		Router.go "/"
 	'keyup #commentText' : (e) ->
 		preventActionsForEvent e
 		if e.keyCode is 27
