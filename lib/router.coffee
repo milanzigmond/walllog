@@ -29,17 +29,14 @@ Router.route '/', {
     else if !Roles.userIsInRole Meteor.userId(), ['admin']
       Meteor.subscribe 'latestPublishedWallpaperId'
   data: ->
-    if this.ready() and Wallpapers.find().count() < 1 and Roles.userIsInRole Meteor.userId(), ['admin']
-      console.log 'admin created, creating first wallpaper'
-      latestWallpaper = Wallpapers.insert
-        userId: Meteor.userId()
-    else
-      latestWallpaper = Wallpapers.findOne()
-      
-    if !latestWallpaper
+    if !this.ready()
       return
-      
-    Router.go '/'+latestWallpaper.name
+    
+    latestWallpaper = Wallpapers.findOne()
+          
+    if latestWallpaper?.name
+      console.log 'passing main, latestWallpaper.name:'+latestWallpaper.name
+      Router.go '/'+latestWallpaper.name
 }
 
 # Router.configure

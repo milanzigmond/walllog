@@ -30,14 +30,19 @@ Template.userCard.helpers
 			"png/eye-off.png"
 		else
 			"png/eye.png"
-	finishedEditing: ->
+	isEditing: ->
+		console.log 'isEditing, this.published:'+@published
+		if @published == undefined
+			return false
+
 		if @published
-			false
-		else
+			return false
+		
+		if !@published
 			if @title == 'title' or @text == 'text' or @name == 'new-wallpaper' or @link == 'link' or @file == ''
-				false
+				return false
 			else
-				true
+				return true
 
 Template.userCard.events
 	'click #logout': (e, t) ->

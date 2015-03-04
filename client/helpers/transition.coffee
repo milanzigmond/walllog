@@ -1,6 +1,5 @@
 createHooks = (options) ->
- 
-  # Defaults
+
   options = _.defaults options, {
     alwaysClass: 'animated'
     onscreenClass: ''
@@ -9,8 +8,6 @@ createHooks = (options) ->
     removeTimeout: 500
     insertTimeout: 500
   }
-
-  # console.log 'options after defaults: ' + JSON.stringify(options) 
  
   {
     transitioning: false
@@ -33,20 +30,20 @@ createHooks = (options) ->
         @transitioning = false
         $(node).remove()
  
-      # if options.removeClass.length
-      #   $(node).addClass(options.alwaysClass)
-      #   $(node).addClass(options.removeClass)
-      #   @transitioning = true
-      #   setTimeout remove, options.removeTimeout
-      # else
-      # remove()
+      if options.removeClass.length
+        @transitioning = true
+        $(node).addClass(options.alwaysClass)
+        $(node).addClass(options.removeClass)
+        setTimeout remove, options.removeTimeout
+      else
+        remove()
   }
  
 Template.transition.rendered = ->
-  hooks = 
-    onscreenClass: @data?.in or 'fadeIn'
-    removeClass: @data?.out or 'fadeOut'
-    insertTimeout: @data?.timeoutIn or 500
-    removeTimeout: @data?.timeoutOut   or 500
+  hooks =
+    onscreenClass: @data?.animIn or 'fadeIn'
+    removeClass: @data?.animOut or 'fadeOut'
+    insertTimeout: @data?.timeoutIn or 700
+    removeTimeout: @data?.timeoutOut   or 300
 
   @firstNode.parentNode._uihooks = createHooks(hooks)

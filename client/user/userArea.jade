@@ -1,0 +1,39 @@
+template(name='userArea')
+  core-animated-pages#userArea(transitions='hero-transition cross-fade', selected='new', valueattr='label')
+    section(label='new')
+      .addUserWrapper
+        core-tooltip(label='Login or create an account', large, position='left', noarrow)
+          paper-fab.addUser(hero-id='card', hero, icon='add', role='button', tabindex='0', aria-label='Add')
+    section(label='login')
+      .loginCard(hero-id='card', hero)
+        div(layout, horizontal)
+          div(flex)
+          core-icon-button#close(icon='close', cross-fade)
+        .texts
+          p.title-class(cross-fade) Welcome
+          p.text-class(cross-fade) Login to like and comment wallpapers.
+          paper-input-decorator.custom(label='Email', floatinglabel, hero-id='email', hero)
+            input#loginEmail(is='core-input')
+          paper-input-decorator.custom.passwordField(label='Password', floatinglabel, hero-id='password', hero)
+            input#loginPassword(type='password', is='core-input')
+          .layout.horizontal(hero-id='loginButton', hero)
+            div(flex)
+            paper-button.loginButton.foreground login
+          .layout.horizontal(hero-id='registerButton', hero)
+            div(flex)
+            paper-button.registerButton.background create account
+    section(label='register')
+      .loginCard(hero-id='card', hero)
+        .texts
+          paper-input-decorator.custom.usernameField(label='Username', floatinglabel, cross-fade)
+            input#registerUsername(is='core-input')
+          paper-input-decorator.custom.emailField(label='Email', floatinglabel, hero-id='email', hero, error='Enter correct email', isinvalid='{{validEmail}}')
+            input#registerEmail(is='core-input', pattern='^[0-9].*')
+          paper-input-decorator.custom.passwordField(label='Password', floatinglabel, hero-id='password', hero)
+            input#registerPassword(type='password', is='core-input')
+          .layout.horizontal
+            div(flex)
+            paper-button.registerButton.foreground(hero-id='registerButton', hero) create an account
+          .layout.horizontal
+            div(flex)
+            paper-button.loginButton.background(hero-id='loginButton', hero) login

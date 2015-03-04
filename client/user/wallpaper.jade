@@ -1,0 +1,63 @@
+template(name='wallpaper')
+    
+  +wallpaperImage this
+  
+  div(horizontal, layout)
+    .smallCard.animated.bounceInLeft
+      .texts
+        if isInRole 'admin'
+          p#title
+            +editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true
+          p#text
+            +editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true
+        else
+          p.title-class {{title}}
+          p.text-class {{text}}
+
+        div(layout, horizontal)
+          div(flex)
+            if currentUser
+              paper-input-decorator.custom(label='Comment here', floatinglabel)
+                paper-autogrow-textarea
+                  textarea#commentText
+
+          div(layout, horizontal, center)
+            core-tooltip.fancy(label='Download wallpaper', large, position='top', noarrow)
+              a(href='{{downloadFile file}}', target='_self')
+                paper-fab.downloadWallpaper(icon='file-download', role='button', tabindex='0', aria-label='Download')
+        
+        .commentsWrapper(style='display:none;')
+          each comments
+            div(class='{{myComment}}')
+              .text-class(layout, horizontal) {{comment}}
+              .author(layout, horizontal)
+                div(flex) 
+                | {{name}}, {{formatDate createdAt}}
+      div(layout, horizontal, style='padding: 5px')
+        if link
+          if isInRole 'admin'
+            div(layout, horizontal, flex)
+              core-icon(icon='link', style='margin:9px;')
+              span(layout, horizontal, center, flex, one)
+                +editableText collection="wallpapers" inputClass="link-input-class" field="link"
+              span(layout, horizontal, center, flex, one)
+                +editableText collection="wallpapers" inputClass="link-input-class" autoInsert="true" field="name"
+          else
+            core-tooltip.fancy(label='Learn more', large, position='top', noarrow)
+              core-icon-button#link(icon='link')
+                a(href='http://{{link}}', target='_blank') {{link}}
+            div(flex)
+
+        if currentUser
+          core-icon-button#like(src='{{likeIcon}}')  {{likes}}
+        else
+          core-tooltip.fancy(label='Login to save your like', large, position='top', noarrow)
+            core-icon-button#like(src='{{likeIcon}}')  {{likes}}
+
+        core-tooltip.fancy(label='Show/hide comments', large, position='top', noarrow)
+          core-icon-button#comment(src='{{commentIcon}}')  {{commentsCount}}
+        core-tooltip.fancy(label='Share wallpaper', large, position='top', noarrow)
+          core-icon-button#share(src='png/ic_share_white_24dp.png')
+        if isInRole 'admin'
+          core-tooltip.fancy(label='Delete wallpaper', large, position='top', noarrow)
+            core-icon-button#delete(icon='close')

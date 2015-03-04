@@ -1,13 +1,13 @@
 <template name="publicLayout">
-	{{#if currentUser}}
-		{{> userCard}}
-	{{else}}
-		{{> userArea}}
-	{{/if}}
+    {{#if currentUser}} 
+    	{{> userCard}} 
+    {{else}} 
+    	{{> userArea}} 
+    {{/if}}
 
-	<div>
-		{{#transition in="fadeInLeft" timeoutIn="1000" timeoutOut="0"}}
-			{{> yield}}
-		{{/transition}}
-	</div>
+    <div>
+        {{#transition animIn="fadeInLeft" animOut="fadeOutRight" }} 
+        	{{> yield}} 
+        {{/transition}}
+    </div>
 </template>

@@ -1,0 +1,19 @@
+template(name='userCard')
+  .userCard
+    .icons(layout, horizontal)
+      if isInRole 'admin'
+        if isEditing
+          core-tooltip.fancy(label='Publish wallpaper', large='', position='bottom', noarrow='')
+            core-icon-button#publish(icon='check')
+          core-tooltip.fancy(label='Cancel wallpaper', large='', position='bottom', noarrow='')
+            core-icon-button#cancel(icon='clear')
+        core-tooltip.fancy(label='Add wallpaper', large='', position='bottom', noarrow='')
+          core-icon-button#add(icon='add')
+      core-icon-button#view(src='{{viewIcon}}')
+      core-tooltip.fancy(label='Liked wallpapers', large='', position='bottom', noarrow='')
+        core-icon-button#likes(src='{{likeIcon}}')  {{likesCount}}
+      core-tooltip.fancy(label='{{newsletterTooltip}}', large='', position='bottom', noarrow='')
+        core-icon-button#newsletter(src='{{newsletterIcon}}')
+      .username(horizontal='', layout='', center-justified='', center='') {{username}}
+      core-tooltip.fancy(label='Logout', large='', position='bottom', noarrow='')
+        core-icon-button#logout(src='png/logout_white.png')
