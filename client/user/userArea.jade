@@ -10,30 +10,31 @@ template(name='userArea')
           div(flex)
           core-icon-button#close(icon='close', cross-fade)
         .texts
-          p.title-class(cross-fade) Welcome
-          p.text-class(cross-fade) Login to like and comment wallpapers.
-          paper-input-decorator.custom(label='Email', floatinglabel, hero-id='email', hero)
+          paper-input-decorator.custom(label='Email', floatinglabel, hero-id='email', hero, error='', isinvalid='false')
             input#loginEmail(is='core-input')
-          paper-input-decorator.custom.passwordField(label='Password', floatinglabel, hero-id='password', hero)
-            input#loginPassword(type='password', is='core-input')
+          paper-input-decorator.custom.passwordField(label='Password', floatinglabel, hero-id='password', hero, error='Incorrect password', isinvalid='{{invalidLoginPassword}}')
+            input#loginPassword(is='core-input', type='password')
           .layout.horizontal(hero-id='loginButton', hero)
             div(flex)
             paper-button.loginButton.foreground login
           .layout.horizontal(hero-id='registerButton', hero)
             div(flex)
-            paper-button.registerButton.background create account
+            paper-button.registerButton.background register
     section(label='register')
       .loginCard(hero-id='card', hero)
+        div(layout, horizontal)
+          div(flex)
+          core-icon-button#close(icon='close', cross-fade)
         .texts
-          paper-input-decorator.custom.usernameField(label='Username', floatinglabel, cross-fade)
+          paper-input-decorator.custom.usernameField(label='Username', floatinglabel, cross-fade, error='Username already exists', isinvalid='{{invalidUsername}}')
             input#registerUsername(is='core-input')
-          paper-input-decorator.custom.emailField(label='Email', floatinglabel, hero-id='email', hero, error='Enter correct email', isinvalid='{{validEmail}}')
+          paper-input-decorator.custom.emailField(label='Email', floatinglabel, hero-id='email', hero, error='Email already exists', isinvalid='{{invalidRegisterEmail}}')
             input#registerEmail(is='core-input', pattern='^[0-9].*')
           paper-input-decorator.custom.passwordField(label='Password', floatinglabel, hero-id='password', hero)
-            input#registerPassword(type='password', is='core-input')
+            input#registerPassword(is='core-input', type='password', )
           .layout.horizontal
             div(flex)
-            paper-button.registerButton.foreground(hero-id='registerButton', hero) create an account
+            paper-button.registerButton.foreground(hero-id='registerButton', hero) register
           .layout.horizontal
             div(flex)
             paper-button.loginButton.background(hero-id='loginButton', hero) login

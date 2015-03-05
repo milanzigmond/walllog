@@ -40,9 +40,20 @@ iMacSmall = new (FS.Store.GridFS)('iMacSmall',
     return
 )
 
+thumbnails = new (FS.Store.GridFS)('thumbnails',
+  beforeWrite: (fileObj) ->
+    {
+      extension: 'png'
+      type: 'image/png'
+    }
+  transformWrite: (fileObj, readStream, writeStream) ->
+    gm(readStream).resize(300,168).stream('PNG').pipe writeStream
+    return
+)
+
 # to make Images global in coffeeScript use this.
 this.Images = new FS.Collection("images",
-	stores: [mackbookProRetina, mackbookProRetinaSmall, iMacSmall]
+	stores: [mackbookProRetina, mackbookProRetinaSmall, iMacSmall, thumbnails]
 	filter:
 		allow:{
 			contentTypes: ['image/*']

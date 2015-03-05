@@ -1,15 +1,46 @@
-Session.setDefault('registerEmailValue',"")
+Session.setDefault 'invalidLoginPassword', false
+Session.setDefault 'invalidUsername', false
+Session.setDefault 'invalidRegisterEmail', false
 
 login = (email, password) ->
+	if !email or !password
+		return
 	Meteor.loginWithPassword email, password, (err) ->
-		console.log err if err
-		# document.getElementById('userArea').selected = "new"
+		if err
+			console.log err
+			if err.reason == "Match failed"
+				document.getElementById('userArea').selected = "register"
+				$('#registerEmail').val(email)
+			if err.reason == "User not found"
+				document.getElementById('userArea').selected = "register"
+				$('#registerEmail').val(email)
+			if err.reason == "Incorrect password"
+				Session.set('invalidLoginPassword', true)
+
+register = (template) ->
+	userData =
+		username: template.find('#registerUsername').value
+		email: template.find('#registerEmail').value
+		password: template.find('#registerPassword').value
+	if !userData.username or !userData.email or !userData.password
+		return
+	Meteor.call "addUser", userData, (err) ->
+		if err
+			console.log err
+			if err.reason == "Username already exists."
+				Session.set 'invalidUsername', true
+			if err.reason == "Email already exists."
+				Session.set 'invalidRegisterEmail', true
+		else
+			login(userData.email, userData.password)
 
 Template.userArea.helpers
-	validEmail: () ->
-		dp = document.getElementById 'registerEmail'
-		if dp?
-			Session.get('registerEmailValue').length > 5
+	invalidLoginPassword: () ->
+		Session.get('invalidLoginPassword')
+	invalidUsername: () ->
+		Session.get('invalidUsername')
+	invalidRegisterEmail: () ->
+		Session.get('invalidRegisterEmail')
 
 Template.userArea.events
 	'click .addUser': (e,t) ->
@@ -21,29 +52,23 @@ Template.userArea.events
 	'click #close': (e,t) ->
 		t.find('#userArea').selected = "new"
 	'click .loginButton.foreground': (e,t) ->
-		login(t.find('#loginEmail').value, t.find('#loginPassword').value)
+		email = t.find('#loginEmail').value
+		password = t.find('#loginPassword').value
+		login(email,password)
 	'click .registerButton.foreground': (e,t) ->
-		userData = {
-			username: t.find('#registerUsername').value
-			email: t.find('#registerEmail').value
-			password: t.find('#registerPassword').value
-		}
-		Meteor.call "addUser", userData, (err) ->
-			login(userData.email, userData.password)
-	'keyup #loginPassword' : (e, t) ->
+		register(t)
+	'keyup #loginPassword' : (e,t) ->
+		preventActionsForEvent e
+		Session.set 'invalidLoginPassword', false
+		if e.keyCode is 13
+			email = t.find('#loginEmail').value
+			password = t.find('#loginPassword').value
+			login(email,password)
+	'keyup #registerUsername' : (e,t) ->
+		Session.set 'invalidUsername', false
+	'keyup #registerEmail' : (e,t) ->
+		Session.set 'invalidRegisterEmail', false
+	'keyup #registerPassword' : (e,t) ->
 		preventActionsForEvent e
 		if e.keyCode is 13
-			login(t.find('#loginEmail').value, t.find('#loginPassword').value)
-	'keyup #registerPassword' : (e, t) ->
-		preventActionsForEvent e
-		if e.keyCode is 13
-			userData = {
-				username: t.find('#registerUsername').value
-				email: t.find('#registerEmail').value
-				password: t.find('#registerPassword').value
-			}
-			Meteor.call "addUser", userData, (err) ->
-				login(userData.email, userData.password)
-	'keyup #registerEmail' : (e, t) ->
-		preventActionsForEvent e
-		Session.set 'registerEmailValue', e.target.value
+			register(t)

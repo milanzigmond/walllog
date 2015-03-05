@@ -37,7 +37,7 @@ template(name='wallpaper')
         if link
           if isInRole 'admin'
             div(layout, horizontal, flex)
-              core-icon(icon='link', style='margin:9px;')
+              core-icon#link(icon='link', style='margin:9px;')
               span(layout, horizontal, center, flex, one)
                 +editableText collection="wallpapers" inputClass="link-input-class" field="link"
               span(layout, horizontal, center, flex, one)
