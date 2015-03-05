@@ -1,0 +1,13 @@
+template(name='wallpaperImage')
+  div(layout='', vertical='', center='', center-justified='', fit='', style='background-color: #f6f6f6;')
+    if isInRole 'admin'
+      #dropzone(layout='', vertical='', center='', center-justified='', fit='')
+        if file
+          .bgImage(fit='', style="background-image:url('{{imageUrl file}}');")
+            paper-ripple(fit='')
+        else
+          img(src='svg/image-area.svg', width='300px')
+          h1 Drag your first image here
+    else
+      .bgImage(fit='', style="background-image:url('{{imageUrl file}}');")
+        paper-ripple(fit='')
