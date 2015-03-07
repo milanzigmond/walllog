@@ -1,5 +1,4 @@
 template(name='wallpaper')
-    
   +wallpaperImage this
   
   div(horizontal, layout)
@@ -13,6 +12,7 @@ template(name='wallpaper')
         else
           p.title-class {{title}}
           p.text-class {{text}}
+          +shareit
 
         div(layout, horizontal)
           div(flex)

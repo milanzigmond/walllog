@@ -2,45 +2,41 @@ Session.setDefault 'invalidLoginPassword', false
 Session.setDefault 'invalidUsername', false
 Session.setDefault 'invalidRegisterEmail', false
 
+
+showToast = (toast) ->
+	Session.set('accountError', toast)
+	document.getElementById('toast').show()
+
+showInfo = (message) ->
+	document.getElementById('toast').style.background = "#000000"
+	showToast(message)
+
+showError = (message) ->
+	document.getElementById('toast').style.background = "#F44336"
+	showToast(message)
+
+showConfirmation = (message) ->
+	document.getElementById('toast').style.background = "#4CAF50"
+	showToast(message)
+
 login = (email, password) ->
-	if !email or !password
-		return
 	Meteor.loginWithPassword email, password, (err) ->
 		if err
-			console.log err
-			if err.reason == "Match failed"
-				document.getElementById('userArea').selected = "register"
-				$('#registerEmail').val(email)
-			if err.reason == "User not found"
-				document.getElementById('userArea').selected = "register"
-				$('#registerEmail').val(email)
-			if err.reason == "Incorrect password"
-				Session.set('invalidLoginPassword', true)
+			showError(err.reason)
+		else
+			showInfo('Welcome back!')
 
 register = (template) ->
 	userData =
 		username: template.find('#registerUsername').value
 		email: template.find('#registerEmail').value
 		password: template.find('#registerPassword').value
-	if !userData.username or !userData.email or !userData.password
-		return
 	Meteor.call "addUser", userData, (err) ->
 		if err
-			console.log err
-			if err.reason == "Username already exists."
-				Session.set 'invalidUsername', true
-			if err.reason == "Email already exists."
-				Session.set 'invalidRegisterEmail', true
+			showError(err.reason)
 		else
 			login(userData.email, userData.password)
-
-Template.userArea.helpers
-	invalidLoginPassword: () ->
-		Session.get('invalidLoginPassword')
-	invalidUsername: () ->
-		Session.get('invalidUsername')
-	invalidRegisterEmail: () ->
-		Session.get('invalidRegisterEmail')
+			showConfirmation('Account created. Welcome to family! ')
 
 Template.userArea.events
 	'click .addUser': (e,t) ->

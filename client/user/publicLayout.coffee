@@ -9,3 +9,7 @@ Template.publicLayout.events
 		preventActionsForEvent e
 	'drop': (e) ->
 		preventActionsForEvent e
+
+Template.publicLayout.helpers
+	accountError: () ->
+		Session.get('accountError')

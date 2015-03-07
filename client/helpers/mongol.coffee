@@ -5,7 +5,7 @@ Session.set 'Mongol',
     'Likes'
     'Comments'
   ]
-  'display': true
+  'display': false
   'opacity_normal': '.7'
   'opacity_expand': '.9'
   'disable_warning': 'false'
