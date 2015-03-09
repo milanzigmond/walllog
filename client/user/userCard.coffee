@@ -31,7 +31,6 @@ Template.userCard.helpers
 		else
 			"png/eye.png"
 	isEditing: ->
-		console.log 'isEditing, this.published:'+@published
 		if @published == undefined
 			return false
 

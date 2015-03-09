@@ -1,3 +1,34 @@
+Template.wallpaper.rendered = () ->
+	return unless @data
+
+	$('meta[property^="og:"]').remove()
+	url = location.origin + location.pathname
+	$('<meta>', { property: 'og:type', content: 'article' }).appendTo 'head'
+	$('<meta>', { property: 'og:site_name', content: location.hostname }).appendTo 'head'
+	$('<meta>', { property: 'og:url', content: url }).appendTo 'head'
+	$('<meta>', { property: 'og:title', content: @data.title }).appendTo 'head'
+	$('<meta>', { property: 'og:description', content: @data.text }).appendTo 'head'
+	$('<meta>', { property: 'og:image', content: location.origin + Images.findOne().url() }).appendTo 'head'
+
+	window.fbAsyncInit = ->
+	  FB.init
+	    appId: '636830676449645'
+	    xfbml: true
+	    oauth: true
+	    version: 'v2.1'
+
+	((d, s, id) ->
+	  js = undefined
+	  fjs = d.getElementsByTagName(s)[0]
+	  if d.getElementById(id)
+	    return
+	  js = d.createElement(s)
+	  js.id = id
+	  js.src = '//connect.facebook.net/en_US/sdk.js'
+	  fjs.parentNode.insertBefore js, fjs
+	  return
+	) document, 'script', 'facebook-jssdk'
+
 updateWallpaper = (event, data) ->
 	console.log 'update wallpaper: ' + data.name
 
@@ -53,6 +84,20 @@ Template.wallpaper.events
 	# 	preventActionsForEvent e
 	# 'drop': (e) ->
 	# 	preventActionsForEvent e
+	'click #share': (e) ->
+		preventActionsForEvent e
+		FB.ui {
+		  # method: 'share'
+		  # # display: 'popup'
+		  # href: location.origin + location.pathname
+		  method: 'feed'
+			name: @title
+			link: location.origin + location.pathname
+			picture: location.origin + Images.findOne().url({store:'thumbnails'})
+			caption: @text
+			description: @text
+			message: 'MESSAGE HERE'
+		}, (response) ->
 	'dragover #dropzone': (e) ->
 		preventActionsForEvent e
 	'drop #dropzone': (e,t) ->

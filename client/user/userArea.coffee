@@ -22,9 +22,7 @@ showConfirmation = (message) ->
 login = (email, password) ->
 	Meteor.loginWithPassword email, password, (err) ->
 		if err
-			showError(err.reason)
-		else
-			showInfo('Welcome back!')
+			showInfo(err.reason)
 
 register = (template) ->
 	userData =
@@ -33,10 +31,10 @@ register = (template) ->
 		password: template.find('#registerPassword').value
 	Meteor.call "addUser", userData, (err) ->
 		if err
-			showError(err.reason)
+			showInfo(err.reason)
 		else
 			login(userData.email, userData.password)
-			showConfirmation('Account created. Welcome to family! ')
+			showInfo('Account created. Welcome to family '+userData.username+'! ')
 
 Template.userArea.events
 	'click .addUser': (e,t) ->
