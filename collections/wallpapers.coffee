@@ -36,10 +36,3 @@ Wallpapers.allow {
 	remove: (userId, doc) ->
 		Roles.userIsInRole userId, ['admin']
 }
-
-Wallpapers.helpers {
-	count: ->
-		return 0
-	likes: ->
-		Likes.find(wallpaperId:@_id).count()
-}

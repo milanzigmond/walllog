@@ -1,22 +1,9 @@
-Session.setDefault 'invalidLoginPassword', false
-Session.setDefault 'invalidUsername', false
-Session.setDefault 'invalidRegisterEmail', false
-
-
 showToast = (toast) ->
 	Session.set('accountError', toast)
 	document.getElementById('toast').show()
 
 showInfo = (message) ->
 	document.getElementById('toast').style.background = "#000000"
-	showToast(message)
-
-showError = (message) ->
-	document.getElementById('toast').style.background = "#F44336"
-	showToast(message)
-
-showConfirmation = (message) ->
-	document.getElementById('toast').style.background = "#4CAF50"
 	showToast(message)
 
 login = (email, password) ->

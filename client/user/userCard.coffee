@@ -3,13 +3,9 @@ Template.userCard.helpers
 		return if !Meteor.user()
 		Meteor.user().username
 	likesCount: ->
-		Likes.find(
-			userId:Meteor.userId()
-		).count()
+		Likes.find().count()
 	likeIcon: ->
-		if Likes.findOne {
-			userId:Meteor.userId()
-			}
+		if Likes.find().count() > 0
 			"png/ic_favorite_white_24dp.png"
 		else
 			"png/ic_favorite_outline_white_24dp.png"
@@ -44,6 +40,8 @@ Template.userCard.helpers
 				return true
 
 Template.userCard.events
+	'click #likes': (e,t) ->
+			t.find('#userCard').selected = "likes"
 	'click #logout': (e, t) ->
 		Meteor.logout()
 	'click #newsletter': (e) ->

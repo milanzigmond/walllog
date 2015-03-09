@@ -1,15 +1,14 @@
 Template.wallpaper.rendered = () ->
 	return unless @data
 
-	$('meta[property^="og:"]').remove()
-	url = location.origin + location.pathname
-	$('<meta>', { property: 'og:type', content: 'article' }).appendTo 'head'
-	$('<meta>', { property: 'og:site_name', content: location.hostname }).appendTo 'head'
-	$('<meta>', { property: 'og:url', content: url }).appendTo 'head'
-	$('<meta>', { property: 'og:title', content: @data.title }).appendTo 'head'
-	$('<meta>', { property: 'og:description', content: @data.text }).appendTo 'head'
-	$('<meta>', { property: 'og:image', content: location.origin + Images.findOne().url() }).appendTo 'head'
-
+	# $('meta[property^="og:"]').remove()
+	# url = location.origin + location.pathname
+	# $('<meta>', { property: 'og:type', content: 'article' }).appendTo 'head'
+	# $('<meta>', { property: 'og:site_name', content: location.hostname }).appendTo 'head'
+	# $('<meta>', { property: 'og:url', content: url }).appendTo 'head'
+	# $('<meta>', { property: 'og:title', content: @data.title }).appendTo 'head'
+	# $('<meta>', { property: 'og:description', content: @data.text }).appendTo 'head'
+	# $('<meta>', { property: 'og:image', content: location.origin + Images.findOne().url() }).appendTo 'head'
 	window.fbAsyncInit = ->
 	  FB.init
 	    appId: '636830676449645'
@@ -50,9 +49,8 @@ updateWallpaper = (event, data) ->
 
 Template.wallpaper.helpers
 	likesCount: ->
-		Likes.find(
-			wallpaperId:@_id
-		).count()
+		Meteor.call 'countLikesForWallpaperId', @_id, (err, res) ->
+			res
 	commentsCount: ->
 		Comments.find(
 			wallpaperId:@_id
@@ -65,7 +63,6 @@ Template.wallpaper.helpers
 	likeIcon: ->
 		if Meteor.user() and Likes.findOne {
 			wallpaperId:@_id
-			userId:Meteor.userId()
 			}
 			"png/ic_favorite_white_24dp.png"
 		else
@@ -85,18 +82,16 @@ Template.wallpaper.events
 	# 'drop': (e) ->
 	# 	preventActionsForEvent e
 	'click #share': (e) ->
-		preventActionsForEvent e
 		FB.ui {
-		  # method: 'share'
-		  # # display: 'popup'
-		  # href: location.origin + location.pathname
-		  method: 'feed'
-			name: @title
-			link: location.origin + location.pathname
-			picture: location.origin + Images.findOne().url({store:'thumbnails'})
-			caption: @text
-			description: @text
-			message: 'MESSAGE HERE'
+		  method: 'share'
+		  href: location.origin + location.pathname
+		 #  method: 'feed'
+			# name: @title
+			# link: location.origin + location.pathname
+			# picture: location.origin + Images.findOne().url({store:'thumbnails'})
+			# caption: @text
+			# description: @text
+			# message: 'MESSAGE HERE'
 		}, (response) ->
 	'dragover #dropzone': (e) ->
 		preventActionsForEvent e
@@ -128,7 +123,6 @@ Template.wallpaper.events
 			return
 		iLike =	Likes.findOne {
 			wallpaperId: @_id
-			userId: Meteor.userId()
 		}
 		if iLike
 			Likes.remove { _id:iLike._id }

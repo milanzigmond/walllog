@@ -7,7 +7,7 @@ Router.route '/:wallpaper', {
       Meteor.subscribe 'wallpaper', @params.wallpaper
       Meteor.subscribe 'image', @params.wallpaper
       Meteor.subscribe 'comments', @params.wallpaper
-      Meteor.subscribe 'wallpaperLikes', @params.wallpaper
+      # Meteor.subscribe 'wallpaperLikes', @params.wallpaper
       Meteor.subscribe 'myLikes'
       Meteor.subscribe 'userData'
     ]

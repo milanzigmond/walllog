@@ -19,4 +19,6 @@ Meteor.methods {
 		Comments.remove {
 			wallpaperId: wallId
 		}
+	countLikesForWallpaperId: (wallId) ->
+		Likes.find({wallpaperId: wallId}).count()
 }

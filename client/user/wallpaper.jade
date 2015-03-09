@@ -1,3 +1,11 @@
+head
+  meta(property='og:type', content='article')
+  meta(property="og:site_name", content="localhost")
+  meta(property="og:url", content="http://localhost:3000/bee")
+  meta(property="og:title", content="Bee")
+  meta(property="og:description", content="text")
+  meta(property="og:image", content="http://localhost:3000/cfs/files/images/sJxQpNWDCTESDw3Ko/bee-16119-2880x1800.jpg?token=eyJhdXRoVG9rZW4iOiJRNlBISmFfa3ZCUG9ZREpib1NDOEJaZkMtQWJnZkRMa1A4Vlh0RDJjY0ZlIn0%3D")
+
 template(name='wallpaper')
   +wallpaperImage this
   
@@ -49,10 +57,10 @@ template(name='wallpaper')
             div(flex)
 
         if currentUser
-          core-icon-button#like(src='{{likeIcon}}')  {{likes}}
+          core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}
         else
           core-tooltip.fancy(label='Login to save your like', large, position='top', noarrow)
-            core-icon-button#like(src='{{likeIcon}}')  {{likes}}
+            core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}
 
         core-tooltip.fancy(label='Show/hide comments', large, position='top', noarrow)
           core-icon-button#comment(src='{{commentIcon}}')  {{commentsCount}}

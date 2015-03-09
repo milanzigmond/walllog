@@ -8,8 +8,10 @@ Meteor.publish null, () ->
 Meteor.publish 'allWallpapers', () ->
   Wallpapers.find {}
 
-Meteor.publish 'wallpaper', (name) ->
-  Wallpapers.find {name: name}
+Meteor.publish 'wallpaper', (wallpaperName) ->
+  wallpaper = Wallpapers.find({name: wallpaperName}).fetch()[0]
+  Counts.publish this, 'likes', Likes.find {wallpaperId:wallpaper._id}, noReady: true
+  Wallpapers.find {name: wallpaperName}
 
 Meteor.publish 'latestWallpaperId', () ->
   Wallpapers.find {},
@@ -33,11 +35,8 @@ Meteor.publish 'allLikes', () ->
   Likes.find {}
 
 Meteor.publish 'myLikes', () ->
-  Likes.find {userId:@userId}
-
-Meteor.publish 'wallpaperLikes', (wallpaperName) ->
-  wallpaper = Wallpapers.find({name: wallpaperName})
-  Likes.find {wallpaperId:wallpaper._id} if wallpaper
+  Likes.find {userId:@userId},
+    fields: wallpaperId: 1
 
 Meteor.publish 'allComments', () ->
   Comments.find {}
