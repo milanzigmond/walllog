@@ -1,9 +1,9 @@
 Meteor.methods {
 	getNextWallpaperId: (wallName) ->
-		wallpaperIdsCursor = Wallpapers.find {published:true},
+		wallpaperCursor = Wallpapers.find {published:true},
 			sort: createdAt: -1
 			fields: name: 1
-		wallpapers = wallpaperIdsCursor.fetch()
+		wallpapers = wallpaperCursor.fetch()
 		names = _.map wallpapers, (wallpaper) ->
 			wallpaper.name
 		currentNameIndex = names.indexOf wallName

@@ -130,6 +130,7 @@ Template.wallpaper.events
 			Likes.insert {
 				wallpaperId: @_id
 				wallpaperName: @name
+				file: @file
 			}
 	'click .bgImage' : (e, t) ->
 		Meteor.call 'getNextWallpaperId', @name, (error, result) ->

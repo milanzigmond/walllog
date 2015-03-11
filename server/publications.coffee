@@ -1,7 +1,3 @@
-# Users
-Meteor.publish 'allUsers', ->
-  Meteor.users.find()
-
 Meteor.publish null, () ->
   Meteor.roles.find {}
 
@@ -26,7 +22,7 @@ Meteor.publish 'latestPublishedWallpaperId', () ->
     limit: 1
 
 Meteor.publish 'allImages', () ->
-  Images.find {}
+Images.find {}
 
 Meteor.publish 'image', (wallpaperName) ->
   Images.find {'metadata.name':wallpaperName}
@@ -35,8 +31,15 @@ Meteor.publish 'allLikes', () ->
   Likes.find {}
 
 Meteor.publish 'myLikes', () ->
-  Likes.find {userId:@userId},
-    fields: wallpaperId: 1
+  likesCursor = Likes.find {userId:@userId}
+  likes = likesCursor.map (like) ->
+    like.wallpaperName
+  [
+    likesCursor
+    Images.find
+      'metadata.name':
+        $in: likes
+  ]
 
 Meteor.publish 'allComments', () ->
   Comments.find {}

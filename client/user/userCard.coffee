@@ -1,4 +1,6 @@
 Template.userCard.helpers
+	likes: ->
+		Likes.find()
 	username: ->
 		return if !Meteor.user()
 		Meteor.user().username
@@ -41,7 +43,12 @@ Template.userCard.helpers
 
 Template.userCard.events
 	'click #likes': (e,t) ->
+		if Session.get('openSection') == 'likes'
+			Session.set 'openSection', null
+			t.find('#userCard').selected = "icons"
+		else
 			t.find('#userCard').selected = "likes"
+			Session.set 'openSection', "likes"
 	'click #logout': (e, t) ->
 		Meteor.logout()
 	'click #newsletter': (e) ->

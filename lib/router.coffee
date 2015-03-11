@@ -7,12 +7,11 @@ Router.route '/:wallpaper', {
       Meteor.subscribe 'wallpaper', @params.wallpaper
       Meteor.subscribe 'image', @params.wallpaper
       Meteor.subscribe 'comments', @params.wallpaper
-      # Meteor.subscribe 'wallpaperLikes', @params.wallpaper
       Meteor.subscribe 'myLikes'
       Meteor.subscribe 'userData'
     ]
   data: ->
-    wallpaper = Wallpapers.findOne
+    Wallpapers.findOne
       name: @params.wallpaper
   action: ->
     NProgress.done()
@@ -27,6 +26,7 @@ Router.route '/', {
     if Roles.userIsInRole Meteor.userId(), ['admin']
       Meteor.subscribe 'latestWallpaperId'
     else if !Roles.userIsInRole Meteor.userId(), ['admin']
+      # user is either 'regular' or not signed in at all (guest)
       Meteor.subscribe 'latestPublishedWallpaperId'
   data: ->
     if !this.ready()
@@ -35,6 +35,5 @@ Router.route '/', {
     latestWallpaper = Wallpapers.findOne()
           
     if latestWallpaper?.name
-      console.log 'passing main, latestWallpaper.name:'+latestWallpaper.name
       Router.go '/'+latestWallpaper.name
 }
