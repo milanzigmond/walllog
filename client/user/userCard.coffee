@@ -28,18 +28,6 @@ Template.userCard.helpers
 			"png/eye-off.png"
 		else
 			"png/eye.png"
-	isNotEditing: ->
-		if @published == undefined
-			return false
-
-		if @published
-			return false
-		
-		if !@published
-			if @title == 'title' or @text == 'text' or @name == 'new-wallpaper' or @link == 'link' or @file == ''
-				return false
-			else
-				return true
 
 Template.userCard.events
 	'click #likes': (e,t) ->

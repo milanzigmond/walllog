@@ -11,14 +11,14 @@ Router.route '/:wallpaper', {
       Meteor.subscribe 'userData'
     ]
   data: ->
+    Wallpapers.findOne
+      name: @params.wallpaper
+  action: ->
+    NProgress.done()
     wallpaper = Wallpapers.findOne
       name: @params.wallpaper
     if !wallpaper
-      NProgress.done()
       Router.go '/'
-    wallpaper
-  action: ->
-    NProgress.done()
     @render 'wallpaper'
 }
 

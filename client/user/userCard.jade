@@ -1,29 +1,40 @@
 template(name='userCard')
-  div#userCardIcons
-    
-    core-animated-pages#userCard(transitions='hero-transition cross-fade', selected='icons', valueattr='label')
-      section(label='icons')
-        .userCard(hero-id='card', hero, style="width:303px;height:53px;")
-      section(label='likes')
-        .userCard(hero-id='card', hero)
+  core-animated-pages#userCard(transitions='hero-transition cross-fade', selected='icons', valueattr='label')
+    section(label='icons')
+      .userCard
+        .iconToolbar(layout, horizontal, end-justified, self-start)
+          if isInRole 'admin'
+            if published
+              core-tooltip.fancy(label='Add wallpaper', large, position='top', noarrow)
+                core-icon-button#add(icon='add')
+          core-icon-button#view(src='{{viewIcon}}')
+          core-tooltip.fancy(label='Liked wallpapers', large, position='top', noarrow)
+            core-icon-button#likes(src='{{likeIcon}}')  {{likesCount}}
+          core-tooltip.fancy(label='{{newsletterTooltip}}', large, position='top', noarrow)
+            core-icon-button#newsletter(src='{{newsletterIcon}}')
+          .username(horizontal, layout, center-justified, center) {{username}}
+          core-tooltip.fancy(label='Logout', large, position='top', noarrow)
+            core-icon-button#logout(src='png/logout_white.png')
+        .userCardBg(hero-id='card', hero)
+    section(label='likes')
+      .userCard
+        .iconToolbar(layout, horizontal, end-justified)
+          if isInRole 'admin'
+            if published
+              core-tooltip.fancy(label='Add wallpaper', large, position='top', noarrow)
+                core-icon-button#add(icon='add')
+          core-icon-button#view(src='{{viewIcon}}')
+          core-tooltip.fancy(label='Liked wallpapers', large, position='top', noarrow)
+            core-icon-button#likes(src='{{likeIcon}}')  {{likesCount}}
+          core-tooltip.fancy(label='{{newsletterTooltip}}', large, position='top', noarrow)
+            core-icon-button#newsletter(src='{{newsletterIcon}}')
+          .username(horizontal, layout, center-justified, center) {{username}}
+          core-tooltip.fancy(label='Logout', large, position='top', noarrow)
+            core-icon-button#logout(src='png/logout_white.png')
+        .userCardBg(hero-id='card', hero)
           div#likesWrapper(layout vertical)
             each likes
               core-tooltip(label='{{wallpaperName}}', large, position='left', noarrow)
                 a#likeImage(href="/{{wallpaperName}}", target='_self').animated.fadeInDown
                   img(src="{{thumbnailUrl file}}")
-      section(label='account')
-
-    div#iconToolbar(layout, horizontal)
-      if isInRole 'admin'
-        if isNotEditing
-          core-tooltip.fancy(label='Add wallpaper', large, position='bottom', noarrow)
-            core-icon-button#add(icon='add')
-      core-icon-button#view(src='{{viewIcon}}')
-      core-tooltip.fancy(label='Liked wallpapers', large, position='bottom', noarrow)
-        core-icon-button#likes(src='{{likeIcon}}')  {{likesCount}}
-      core-tooltip.fancy(label='{{newsletterTooltip}}', large, position='bottom', noarrow)
-        core-icon-button#newsletter(src='{{newsletterIcon}}')
-      
-      .username(horizontal, layout, center-justified, center) {{username}}
-      core-tooltip.fancy(label='Logout', large, position='bottom', noarrow)
-        core-icon-button#logout(src='png/logout_white.png')
+    section(label='account')
