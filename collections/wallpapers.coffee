@@ -12,6 +12,49 @@ Wallpapers.before.insert (userId, doc) ->
   doc.published = false
   return
 
+Wallpapers.before.update (userId, doc, fieldNames, modifier, options) ->
+	return if doc.published
+	# if any of the default values are present
+	titleOk = textOk = nameOk = linkOk = fileOk = false
+
+	if 'title' in fieldNames
+		if modifier.$set.title != 'title'
+			titleOk = true
+	else
+		if doc.title != 'title'
+			titleOk = true
+
+	if 'text' in fieldNames
+		if modifier.$set.text != 'text'
+			textOk = true
+	else
+		if doc.text != 'text'
+			textOk = true
+
+	if 'name' in fieldNames
+		if modifier.$set.name != 'new-wallpaper'
+			nameOk = true
+	else
+		if doc.name != 'new-wallpaper'
+			nameOk = true
+
+	if 'link' in fieldNames
+		if modifier.$set.link != 'link'
+			linkOk = true
+	else
+		if doc.link != 'link'
+			linkOk = true
+
+	if 'file' in fieldNames
+		if modifier.$set.file != ''
+			fileOk = true
+	else
+		if doc.file != ''
+			fileOk = true
+
+	if titleOk and textOk and nameOk and linkOk and fileOk
+		modifier.$set.published = true
+
 Wallpapers.after.update (userId, doc, fieldNames, modifier, options) ->
 	if "name" in fieldNames and doc.file?
 		Images.update { _id: doc.file }, $set: 'metadata.name': modifier.$set.name

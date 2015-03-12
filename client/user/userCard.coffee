@@ -28,7 +28,7 @@ Template.userCard.helpers
 			"png/eye-off.png"
 		else
 			"png/eye.png"
-	isEditing: ->
+	isNotEditing: ->
 		if @published == undefined
 			return false
 
@@ -43,6 +43,7 @@ Template.userCard.helpers
 
 Template.userCard.events
 	'click #likes': (e,t) ->
+		return unless Likes.find().count() > 0
 		if Session.get('openSection') == 'likes'
 			Session.set 'openSection', null
 			t.find('#userCard').selected = "icons"
@@ -62,9 +63,6 @@ Template.userCard.events
 	'click #add' : (e, t) ->
 		Wallpapers.insert {}
 		Router.go '/new-wallpaper'
-	'click #cancel' : (e, t) ->
-		Wallpapers.remove t.data._id
-		Router.go '/'
 	'mouseover #view' : (e) ->
 		Session.set('lookingAtWallpaper', true)
 		$('.smallCard').hide()

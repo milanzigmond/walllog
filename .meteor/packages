@@ -11,8 +11,6 @@ accounts-base
 accounts-password
 accounts-ui
 coffeescript
-ecwyne:polymer
-ecwyne:polymer-elements
 meteorhacks:inject-initial
 jquery
 natestrauser:animate-css
@@ -34,3 +32,4 @@ mquandalle:jade
 fortawesome:fontawesome
 spiderable
 tmeasday:publish-counts
+ecwyne:polymer-elements

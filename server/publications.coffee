@@ -6,6 +6,7 @@ Meteor.publish 'allWallpapers', () ->
 
 Meteor.publish 'wallpaper', (wallpaperName) ->
   wallpaper = Wallpapers.find({name: wallpaperName}).fetch()[0]
+  return @ready() unless wallpaper
   Counts.publish this, 'likes', Likes.find {wallpaperId:wallpaper._id}, noReady: true
   Wallpapers.find {name: wallpaperName}
 
