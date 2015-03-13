@@ -20,9 +20,9 @@ Template.userCard.helpers
 	newsletterTooltip: ->
 		user = Meteor.user()
 		if user and user.profile.newsletter
-			"Turn off email newsletter"
+			"Turn OFF email newsletter"
 		else
-			"Turn on email newsletter"
+			"Turn ON email newsletter"
 	viewIcon: ->
 		if Session.get('lookingAtWallpaper')
 			"png/eye-off.png"

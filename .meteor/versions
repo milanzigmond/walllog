@@ -3,8 +3,10 @@ accounts-password@1.0.6
 accounts-ui@1.1.4
 accounts-ui-unstyled@1.1.6
 alanning:roles@1.2.13
+aldeed:template-extension@3.4.1
 application-configuration@1.0.4
 autoupdate@1.1.5
+babrahams:editable-json@0.3.7
 babrahams:editable-text@0.7.17
 base64@1.0.2
 binary-heap@1.0.2
@@ -38,7 +40,7 @@ dburles:mongo-collection-instances@0.3.3
 ddp@1.0.14
 deps@1.0.6
 djedi:sanitize-html@1.3.0
-ecwyne:polymer-elements@1.0.7
+ecwyne:polymer-elements@1.0.8
 ejson@1.0.5
 email@1.0.5
 fastclick@1.0.2
@@ -46,6 +48,7 @@ follower-livedata@1.0.3
 fortawesome:fontawesome@4.2.0_2
 geojson-utils@1.0.2
 gwendall:body-events@0.1.4
+gwendall:session-json@0.1.7
 html-tools@1.0.3
 htmljs@1.0.3
 http@1.0.10
@@ -80,7 +83,7 @@ mongo-livedata@1.0.7
 mquandalle:jade@0.4.1
 mrt:moment@2.8.1
 mrt:nprogress@0.1.0
-msavin:mongol@0.6.5
+msavin:mongol@1.0.1
 natestrauser:animate-css@3.1.2
 npm-bcrypt@0.7.7
 observe-sequence@1.0.4
@@ -92,6 +95,7 @@ reactive-dict@1.0.5
 reactive-var@1.0.4
 reload@1.1.2
 retry@1.0.2
+richsilv:pikaday@1.0.0
 routepolicy@1.0.4
 service-configuration@1.0.3
 session@1.0.5

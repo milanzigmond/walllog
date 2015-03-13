@@ -7,12 +7,12 @@ template(name='userCard')
             if published
               core-tooltip.fancy(label='Add wallpaper', large, position='top', noarrow)
                 core-icon-button#add(icon='add')
-          core-icon-button#view(src='{{viewIcon}}')
           core-tooltip.fancy(label='Liked wallpapers', large, position='top', noarrow)
             core-icon-button#likes(src='{{likeIcon}}')  {{likesCount}}
           core-tooltip.fancy(label='{{newsletterTooltip}}', large, position='top', noarrow)
             core-icon-button#newsletter(src='{{newsletterIcon}}')
-          .username(horizontal, layout, center-justified, center) {{username}}
+          .username(horizontal, layout, center-justified, center) 
+            core-tooltip.fancy(label='Account', position='top', noarrow) {{username}}
           core-tooltip.fancy(label='Logout', large, position='top', noarrow)
             core-icon-button#logout(src='png/logout_white.png')
         .userCardBg(hero-id='card', hero)
@@ -23,7 +23,6 @@ template(name='userCard')
             if published
               core-tooltip.fancy(label='Add wallpaper', large, position='top', noarrow)
                 core-icon-button#add(icon='add')
-          core-icon-button#view(src='{{viewIcon}}')
           core-tooltip.fancy(label='Liked wallpapers', large, position='top', noarrow)
             core-icon-button#likes(src='{{likeIcon}}')  {{likesCount}}
           core-tooltip.fancy(label='{{newsletterTooltip}}', large, position='top', noarrow)
