@@ -48,3 +48,7 @@
 ## revenue
 -  **todo** kolko sa predalo members za dane obdobie (novych + opakovanych)
 
+other
+file names:
+mond_we-are-one_1280x960
+

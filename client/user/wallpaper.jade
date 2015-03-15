@@ -7,16 +7,16 @@
 //-   meta(property="og:image", content="http://localhost:3000/cfs/files/images/sJxQpNWDCTESDw3Ko/bee-16119-2880x1800.jpg?token=eyJhdXRoVG9rZW4iOiJRNlBISmFfa3ZCUG9ZREpib1NDOEJaZkMtQWJnZkRMa1A4Vlh0RDJjY0ZlIn0%3D")
 
 template(name='wallpaper')
-  +wallpaperImage this
-  
   div(horizontal, layout)
+    +wallpaperImage this
+    +wallpaperVideo
     .smallCard.animated.bounceInLeft
       .texts
         if isInRole 'admin'
           p#title
-            +editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true
+            +editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true spellcheck=true
           p#text
-            +editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true
+            +editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true spellcheck=true
         else
           p.title-class {{title}}
           p.text-class {{text}}

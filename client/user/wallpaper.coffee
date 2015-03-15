@@ -136,4 +136,5 @@ Template.wallpaper.events
 		Meteor.call 'getNextWallpaperId', @name, (error, result) ->
 			if error
 				console.log error
-			Router.go '/'+result
+			Router.go 'wallpaper',
+				wallpaper: result

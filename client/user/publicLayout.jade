@@ -1,0 +1,9 @@
+template(name="publicLayout")
+	paper-toast(id="toast" text="{{accountError}}")
+	if currentUser
+		+userCard
+	else
+		+userArea
+	div
+		+transition
+			+yield

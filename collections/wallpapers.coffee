@@ -1,14 +1,17 @@
 this.Wallpapers = new Mongo.Collection("wallpapers")
 
 Wallpapers.before.insert (userId, doc) ->
-  doc.createdAt = new Date()
   if !doc.userId
   	doc.userId = userId
+  doc.createdAt = new Date()
+  doc.file = ""
   doc.title = "title"
   doc.text = "text"
   doc.link = "link"
   doc.name = "new-wallpaper"
-  doc.file = ""
+  doc.preview = "Minutes preview of video link"
+  doc.video = "Full video link for subscribers"
+  doc.source = "fileId here"
   doc.published = false
   return
 

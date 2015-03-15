@@ -51,9 +51,3 @@ Template.userCard.events
 	'click #add' : (e, t) ->
 		Wallpapers.insert {}
 		Router.go '/new-wallpaper'
-	'mouseover #view' : (e) ->
-		Session.set('lookingAtWallpaper', true)
-		$('.smallCard').hide()
-	'mouseout #view' : (e) ->
-		Session.set('lookingAtWallpaper', false)
-		$('.smallCard').show()

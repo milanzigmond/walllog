@@ -44,6 +44,7 @@ Template.transition.rendered = ->
     onscreenClass: @data?.animIn or 'fadeIn'
     removeClass: @data?.animOut or 'fadeOut'
     insertTimeout: @data?.timeoutIn or 700
-    removeTimeout: @data?.timeoutOut   or 300
+    removeTimeout: @data?.timeoutOut or 300
 
+  # debugger
   @firstNode.parentNode._uihooks = createHooks(hooks)
