@@ -17,6 +17,18 @@ template(name='wallpaper')
             +editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true spellcheck=true
           p#text
             +editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true spellcheck=true
+          p
+            strong name 
+            +editableText collection="wallpapers" inputClass="link-input-class" field="name"
+          p
+            strong preview 
+            +editableText collection="wallpapers" inputClass="link-input-class" field="preview"
+          p
+            strong video 
+            +editableText collection="wallpapers" inputClass="link-input-class" field="video"
+          p
+            strong source 
+            +editableText collection="wallpapers" inputClass="link-input-class" field="source"
         else
           p.title-class {{title}}
           p.text-class {{text}}
@@ -29,10 +41,15 @@ template(name='wallpaper')
                 paper-autogrow-textarea
                   textarea#commentText
 
-          div(layout, horizontal, center)
-            core-tooltip.fancy(label='Download wallpaper', large, position='top', noarrow)
+          div#actionIcons(layout, vertical)
+            core-tooltip(label='Play preview', large, position='right', noarrow)
+              paper-fab#playVideo(src='png/ic_play_arrow_black_24dp.png', role='button', aria-label='Play')
+            core-tooltip(label='Download wallpaper', large, position='right', noarrow)
               a(href='{{downloadFile file}}', target='_self')
-                paper-fab.downloadWallpaper(icon='file-download', role='button', tabindex='0', aria-label='Download')
+                paper-fab#downloadWallpaper(icon='file-download', role='button', aria-label='Download')
+            core-tooltip(label='Share wallpaper', large, position='right', noarrow)
+              a(href='{{downloadFile file}}', target='_self')
+                paper-fab#share(src='png/ic_share_black_24dp.png', role='button', aria-label='Share')
         
         .commentsWrapper(style='display:none;')
           each comments
@@ -46,12 +63,10 @@ template(name='wallpaper')
           if isInRole 'admin'
             div(layout, horizontal, flex)
               core-icon#link(icon='link', style='margin:9px;')
-              span(layout, horizontal, center, flex, one)
+              span(layout, horizontal, center, flex)
                 +editableText collection="wallpapers" inputClass="link-input-class" field="link"
-              span(layout, horizontal, center, flex, one)
-                +editableText collection="wallpapers" inputClass="link-input-class" autoInsert="true" field="name"
           else
-            core-tooltip.fancy(label='Learn more', large, position='top', noarrow)
+            core-tooltip(label='Learn more', large, position='bottom', noarrow)
               core-icon-button#link(icon='link')
                 a(href='http://{{link}}', target='_blank') {{link}}
             div(flex)
@@ -59,13 +74,11 @@ template(name='wallpaper')
         if currentUser
           core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}
         else
-          core-tooltip.fancy(label='Login to save your like', large, position='top', noarrow)
+          core-tooltip(label='Login to save your like', large, position='bottom', noarrow)
             core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}
 
-        core-tooltip.fancy(label='Show/hide comments', large, position='top', noarrow)
+        core-tooltip(label='Show/hide comments', large, position='bottom', noarrow)
           core-icon-button#comment(src='{{commentIcon}}')  {{commentsCount}}
-        core-tooltip.fancy(label='Share wallpaper', large, position='top', noarrow)
-          core-icon-button#share(src='png/ic_share_white_24dp.png')
         if isInRole 'admin'
-          core-tooltip.fancy(label='Delete wallpaper', large, position='top', noarrow)
+          core-tooltip(label='Delete wallpaper', large, position='bottom', noarrow)
             core-icon-button#remove(icon='close')

@@ -1,3 +1,5 @@
+@import '../styl/colors'
+
 .bgImage
   background-repeat no-repeat
   background-attachment fixed
@@ -27,6 +29,20 @@ core-tooltip.fancy:focus::shadow .core-tooltip {
 
 paper-ripple
   color white
+  
+paper-fab
+  background rgba(255,255,255,0.85)
+  color primaryTextColor
+  
+paper-fab::shadow #ripple
+  color white
+
+#actionIcons
+  position absolute
+  right -27px
+  bottom 55px
+  paper-fab
+    margin-top 5px
   
 .smallCard
   -webkit-animation-delay 1s
@@ -59,6 +75,7 @@ paper-ripple
   outline none
   border none
   white-space pre-wrap
+  width auto
   
 .text-class
   // background red
@@ -80,4 +97,4 @@ paper-ripple
   border none
   
 .texts
-  padding 20px 40px 20px 40px
+  padding 20px 60px 20px 40px
