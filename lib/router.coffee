@@ -11,10 +11,6 @@ Router.route '/:wallpaper', {
       Meteor.subscribe 'myLikes'
       Meteor.subscribe 'userData'
     ]
-  # wallpaper: ->
-  #   console.log 'wallpaper data'
-  #   Wallpapers.findOne
-  #     name: @params.wallpaper
   action: ->
     @render 'wallpaper',
       data: ->
@@ -53,7 +49,6 @@ Router.route '/', {
       latestWallpaper = Wallpapers.findOne()
       if latestWallpaper?.name
         Router.go '/'+latestWallpaper.name
-    else
-      console.log 'main loading'
-      @render 'loading'
+      else
+        @render 'setup'
 }

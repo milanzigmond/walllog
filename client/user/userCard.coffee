@@ -1,4 +1,13 @@
 Template.userCard.helpers
+	isNotEditing: ->
+		# debugger
+		wallpaper = Wallpapers.findOne()
+		if !wallpaper
+			# there is no wallpaper yet, show + button
+			true
+		else
+			# just mirror published flag
+			wallpaper.published
 	likes: ->
 		Likes.find()
 	username: ->

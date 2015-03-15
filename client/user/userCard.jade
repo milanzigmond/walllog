@@ -4,7 +4,7 @@ template(name='userCard')
       .userCard
         .iconToolbar(layout, horizontal, end-justified, self-start)
           if isInRole 'admin'
-            if published
+            if isNotEditing
               core-tooltip.fancy(label='Add wallpaper', large, position='top', noarrow)
                 core-icon-button#add(icon='add')
           core-tooltip.fancy(label='Liked wallpapers', large, position='top', noarrow)
