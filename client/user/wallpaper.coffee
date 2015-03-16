@@ -1,4 +1,11 @@
 Template.wallpaper.rendered = () ->
+	video = document.getElementById('video')
+	video.addEventListener 'ended', ->
+		Session.set('videoPlaying', false)
+		$('#video').fadeOut()
+		this.rewind()
+
+
 	return unless @data
 
 	# $('meta[property^="og:"]').remove()
