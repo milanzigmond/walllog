@@ -99,7 +99,7 @@ Template.wallpaper.events
 		preventActionsForEvent e
 		updateWallpaper e, t.data
 	'click #comment': (e) ->
-		$('.commentsWrapper').slideToggle(400)
+		$('#commentsWrapper').slideToggle(400)
 	'click #remove': (e) ->
 		Wallpapers.remove @_id
 		Router.go "/"
@@ -116,8 +116,8 @@ Template.wallpaper.events
 			e.target.value = ""
 			e.target.parentElement.update()
 			$(e.target).blur()
-			if $('.commentsWrapper').css('display') is "none"
-				$('.commentsWrapper').slideToggle(400)
+			if $('#commentsWrapper').css('display') is "none"
+				$('#commentsWrapper').slideToggle(400)
 	'click #like': (e) ->
 		if !Meteor.user()
 			return

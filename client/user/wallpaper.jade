@@ -10,7 +10,7 @@ template(name='wallpaper')
   div(horizontal, layout)
     +wallpaperImage this
     +wallpaperVideo
-    .smallCard.animated.bounceInLeft
+    .smallCard.animated.fadeInDown
       .texts
         if isInRole 'admin'
           p#title
@@ -41,17 +41,17 @@ template(name='wallpaper')
                 paper-autogrow-textarea
                   textarea#commentText
 
-          div#actionIcons(layout, vertical)
-            core-tooltip(label='Play preview', large, position='right', noarrow)
-              paper-fab#playVideo(src='png/ic_play_arrow_black_24dp.png', role='button', aria-label='Play')
-            core-tooltip(label='Download wallpaper', large, position='right', noarrow)
-              a(href='{{downloadFile file}}', target='_self')
-                paper-fab#downloadWallpaper(icon='file-download', role='button', aria-label='Download')
-            core-tooltip(label='Share wallpaper', large, position='right', noarrow)
-              a(href='{{downloadFile file}}', target='_self')
-                paper-fab#share(src='png/ic_share_black_24dp.png', role='button', aria-label='Share')
+          //- div#actionIcons(layout, vertical)
+          //-   core-tooltip(label='Play preview', large, position='right', noarrow)
+          //-     paper-fab#playVideo(src='png/ic_play_arrow_white_24dp.png', role='button', aria-label='Play')
+          //-   core-tooltip(label='Download wallpaper', large, position='right', noarrow)
+          //-     a(href='{{downloadFile file}}', target='_self')
+          //-       paper-fab#downloadWallpaper(icon='file-download', role='button', aria-label='Download')
+          //-   core-tooltip(label='Share wallpaper', large, position='right', noarrow)
+          //-     a(href='{{downloadFile file}}', target='_self')
+          //-       paper-fab#share(src='png/ic_share_white_24dp.png', role='button', aria-label='Share')
         
-        .commentsWrapper(style='display:none;')
+        #commentsWrapper(style='display:none;')
           each comments
             div(class='{{myComment}}')
               .text-class(layout, horizontal) {{comment}}
@@ -59,18 +59,6 @@ template(name='wallpaper')
                 div(flex) 
                 | {{name}}, {{formatDate createdAt}}
       div(layout, horizontal, style='padding: 5px')
-        if link
-          if isInRole 'admin'
-            div(layout, horizontal, flex)
-              core-icon#link(icon='link', style='margin:9px;')
-              span(layout, horizontal, center, flex)
-                +editableText collection="wallpapers" inputClass="link-input-class" field="link"
-          else
-            core-tooltip(label='Learn more', large, position='bottom', noarrow)
-              core-icon-button#link(icon='link')
-                a(href='http://{{link}}', target='_blank') {{link}}
-            div(flex)
-
         if currentUser
           core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}
         else
@@ -82,3 +70,13 @@ template(name='wallpaper')
         if isInRole 'admin'
           core-tooltip(label='Delete wallpaper', large, position='bottom', noarrow)
             core-icon-button#remove(icon='close')
+
+        div(flex)
+        core-tooltip(label='Play preview', large, position='bottom', noarrow)
+            core-icon-button#playVideo(src='png/ic_play_arrow_white_24dp.png')
+        core-tooltip(label='Download wallpaper', large, position='bottom', noarrow)
+          a(href='{{downloadFile file}}', target='_self')
+            core-icon-button#downloadWallpaper(icon='file-download')
+        core-tooltip(label='Share wallpaper', large, position='bottom', noarrow)
+          a(href='{{downloadFile file}}', target='_self')
+            core-icon-button#share(src='png/ic_share_white_24dp.png')

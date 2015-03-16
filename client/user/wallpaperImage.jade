@@ -1,5 +1,5 @@
 template(name='wallpaperImage')
-  div(layout, vertical, center, center-justified, fit, style='background-color: #f6f6f6;')
+  div#nextWallpaper(layout, vertical, center, center-justified, fit, style='background-color: #f6f6f6;')
     if isInRole 'admin'
       #dropzone(layout, vertical, center, center-justified, fit)
         if file

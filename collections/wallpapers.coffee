@@ -7,7 +7,6 @@ Wallpapers.before.insert (userId, doc) ->
   doc.file = ""
   doc.title = "title"
   doc.text = "text"
-  doc.link = "link"
   doc.name = "new-wallpaper"
   doc.preview = "Minutes preview of video link"
   doc.video = "Full video link for subscribers"
@@ -40,13 +39,6 @@ Wallpapers.before.update (userId, doc, fieldNames, modifier, options) ->
 	else
 		if doc.name != 'new-wallpaper'
 			nameOk = true
-
-	if 'link' in fieldNames
-		if modifier.$set.link != 'link'
-			linkOk = true
-	else
-		if doc.link != 'link'
-			linkOk = true
 
 	if 'file' in fieldNames
 		if modifier.$set.file != ''

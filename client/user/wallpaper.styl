@@ -5,12 +5,6 @@
   background-attachment fixed
   background-position center top
   background-size cover
-  
-core-icon-button#link::shadow core-icon
-	transform: rotate(90deg)
-
-core-icon#link
-  transform: rotate(90deg)
 	
 core-tooltip.fancy::shadow .core-tooltip {
   opacity: 0;
@@ -20,29 +14,32 @@ core-tooltip.fancy::shadow .core-tooltip {
   transform: translate3d(0, -10px, 0);
 }
 
-core-tooltip.fancy:hover::shadow .core-tooltip,
-core-tooltip.fancy:focus::shadow .core-tooltip {
-  opacity: 1;
+core-tooltip:hover::shadow .core-tooltip, core-tooltip:focus::shadow .core-tooltip
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-}
+  -webkit-transition-delay: 0.6s;
+  transition-delay: 0.6s;
 
 paper-ripple
   color white
   
+// paper-fab
+//   background rgba(255,255,255,1)
+//   color primaryTextColor
+
 paper-fab
-  background rgba(255,255,255,0.85)
-  color primaryTextColor
+  background rgba(0,0,0,0.36)
+  color white
   
 paper-fab::shadow #ripple
   color white
 
 #actionIcons
   position absolute
-  right -27px
-  bottom 55px
+  left -27px
+  bottom 53px
   paper-fab
-    margin-top 5px
+    margin-top 10px
   
 .smallCard
   -webkit-animation-delay 1s
@@ -50,14 +47,14 @@ paper-fab::shadow #ripple
   position absolute
   left 60px
   bottom 60px
-  right 60px
-  max-width 600px
-  background rgba(0,0,0,0.5)
+  right auto
+  max-width 45%
+  margin 60px 60px 0px 0px
+  max-height 90%
+  background rgba(0,0,0,0.36)
   color white
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
   border-radius 2px
-  > img
-    width 100%
   a
     color white
     text-decoration none
@@ -97,4 +94,13 @@ paper-fab::shadow #ripple
   border none
   
 .texts
-  padding 20px 60px 20px 40px
+  padding 20px 40px 20px 40px
+
+#nextWallpaper
+  cursor pointer
+  
+#commentsWrapper
+  max-height 300px
+  overflow-x hidden
+  overflow-y scroll
+  padding-right 20px
