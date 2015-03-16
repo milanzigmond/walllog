@@ -8,8 +8,8 @@
 
 template(name='wallpaper')
   div(horizontal, layout)
-    +wallpaperImage this
     +wallpaperVideo
+    +wallpaperImage this
     .smallCard.animated.fadeInDown
       .texts
         if isInRole 'admin'
@@ -40,24 +40,12 @@ template(name='wallpaper')
               paper-input-decorator.custom(label='Comment here', floatinglabel)
                 paper-autogrow-textarea
                   textarea#commentText
-
-          //- div#actionIcons(layout, vertical)
-          //-   core-tooltip(label='Play preview', large, position='right', noarrow)
-          //-     paper-fab#playVideo(src='png/ic_play_arrow_white_24dp.png', role='button', aria-label='Play')
-          //-   core-tooltip(label='Download wallpaper', large, position='right', noarrow)
-          //-     a(href='{{downloadFile file}}', target='_self')
-          //-       paper-fab#downloadWallpaper(icon='file-download', role='button', aria-label='Download')
-          //-   core-tooltip(label='Share wallpaper', large, position='right', noarrow)
-          //-     a(href='{{downloadFile file}}', target='_self')
-          //-       paper-fab#share(src='png/ic_share_white_24dp.png', role='button', aria-label='Share')
         
         #commentsWrapper(style='display:none;')
           each comments
             div(class='{{myComment}}')
-              .text-class(layout, horizontal) {{comment}}
-              .author(layout, horizontal)
-                div(flex) 
-                | {{name}}, {{formatDate createdAt}}
+              .text-class
+                <strong>{{name}}</strong> - {{comment}} - <i style="color:rgba(255,255,255,0.6);">{{formatDate createdAt}}</i>
       div(layout, horizontal, style='padding: 5px')
         if currentUser
           core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}
@@ -73,10 +61,9 @@ template(name='wallpaper')
 
         div(flex)
         core-tooltip(label='Play preview', large, position='bottom', noarrow)
-            core-icon-button#playVideo(src='png/ic_play_arrow_white_24dp.png')
+            core-icon-button#playVideo(src='{{playIcon}}')
         core-tooltip(label='Download wallpaper', large, position='bottom', noarrow)
           a(href='{{downloadFile file}}', target='_self')
             core-icon-button#downloadWallpaper(icon='file-download')
         core-tooltip(label='Share wallpaper', large, position='bottom', noarrow)
-          a(href='{{downloadFile file}}', target='_self')
-            core-icon-button#share(src='png/ic_share_white_24dp.png')
+          core-icon-button#share(src='png/ic_share_white_24dp.png')

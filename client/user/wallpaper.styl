@@ -5,7 +5,7 @@
   background-attachment fixed
   background-position center top
   background-size cover
-	
+  	
 core-tooltip.fancy::shadow .core-tooltip {
   opacity: 0;
   -webkit-transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
@@ -28,7 +28,7 @@ paper-ripple
 //   color primaryTextColor
 
 paper-fab
-  background rgba(0,0,0,0.36)
+  background rgba(0,0,0,0.5)
   color white
   
 paper-fab::shadow #ripple
@@ -40,24 +40,30 @@ paper-fab::shadow #ripple
   bottom 53px
   paper-fab
     margin-top 10px
-  
+
 .smallCard
+  z-index 2
+  max-width 46%
   -webkit-animation-delay 1s
   -webkit-animation-duration 1s
   position absolute
   left 60px
   bottom 60px
   right auto
-  max-width 45%
   margin 60px 60px 0px 0px
   max-height 90%
-  background rgba(0,0,0,0.36)
+  background rgba(0,0,0,0.5)
   color white
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
   border-radius 2px
   a
     color white
     text-decoration none
+
+
+@media (max-width: 900px)
+  .smallCard
+    max-width 100%
 
 .title-class
   font-size 36px
@@ -77,6 +83,7 @@ paper-fab::shadow #ripple
 .text-class
   // background red
   font-size 16px
+  line-height 24px
   white-space pre-wrap
 
 .text-input-class
@@ -100,7 +107,10 @@ paper-fab::shadow #ripple
   cursor pointer
   
 #commentsWrapper
-  max-height 300px
+  max-height 250px
   overflow-x hidden
   overflow-y scroll
   padding-right 20px
+  
+.author 
+  color rgba(255,255,255,0.6)

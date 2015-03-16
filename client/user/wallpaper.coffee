@@ -75,6 +75,11 @@ Template.wallpaper.helpers
 			"png/ic_comment_white_24dp.png"
 		else
 			"png/ic_comment_white_24dp.png"
+	playIcon: ->
+		if Session.get('videoPlaying')
+			"png/ic_pause_white_24dp.png"
+		else
+			"png/ic_play_arrow_white_24dp.png"
 
 Template.wallpaper.events
 	# 'dragover': (e) ->
@@ -103,15 +108,28 @@ Template.wallpaper.events
 	'click #remove': (e) ->
 		Wallpapers.remove @_id
 		Router.go "/"
+	'click #playVideo': (e) ->
+		playing = Session.get('videoPlaying')
+		video = document.getElementById('video')
+		if playing
+			Session.set('videoPlaying', false)
+			$('#video').fadeOut()
+			video.pause()
+		else
+			Session.set("videoPlaying", true)
+			$('#video').fadeIn()
+			video.play()
 	'keyup #commentText' : (e) ->
 		preventActionsForEvent e
 		if e.keyCode is 27
     	console.log 'escape pressed'
 		if e.keyCode is 13
 			console.log 'enter pressed'
+			# temp fix to remove enter at the end entered text
+			comment = e.target.value.substr(0,e.target.value.length-1)
 			Comments.insert {
     		wallpaperId: @_id
-    		comment: e.target.value
+    		comment: comment
 				}
 			e.target.value = ""
 			e.target.parentElement.update()
