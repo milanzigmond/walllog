@@ -11,41 +11,42 @@ template(name='wallpaper')
     +wallpaperVideo
     +wallpaperImage this
     .smallCard.animated.fadeInDown
-      .texts
-        if isInRole 'admin'
-          p#title
-            +editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true spellcheck=true
-          p#text
-            +editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true spellcheck=true
-          p
-            strong name 
-            +editableText collection="wallpapers" inputClass="link-input-class" field="name"
-          p
-            strong preview 
-            +editableText collection="wallpapers" inputClass="link-input-class" field="preview"
-          p
-            strong video 
-            +editableText collection="wallpapers" inputClass="link-input-class" field="video"
-          p
-            strong source 
-            +editableText collection="wallpapers" inputClass="link-input-class" field="source"
-        else
-          p.title-class {{title}}
-          p.text-class {{text}}
-        //- +shareit shareData
+      .textsScrollWrapper
+        .texts
+          if isInRole 'admin'
+            p#title
+              +editableText collection="wallpapers" field="title" textarea=true class="title-class" inputClass="title-input-class" trustHTML=true spellcheck=true
+            p#text
+              +editableText collection="wallpapers" field="text" textarea=true class="text-class" inputClass="text-input-class" trustHTML=true spellcheck=true
+            p
+              strong name 
+              +editableText collection="wallpapers" inputClass="link-input-class" field="name"
+            p
+              strong preview 
+              +editableText collection="wallpapers" inputClass="link-input-class" field="preview"
+            p
+              strong video 
+              +editableText collection="wallpapers" inputClass="link-input-class" field="video"
+            p
+              strong source 
+              +editableText collection="wallpapers" inputClass="link-input-class" field="source"
+          else
+            p.title-class {{title}}
+            p.text-class {{text}}
+          //- +shareit shareData
 
-        div(layout, horizontal)
-          div(flex)
-            if currentUser
-              paper-input-decorator.custom(label='Comment here', floatinglabel)
-                paper-autogrow-textarea
-                  textarea#commentText
-        
-        #commentsWrapper(style='display:none;')
-          each comments
-            div(class='{{myComment}}')
-              .text-class
-                <strong>{{name}}</strong> - {{comment}} - <i style="color:rgba(255,255,255,0.6);">{{formatDate createdAt}}</i>
+          div(layout, horizontal)
+            div(flex)
+              if currentUser
+                paper-input-decorator.custom(label='Comment here', floatinglabel)
+                  paper-autogrow-textarea
+                    textarea#commentText
+          
+          #commentsWrapper(style='display:none;')
+            each comments
+              div(class='{{myComment}}')
+                .text-class
+                  <strong>{{name}}</strong> - {{comment}} - <i style="color:rgba(255,255,255,0.6);">{{formatDate createdAt}}</i>
       div(layout, horizontal, style='padding: 5px')
         if currentUser
           core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}

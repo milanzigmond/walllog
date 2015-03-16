@@ -47,11 +47,11 @@ paper-fab::shadow #ripple
   -webkit-animation-delay 1s
   -webkit-animation-duration 1s
   position absolute
-  left 60px
-  bottom 60px
+  left 0px
+  bottom 0px
   right auto
-  margin 60px 60px 0px 0px
-  max-height 90%
+  max-height 85%
+  margin 60px 60px 60px 60px
   background rgba(0,0,0,0.5)
   color white
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
@@ -60,6 +60,13 @@ paper-fab::shadow #ripple
     color white
     text-decoration none
 
+.textsScrollWrapper
+  position relative
+  max-height 600px
+  overflow-y scroll
+
+.texts
+  padding 20px 40px 20px 40px
 
 @media (max-width: 900px)
   .smallCard
@@ -99,17 +106,14 @@ paper-fab::shadow #ripple
   font-size 16px
   outline none
   border none
-  
-.texts
-  padding 20px 40px 20px 40px
 
 #nextWallpaper
   cursor pointer
   
 #commentsWrapper
-  max-height 250px
-  overflow-x hidden
-  overflow-y scroll
+  // height 200px
+  // overflow-x hidden
+  // overflow-y scroll
   padding-right 20px
   
 .author 
