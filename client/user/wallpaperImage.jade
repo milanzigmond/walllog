@@ -6,8 +6,7 @@ template(name='wallpaperImage')
           .bgImage(fit, style="background-image:url('{{imageUrl file}}');")
             paper-ripple(fit)
         else
-          img(src='svg/image-area.svg', width='300px')
-          h1 Drag your first image here
+          h1 Drop image here
     else
       .bgImage(fit, style="background-image:url('{{imageUrl file}}');")
         paper-ripple(fit)

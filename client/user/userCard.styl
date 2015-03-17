@@ -8,9 +8,9 @@
   position fixed
   right 60px
   top 60px
-  height auto
-  z-index 10
+  margin-bottom auto
   color white
+  z-index 10
   .username
     padding 0px 15px
 
@@ -22,14 +22,26 @@
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
   border-radius 2px 2px 2px 2px
 
+.userCardBgOpened
+  min-height 53px
+  background rgba(0,0,0,0.5)
+  background-size 100% 100%
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
+  border-radius 2px 2px 2px 2px
+  
+#likesScrollArea
+  max-height 630px
+  overflow-y scroll
+
 .iconToolbar
-  padding 5px    
+  padding 5px  
 
 #userCard
   left 50%
   
 #likesWrapper
-  padding 63px 0px 10px 0px
-  #likeImage
-    margin 0px 20px
-    -webkit-animation-duration 0.3s
+  padding 0px 0px 0px 5px
+  
+#likeImage
+  cursor pointer
+  -webkit-animation-duration 0.3s

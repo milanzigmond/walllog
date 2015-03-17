@@ -29,10 +29,10 @@ template(name='userCard')
           .username(horizontal, layout, center-justified, center) {{username}}
           core-tooltip(label='Logout', large, position='top', noarrow)
             core-icon-button#logout(src='png/logout_white.png')
-        .userCardBg(hero-id='card', hero)
-          div#likesWrapper(layout vertical)
-            each likes
-              core-tooltip(label='{{wallpaperName}}', large, position='left', noarrow)
-                a#likeImage(href="{{pathFor route='wallpaper' data=wallpaperName}}", target='_self').animated.fadeInDown
-                  img(src="{{thumbnailUrl file}}")
+        .userCardBgOpened(hero-id='card', hero)
+          #likesScrollArea
+            div#likesWrapper(layout vertical)
+              each likes
+                core-tooltip(label='{{wallpaperName}}', large, position='left', noarrow)
+                  img#likeImage(src="{{thumbnailUrl file}}").animated.fadeInDown
     section(label='account')

@@ -9,7 +9,8 @@ Template.userCard.helpers
 			# just mirror published flag
 			wallpaper.published
 	likes: ->
-		Likes.find()
+		Likes.find {},
+			sort: createdAt: -1
 	username: ->
 		return if !Meteor.user()
 		Meteor.user().username
@@ -39,6 +40,10 @@ Template.userCard.helpers
 			"png/eye.png"
 
 Template.userCard.events
+	'click #likeImage': (e, t) ->
+		console.log 'like image clicked:'+@wallpaperName
+		Router.go 'wallpaper',
+			wallpaper: @wallpaperName
 	'click #likes': (e,t) ->
 		return unless Likes.find().count() > 0
 		if Session.get('openSection') == 'likes'
