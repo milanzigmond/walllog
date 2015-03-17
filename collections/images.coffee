@@ -29,6 +29,21 @@ mackbookProRetinaSmall = new (FS.Store.GridFS)('mackbookProRetinaSmall',
     return
 )
 
+iMac27 = new (FS.Store.GridFS)('iMac27',
+  beforeWrite: (fileObj) ->
+    {
+      extension: 'png'
+      type: 'image/png'
+    }
+  transformWrite: (fileObj, readStream, writeStream) ->
+    width = 2560
+    height = 1440
+    x = (2880 - width)/2
+    y = (1800 - height)/2
+    gm(readStream).crop(width, height, x, y).stream('PNG').pipe writeStream
+    return
+)
+
 iMacSmall = new (FS.Store.GridFS)('iMacSmall',
   beforeWrite: (fileObj) ->
     {
@@ -36,7 +51,11 @@ iMacSmall = new (FS.Store.GridFS)('iMacSmall',
       type: 'image/png'
     }
   transformWrite: (fileObj, readStream, writeStream) ->
-    gm(readStream).resize(1920,1080).stream('PNG').pipe writeStream
+    width = 1920
+    height = 1080
+    x = (2880 - width)/2
+    y = (1800 - height)/2
+    gm(readStream).crop(width, height, x, y).stream('PNG').pipe writeStream
     return
 )
 
@@ -47,13 +66,13 @@ thumbnails = new (FS.Store.GridFS)('thumbnails',
       type: 'image/png'
     }
   transformWrite: (fileObj, readStream, writeStream) ->
-    gm(readStream).resize(300,168).stream('PNG').pipe writeStream
+    gm(readStream).resize(300,187).stream('PNG').pipe writeStream
     return
 )
 
 # to make Images global in coffeeScript use this.
 this.Images = new FS.Collection("images",
-	stores: [mackbookProRetina, mackbookProRetinaSmall, iMacSmall, thumbnails]
+	stores: [mackbookProRetina, mackbookProRetinaSmall, iMac27, iMacSmall, thumbnails]
 	filter:
 		allow:{
 			contentTypes: ['image/*']

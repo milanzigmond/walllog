@@ -18,4 +18,4 @@ Template.registerHelper 'thumbnailUrl', (fileId) ->
 Template.registerHelper 'downloadFile', (fileId) ->
 	file = Images.findOne fileId
 	if file
-		file.url()+"&download=true"
+		file.url({store:'iMac27'})+"&download=true"
