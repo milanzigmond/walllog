@@ -1,3 +1,10 @@
+closeLikesSectionIfEmpty = (t) ->
+	myLikesCount = Likes.find({userId:Meteor.userId()}).count()
+	return unless myLikesCount == 0
+	if Session.get('openSection') == 'likes'
+		Session.set 'openSection', null
+		document.getElementById('userCard').selected = "icons"
+
 Template.wallpaper.rendered = () ->
 	video = document.getElementById('video')
 	video.addEventListener 'ended', ->
@@ -151,6 +158,7 @@ Template.wallpaper.events
 		}
 		if iLike
 			Likes.remove { _id:iLike._id }
+			closeLikesSectionIfEmpty()
 		else
 			Likes.insert {
 				wallpaperId: @_id

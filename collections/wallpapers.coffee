@@ -17,7 +17,7 @@ Wallpapers.before.insert (userId, doc) ->
 Wallpapers.before.update (userId, doc, fieldNames, modifier, options) ->
 	return if doc.published
 	# if any of the default values are present
-	titleOk = textOk = nameOk = linkOk = fileOk = false
+	titleOk = textOk = nameOk = fileOk = false
 
 	if 'title' in fieldNames
 		if modifier.$set.title != 'title'
@@ -47,7 +47,7 @@ Wallpapers.before.update (userId, doc, fieldNames, modifier, options) ->
 		if doc.file != ''
 			fileOk = true
 
-	if titleOk and textOk and nameOk and linkOk and fileOk
+	if titleOk and textOk and nameOk and fileOk
 		modifier.$set.published = true
 
 Wallpapers.after.update (userId, doc, fieldNames, modifier, options) ->

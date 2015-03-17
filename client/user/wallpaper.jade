@@ -53,13 +53,8 @@ template(name='wallpaper')
         else
           core-tooltip(label='Login to save your like', large, position='bottom', noarrow)
             core-icon-button#like(src='{{likeIcon}}')  {{getPublishedCount 'likes'}}
-
         core-tooltip(label='Show/hide comments', large, position='bottom', noarrow)
           core-icon-button#comment(src='{{commentIcon}}')  {{commentsCount}}
-        if isInRole 'admin'
-          core-tooltip(label='Delete wallpaper', large, position='bottom', noarrow)
-            core-icon-button#remove(icon='close')
-
         div(flex)
         core-tooltip(label='Play preview', large, position='bottom', noarrow)
             core-icon-button#playVideo(src='{{playIcon}}')
@@ -68,3 +63,6 @@ template(name='wallpaper')
             core-icon-button#downloadWallpaper(icon='file-download')
         core-tooltip(label='Share wallpaper', large, position='bottom', noarrow)
           core-icon-button#share(src='png/ic_share_white_24dp.png')
+        if isInRole 'admin'
+          core-tooltip(label='Delete wallpaper', large, position='bottom', noarrow)
+            core-icon-button#remove(icon='close')

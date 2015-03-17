@@ -33,6 +33,6 @@ template(name='userCard')
           div#likesWrapper(layout vertical)
             each likes
               core-tooltip(label='{{wallpaperName}}', large, position='left', noarrow)
-                a#likeImage(href="/{{wallpaperName}}", target='_self').animated.fadeInDown
+                a#likeImage(href="{{pathFor route='wallpaper' data=wallpaperName}}", target='_self').animated.fadeInDown
                   img(src="{{thumbnailUrl file}}")
     section(label='account')

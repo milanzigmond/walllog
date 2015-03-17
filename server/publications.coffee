@@ -31,7 +31,7 @@ Meteor.publish 'image', (wallpaperName) ->
 Meteor.publish 'allLikes', () ->
   Likes.find {}
 
-Meteor.publish 'myLikes', () ->
+Meteor.publish 'myLikes', (wallpaperName) ->
   likesCursor = Likes.find {userId:@userId}
   likes = likesCursor.map (like) ->
     like.wallpaperName
