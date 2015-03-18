@@ -23,9 +23,11 @@ Meteor.publish 'latestPublishedWallpaperId', () ->
     limit: 1
 
 Meteor.publish 'allImages', () ->
-Images.find {}
+  Images.find {}
 
 Meteor.publish 'image', (wallpaperName) ->
+  # console.log 'image publication:'+wallpaperName
+  # console.log Images.find({'metadata.name':wallpaperName}).count()
   Images.find {'metadata.name':wallpaperName}
 
 Meteor.publish 'allLikes', () ->

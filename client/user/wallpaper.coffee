@@ -7,6 +7,8 @@ closeLikesSectionIfEmpty = (t) ->
 
 Template.wallpaper.rendered = () ->
 	video = document.getElementById('video')
+	# console.log 'rendered - video:'+video
+	return unless video
 	video.addEventListener 'ended', ->
 		console.log 'video ended'
 		Session.set('videoPlaying', false)

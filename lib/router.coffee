@@ -36,7 +36,6 @@ Router.route '/:wallpaper', {
 Router.route '/', {
   name: 'setup'
   layoutTemplate: 'publicLayout'
-  loadingTemplate: 'loading'
   waitOn: ->
     if Roles.userIsInRole Meteor.userId(), ['admin']
       Meteor.subscribe 'latestWallpaperId'
@@ -44,11 +43,9 @@ Router.route '/', {
       # user is either 'regular' or not signed in at all (guest)
       Meteor.subscribe 'latestPublishedWallpaperId'
   action: ->
-    if @ready()
-      console.log 'main ready'
-      latestWallpaper = Wallpapers.findOne()
-      if latestWallpaper?.name
-        Router.go '/'+latestWallpaper.name
-      else
-        @render 'setup'
+    latestWallpaper = Wallpapers.findOne()
+    if latestWallpaper
+      Router.go '/'+latestWallpaper.name
+    else
+      @render 'setup'
 }
