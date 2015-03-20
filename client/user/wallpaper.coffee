@@ -108,7 +108,7 @@ Template.wallpaper.events
 		 #  method: 'feed'
 			# name: @title
 			# link: location.origin + location.pathname
-			# picture: location.origin + Images.findOne().url({store:'thumbnails'})
+			# picture: location.origin + Images.findOne().url({store:'thumbnail'})
 			# caption: @text
 			# description: @text
 			# message: 'MESSAGE HERE'

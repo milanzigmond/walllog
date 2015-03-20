@@ -1,5 +1,5 @@
 template(name='userCard')
-  core-animated-pages#userCard(transitions='hero-transition cross-fade', selected='icons', valueattr='label')
+  core-animated-pages#userCard(transitions='cross-fade list-cascade', selected='icons', valueattr='label')
     section(label='icons')
       .userCard
         .iconToolbar(layout, horizontal, end-justified, self-start)
@@ -14,12 +14,12 @@ template(name='userCard')
           .username(horizontal, layout, center-justified, center) {{username}}
           core-tooltip(label='Logout', large, position='top', noarrow)
             core-icon-button#logout(src='png/logout_white.png')
-        .userCardBg(hero-id='card', hero)
+        .userCardBg(cross-fade, fit)
     section(label='likes')
       .userCard
         .iconToolbar(layout, horizontal, end-justified)
           if isInRole 'admin'
-            if published
+            if isNotEditing
               core-tooltip(label='Add wallpaper', large, position='top', noarrow)
                 core-icon-button#add(icon='add')
           core-tooltip(label='Liked wallpapers', large, position='top', noarrow)
@@ -29,10 +29,11 @@ template(name='userCard')
           .username(horizontal, layout, center-justified, center) {{username}}
           core-tooltip(label='Logout', large, position='top', noarrow)
             core-icon-button#logout(src='png/logout_white.png')
-        .userCardBgOpened(hero-id='card', hero)
+        .userCardBg(cross-fade, fit)
+        .scrollAreaWrapper
           #likesScrollArea
-            div#likesWrapper(layout vertical)
+            div#likesWrapper(layout, vertical, list-cascade)
               each likes
-                core-tooltip(label='{{wallpaperName}}', large, position='left', noarrow)
-                  img#likeImage(src="{{thumbnailUrl file}}").animated.fadeInDown
+                //- core-tooltip(label='{{wallpaperName}}', large, position='left', noarrow)
+                img#likeImage(src="{{thumbnailUrl file}}")
     section(label='account')

@@ -5,7 +5,7 @@
   cursor initial
 
 .userCard
-  position fixed
+  position absolute
   right 60px
   top 60px
   margin-bottom auto
@@ -15,33 +15,31 @@
     padding 0px 15px
 
 .userCardBg
+  z-index -100
   min-height 53px
-  margin-top -53px
+  // margin-top -53px
   background rgba(0,0,0,0.5)
   background-size 100% 100%
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
   border-radius 2px 2px 2px 2px
 
-.userCardBgOpened
-  min-height 53px
-  background rgba(0,0,0,0.5)
-  background-size 100% 100%
-  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
-  border-radius 2px 2px 2px 2px
-  
 #likesScrollArea
-  max-height 630px
-  overflow-y scroll
+  // max-height 630px
+  // overflow hidden
+  // overflow-y scroll
 
 .iconToolbar
-  padding 5px  
+  // margin-top -53px
+  padding 5px
 
 #userCard
-  left 50%
+  height 100%
+  // left 50%
+  // position:relative
   
 #likesWrapper
-  padding 0px 0px 0px 5px
+  padding 10px
   
 #likeImage
   cursor pointer
-  -webkit-animation-duration 0.3s
+  -webkit-animation-duration 0.6s

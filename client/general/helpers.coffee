@@ -29,7 +29,7 @@ Template.registerHelper 'thumbnailUrl', (fileId) ->
 	image = Images.findOne fileId
 	if image
 		image.url
-			store: 'thumbnails'
+			store: 'thumbnail'
 
 Template.registerHelper 'downloadFile', (fileId) ->
 	file = Images.findOne fileId
